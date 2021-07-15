@@ -47,35 +47,43 @@
             \item Dafür müssen auf beiden Seiten Komponenten eingebaut werden, die mit dem Messaging Service kommunizieren.
         \end{itemize}
 
-
+\clearpage
 \subsection{Mobile Client}
     \subsubsection{Architektur}
     \subsubsection{User Interface}
+        \subsubsection*{Home Screen}
+            \begin{figure}[H]
+            \centering
+            \includegraphics[width=\linewidth]{homescreen-mockup.png}
+            \end{figure}
+        \subsubsection*{Empfangene Meldungen}
+            \begin{figure}[H]
+            \centering
+            \includegraphics[width=\linewidth]{mockup-received.png}
+            \end{figure}
 
+
+\clearpage
 \subsection{Cloud Service}
     \subsubsection{Architektur}
     \subsubsection{Domänenmodell}
     \subsubsection{Laufzeitmodell}
 
+\clearpage
 \subsection{Admin UI}
 
+\clearpage
 \subsection{Proof Of Concept}
-\subsubsection*{Anforderungen}
-
-\begin{itemize}
-    \item Als <Sender Rolle> möchte ich Notifikationen versenden können. 
-    \item Als <Empfänger Rolle> möchte ich Notifikationen in der Applikation sehen, wenn die Applikation geöffnet ist.  
-    \item Als <Empfänger Rolle> möchte ich Notifikationen über das OS erhalten, wenn die Applikation minimiert ist. 
-\end{itemize}
-
-\subsubsection*{Restriktionen}
-
-\begin{itemize}
-    \item Nur 1 Client. 
-    \item Nur 1 fixe Notifikation. Keine Types. 
-    \item Notifikation wird vom Client gesendet und vom selben Client empfangen. 
-    \item Keine Authentication oder Authorization. 
-  
-\end{itemize}
-
-
+    \subsubsection*{Anforderungen}
+        \begin{itemize}
+            \item Als <Sender Rolle> möchte ich Notifikationen versenden können. 
+            \item Als <Empfänger Rolle> möchte ich Notifikationen in der Applikation sehen, wenn die Applikation geöffnet ist.  
+            \item Als <Empfänger Rolle> möchte ich Notifikationen über das OS erhalten, wenn die Applikation minimiert ist. 
+        \end{itemize}
+    \subsubsection*{Restriktionen}
+        \begin{itemize}
+            \item Nur 1 Client. 
+            \item Nur 1 fixe Notifikation. Keine Types. 
+            \item Notifikation wird vom Client gesendet und vom selben Client empfangen. 
+            \item Keine Authentication oder Authorization. 
+        \end{itemize}
