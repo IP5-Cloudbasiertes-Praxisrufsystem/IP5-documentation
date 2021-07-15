@@ -35,13 +35,13 @@ Hochschule & Hochschule für Technik
 \clearpage
 			
 %%---ABSTRACT----------------------------------------------------------------------------
-\selectlanguage{ngerman}				%ngerman or english
+\selectlanguage{ngerman}				
 \thispagestyle{empty}
 \include{sections/abstract}
 
 %%---TABLE OF CONTENTS-------------------------------------------------------------------
 \pagenumbering{Roman}		
-\selectlanguage{ngerman}				%ngerman or english
+\selectlanguage{ngerman}				
 \tableofcontents
 \clearpage
 
@@ -53,19 +53,10 @@ Hochschule & Hochschule für Technik
 \include{sections/concept}
 \include{sections/evaltech}
 \include{sections/realisation}
-
-
-%%---BIBLIOGRAPHY------------------------------------------------------------------------
-\sloppypar
-    \printbibliography[heading=bibintoc]
+\include{sections/end}
 
 
 %%---APPENDIX----------------------------------------------------------------------------
 \include{sections/appendix}
-
-%%---NOTES for DEBUG---------------------------------------------------------------------
-%\newpage
-%\listoftodos[\section{Todo-Notes}]
-%\clearpage
 
 \end{document}
