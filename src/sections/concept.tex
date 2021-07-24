@@ -1,0 +1,91 @@
+\section{Konzept}\label{sec:konzept}
+
+\subsection{Systemarchitektur}\label{subsec:systemarchitektur}
+
+\subsubsection*{Überblick}
+
+    Für das Cloudbasierte Praxisruf System sehen wir fünf Komponenten vor: 
+
+    \begin{itemize}
+        \item Messaging Service
+        \item Cloud Service
+        \item Mobile Client
+        \item Admin UI
+        \item VOIP Mediator
+    \end{itemize}
+
+
+    \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{graphics/IP5_POC_Cloud_Architecture}\label{fig:architecure}
+    \end{figure}
+
+
+    \subsubsection*{Mobile Client}
+
+        \begin{itemize}
+            \item Der Mobile Client implementiert die Anbindung an den Messaging Service. 
+            \item Als Reaktion auf eine Notification wird eine Rückmeldung im UI angezeigt. 
+            \item Als Reaktion auf eine Notification wird eine OS Push Notifikation gesendet. 
+            Das UI bietet einen Button der eine Anfrage an die REST Schnittstelle im Cloud Service sendet. 
+        \end{itemize}
+
+
+    \subsubsection*{Cloud Service}
+
+        \begin{itemize}
+            \item Responsibilities (Notification and Configuration)
+            \item Microservice Granularity
+        \end{itemize}
+
+
+    \subsubsection*{Messaging Service}
+
+        \begin{itemize}
+            \item Dies wird ein externer Service den wir in die Applikationen einbinden. Standard hierfür ist Firebase Notifications. 
+            \item Der Messaging Service nimmt Notifikationen vom Cloud Service entgegen und gibt diese an den Mobile Client wieder. 
+            \item Dafür müssen auf beiden Seiten Komponenten eingebaut werden, die mit dem Messaging Service kommunizieren.
+        \end{itemize}
+
+\clearpage
+\subsection{Mobile Client}\label{subsec:mobile-client}
+
+\subsubsection{Architektur}
+    \subsubsection{User Interface}
+        \subsubsection*{Home Screen}
+            \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{graphics/homescreen-mockup}\label{fig:homescreen-mock}
+            \end{figure}
+        \subsubsection*{Empfangene Meldungen}
+            \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{graphics/mockup-received}\label{fig:inbox-mock}
+            \end{figure}
+
+
+\clearpage
+\subsection{Cloud Service}\label{subsec:cloud-service}
+
+\subsubsection{Architektur}
+    \subsubsection{Domänenmodell}
+    \subsubsection{Laufzeitmodell}
+
+\clearpage
+\subsection{Admin UI}\label{subsec:admin-ui}
+
+\clearpage
+\subsection{Proof Of Concept}\label{subsec:proof-of-concept}
+\subsubsection*{Anforderungen}
+        \begin{itemize}
+            \item Als \textless Sender Rolle\textgreater möchte ich Notifikationen versenden können.
+            \item Als \textless Empfänger Rolle\textgreater möchte ich Notifikationen in der Applikation sehen, wenn die Applikation geöffnet ist.
+            \item Als \textless Empfänger Rolle\textgreater möchte ich Notifikationen über das OS erhalten, wenn die Applikation minimiert ist.
+        \end{itemize}
+    \subsubsection*{Restriktionen}
+        \begin{itemize}
+            \item Nur 1 Client. 
+            \item Nur 1 fixe Notifikation. Keine Types. 
+            \item Notifikation wird vom Client gesendet und vom selben Client empfangen. 
+            \item Keine Authentication oder Authorization. 
+        \end{itemize}

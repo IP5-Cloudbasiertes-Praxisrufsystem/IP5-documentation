@@ -1,0 +1,57 @@
+%! Author = fusel
+%! Date = 24.07.21
+
+% Preamble
+\documentclass[final]{fhnwreport}
+% Packages
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage[german]{babel}
+
+\title{Cloudbasiertes Praxisrufsystem}  %Project Title
+\author{IP 5}                      %Document Type => Technical Report, ...
+
+\begin{document}
+    \maketitle
+    \begin{figure}[h]\label{fig:title}
+        \includegraphics[width=\linewidth]{graphics/wip}\caption[Titlebild]{Titlebild}
+    \end{figure}
+
+    \begin{center}
+        \renewcommand\arraystretch{2}
+        \begin{tabular}{l l}
+            Studenten & Joshua Villing, Kevin Zellweger\\
+            Fachbetreuer & Daniel Jossen\\
+            Auftraggeberin & Daniel Jossen\\
+            Studiengang & Informatik\\
+            Hochschule & Hochschule für Technik
+        \end{tabular}
+    \end{center}
+
+    \clearpage
+
+
+%%---ABSTRACT----------------------------------------------------------------------------
+    \thispagestyle{empty}
+    \include{sections/abstract}
+
+%%---TABLE OF CONTENTS-------------------------------------------------------------------
+    \pagenumbering{Roman}
+    \tableofcontents
+    \clearpage
+
+%%---TEXT--------------------------------------------------------------------------------
+    \pagenumbering{arabic}
+    \include{sections/einleitung}
+    \include{sections/organisation}
+    \include{sections/requirements}
+    \include{sections/concept}
+%%\include{sections/evaltech}
+    \include{sections/realisation}
+    \include{sections/end}
+
+
+%%---APPENDIX----------------------------------------------------------------------------
+    \include{sections/appendix}
+
+\end{document}
