@@ -5,59 +5,95 @@
 \subsubsection*{Projekt Scope}
 
 
-    Nummeriert mit U01-Uxx - High Level - Fachliche Anforderung
+Nummeriert mit U01-Uxx - High Level - Fachliche Anforderung
 
-    \subsubsection*{Benutzer}
+\subsubsection*{Benutzer}
 
-        \begin{itemize}
-            \item ALS Benutzer WILL ich relevante Anfragen versenden können, DAMIT ich über Probleme und Bedarf notifizieren kann. 
-            \item ALS Benutzer WILL ich relevante Notifikationen empfangen können, DAMIT ich über Probleme und Bedarf notifiziert werde.   
-            \item ALS Benutzer WILL will nur Notifikationen sehen die für mich relevant sind, DAMIT nicht unnötig belästigt werde.   
-            \item ALS Benutzer WILL ich über eingehende Notifikationen aufmerksam gemacht werden, DAMIT ich Notifikationen nicht übersehe.   
-            \item ALS Benutzer WILL ich sehen welche Notifikationen ich verpasst habe, DAMIT ich vergessenes nachholen kann.   
-        \end{itemize}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{13cm}|c|}
+        \hline
+        \textbf{Id} & \textbf{Anforderung}                                                                                                     & \textbf{Features} \\
+        \hline
+        U01         & ALS Benutzer WILL ich relevante Anfragen versenden können, DAMIT ich über Probleme und Bedarf notifizieren kann. & F0x \\
+        \hline
+        U02         & ALS Benutzer WILL ich relevante Notifikationen empfangen können, DAMIT ich über Probleme und Bedarf notifiziert werde. & F0x \\
+        \hline
+        U03         & ALS Benutzer WILL will nur Notifikationen sehen die für mich relevant sind, DAMIT nicht unnötig belästigt werde. & F0x \\
+        \hline
+        U04         & ALS Benutzer WILL ich über eingehende Notifikationen aufmerksam gemacht werden, DAMIT ich Notifikationen nicht übersehe. & F0x \\
+        \hline
+        U05         & ALS Benutzer WILL ich sehen welche Notifikationen ich verpasst habe, DAMIT ich vergessenes nachholen kann. & F0x \\
+        \hline
+    \end{tabular}\label{tab:userstories1}
+\end{table}
 
+\subsubsection*{Admin}
 
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{13cm}|c|}
+        \hline
+        \textbf{Id} & \textbf{Anforderung}                                                                                                                                 & \textbf{Features} \\
+        \hline
+        U10         & ALS Administrator WILL mehrere Geräte verwalten kann DAMIT jedes Gerät für Verwendungsort optimiert werden kann. & F0x \\
+        \hline
+        U11         & ALS Administrator WILL ich definieren können welches Gerät, welche Anfragen versenden kann DAMIT jedes Gerät für Ort und Zweck optimiert werden kann & F0x \\
+        \hline
+        U12         & ALS Administrator WILL ich die Verwalung und Konfiguration des Praxisrufsystems zentral verwalten DAMIT overhead minimiert wird. & F0x \\
+        \hline
+    \end{tabular}\label{tab:userstories2}
+\end{table}
 
-    \subsubsection*{Admin}
+\subsubsection*{Out Of Scope}
 
-    \begin{itemize}
-        \item ALS Administrator WILL mehrere Geräte verwalten kann DAMIT jedes Gerät für Verwendungsort optimiert werden kann.
-        \item ALS Administrator WILL ich definieren können welches Gerät, welche Anfragen versenden kann DAMIT jedes Gerät für Ort und Zweck optimiert werden kann 
-        \item ALS Administrator WILL ich die Verwalung und Konfiguration des Praxisrufsystems zentral verwalten DAMIT overhead minimiert wird. 
-    \end{itemize}
-
-    \subsubsection*{Out Of Scope}
-
-        TODO: User Stories für Out Of Scope
+TODO: User Stories für Out Of Scope
 
 \subsection{Technisch}\label{subsec:technisch}
 
+
 \subsubsection*{Mobile CLient}
 
-        \begin{itemize}
-            \item Die Codebasis des Mobile Client MUSS für Android und IOS verwendet werden können.  
-            \item Der Mobile CLient MUSS für IOS auf IPad optimiert werden.  
-            \item Der Mobile CLient SOLL für Android Tablets opitimiert werden.  
-        \end{itemize}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{13cm}|c|}
+        \hline
+        \textbf{Id} & \textbf{Anforderung}                                                              & \textbf{Features} \\
+        \hline
+        T01         & Die Codebasis des Mobile Client MUSS für Android und IOS verwendet werden können. & F0x \\
+        \hline
+        T02         & Der Mobile CLient MUSS für IOS auf IPad optimiert werden.                         & F0x               \\
+        \hline
+        T03         & Der Mobile CLient SOLL für Android Tablets opitimiert werden.                     & F0x               \\
+        \hline
+    \end{tabular}\label{tab:userstories3}
+\end{table}
+\clearpage
 
-    \subsubsection*{Betrieb}
+\subsubsection*{Betrieb}
 
-        \begin{itemize}
-            \item Der Betrieb aller Cloud Services und Web UIs MUSS über AWS erfolgen. 
-        \end{itemize}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{13cm}|c|}
+        \hline
+        \textbf{Id} & \textbf{Anforderung}                                                 & \textbf{Features} \\
+        \hline
+        T10         & Der Betrieb aller Cloud Services und Web UIs MUSS über AWS erfolgen. & F0x               \\
+        \hline
+    \end{tabular}\label{tab:userstories4}
+\end{table}
 
 \subsection{Features}\label{subsec:features}
 
 Nummeriert mit F01-Fxx - Lower Level, näher am technischen - Spezifiziert die Anforderungen die Umgesetzt werden sollen
 
-    \subsubsection*{Projekt Scope}
+\subsubsection*{Projekt Scope}
 
-        TODO: Document Features
+TODO: Document Features
 
 
-    \subsubsection*{Out Of Scope}
+\subsubsection*{Out Of Scope}
 
-        TODO: Document some features that were discussed but de-prioritized. (e.g. Raspi, Calls)
-        
-        Weitere Features wurden noch nicht konkreter definiert. Da jeweils je "Sprint" die als nächstes umzusetzenden Features definiert wurden. 
+TODO: Document some features that were discussed but de-prioritized. (e.g. Raspi, Calls)
+
+Weitere Features wurden noch nicht konkreter definiert. Da jeweils je "Sprint" die als nächstes umzusetzenden Features definiert wurden.
