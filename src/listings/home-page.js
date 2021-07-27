@@ -11,7 +11,6 @@ export function onPageLoaded(args){
 }
 
 export function onGridLoaded(args){
-    console.log("loading grid", ApplicationSettings.getString("clientId"))
     const grid = args.object;
     getClientConfiguration(ApplicationSettings.getString("clientId"))
         .then(result => buildMessageUI(result, grid))
@@ -19,11 +18,7 @@ export function onGridLoaded(args){
 }
 
 function buildMessageUI(clientConfiguration, grid){
-    console.log("buildMessageUI",clientConfiguration)
-    let rowCounter = 0;
-    let columnCounter = 0;
-    let rowIdx = 0;
-    let columnIdx = 0;
+    let rowCounter, columnCounter, rowIdx, columnIdx = 0;
     clientConfiguration.map((conf) => {
         const messageComp = new MessageTrigger(conf.title, conf.id);
         grid.addChild(messageComp);
