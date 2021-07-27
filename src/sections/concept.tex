@@ -69,6 +69,31 @@ Im Umkehrschluss findet eine Typenkonversion via Marshalling Service statt\cite{
 Wir verwenden NativeScript Core als Framework des Mobile-Clients.
 In Kapitel \emph{\nameref{subsec:mobile-client-eval}} gehen wir auf die weiteren verfügbaren Frameworks ein und erläutern, weshalb wir uns gegen sie entschieden haben.
 
+Die Client-Applikation ist in Module unterteilt.
+Ein Modul wird aus folgenden Komponenten definiert:
+\begin{itemize}
+    \item UI-Markup: Statische Darstellung in XML
+    \item Backend: Verhalten und Dynamisierung in Javascript
+    \item Styling: Layout und Styles in CSS
+\end{itemize}
+
+Ein minimales Modul kann alleine aus einer XML-Datei bestehen.
+Die optionalen Javascript und CSS Dateien müssen denselben Namen haben wie die XML Datei, um vom Framework korrekt verknüpft zu werden.
+Dateien mit anderen Namen werden grundsätzlich vom Framework ignoriert.
+Natürlich steht es Frei dennoch solche Dateien anzulegen und deren Funktionen zu verwenden z.~B. als \emph{\nameref{subsubsec:services}} oder als \emph{\nameref{subsubsec:code-behind-komponenten}}.
+
+\subsubsection*{Page Module}
+
+\lstinputlisting[caption=home-model.js,language=JavaScript,label={lst:home-model.js}]{listings/home-model.js}
+\lstinputlisting[caption=home-page.js,language=JavaScript,label={lst:home-page.js}]{listings/home-page.js}
+\lstinputlisting[caption=home-page.xml,language=XML,label={lst:home-page.xml}]{listings/home-page.xml}
+
+
+\subsubsection*{Code-Behind Komponenten}\label{subsubsec:code-behind-komponenten}
+\subsubsection*{Services}\label{subsubsec:services}
+
+
+
 \clearpage
 
 \subsubsection{User Interface}
