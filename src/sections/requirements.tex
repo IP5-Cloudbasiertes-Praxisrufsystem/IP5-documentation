@@ -1,11 +1,11 @@
 \section{Anforderungen}\label{sec:anforderungen}
 
+Die im Rahmen des Projektes umzusetzenden Anforderungen wurden während des Projektes iterativ zusammen mit dem Kunden erarbeitet.
+Alle Anforderungen werden zuerst aus Fachlicher sicht mit User Stories festgehalten, die ein konkretes Bedürfnis der Benutzer beschreiben.
+Weiter werden User Stories aus Sicht des Kunden festhalten, welche Rahmenbedingungen und Bedürfnisse des Auftraggebers festhalten.
+Aufgrund der User Stories werden anschliessend Features definiert, welche umsetzbare Anforderungen an die Systemkomponenten definieren.
+
 \subsection{User Stories}\label{subsec:user-stories}
-
-\subsubsection*{Projekt Scope}
-
-
-Nummeriert mit U01-Uxx - High Level - Fachliche Anforderung
 
 \subsubsection*{Praxismitarbeiter}
 
@@ -15,25 +15,27 @@ Nummeriert mit U01-Uxx - High Level - Fachliche Anforderung
         \hline
         \textbf{Id} & \textbf{Anforderung}                                                                                                                                      & \textbf{Features} \\
         \hline
-        U01         & ALS Praxismitarbeiter WILL ich relevante Anfragen versenden können, DAMIT ich über Probleme und Bedarf notifizieren kann. & F0x \\
+        U01         & Als Praxismitarbeiter möchte ich Benachrichtigungen versenden können, damit ich andere Mitarbeiter über Probleme und Anfragen informieren kann. & F0x \\
         \hline
-        U02         & ALS Praxismitarbeiter WILL ich relevante Notifikationen empfangen können, DAMIT ich über Probleme und Bedarf notifiziert werde. & F0x \\
+        U02         & Als Praxismitarbeiter möchte ich Benachrichtigungen empfangen können, damit ich auf Probleme und Anfragen anderer Mitarbeiter reagieren kann. & F0x \\
         \hline
-        U03         & ALS Praxismitarbeiter WILL will nur Notifikationen sehen die für mich relevant sind, DAMIT nicht unnötig belästigt werde. & F0x \\
+        U03         & Als Praxismitarbeiter möchte ich nur Benachrichtigungen sehen, die für mich relevant sind, damit ich meine Arbeit effizient gestalten kann. & F0x \\
         \hline
-        U04         & ALS Praxismitarbeiter WILL ich über eingehende Notifikationen aufmerksam gemacht werden, DAMIT ich Notifikationen nicht übersehe. & F0x \\
+        U04         & Als Praxismitarbeiter möchte ich über empfangene Benachrichtigungen aufmerksam gemacht werden, damit ich keine Benachrichtigungen verpasse. & F0x \\
         \hline
-        U05         & ALS Praxismitarbeiter WILL ich sehen welche Notifikationen ich verpasst habe, DAMIT ich vergessenes nachholen kann. & F0x \\
+        U05         & Als Praxismitarbeiter möchte ich sehen welche Benachrichtigungen ich verpasst habe, damit ich auf verpasste Benachrichtigungen reagieren kann. & F0x \\
         \hline
-        U06         & ALS Praxismitarbeiter WILL ich wissen, wenn eine Notifikation nicht versendet wurde, DAMIT entsprechend reagieren kann. & F0x \\
+        U06         & Als Praxismitarbeiter möchte ich eine Rückmeldung erhalten, wenn eine Benachrichtigung nicht versendet werden kann, damit Benachrichtigungen nicht verloren gehen. & F0x \\
         \hline
-        U7          & ALS Praxismitarbeiter WILL ich einen Knopf an meinem Stuhl haben DAMIT ich notifikationen darüber versenden kann. & F0x \\
+        U07         & Als Praxismitarbeiter möchte ich auswählen können an welchem Gerät ich das Praxisrufsystem verwende und die dafür erstellte Konfiguration erhalten, damit das Praxisrufsystem optimal verwendet werden kann. & F0x \\
         \hline
-        U8          & ALS Praxismitarbeiter WILL ich, dass mir Notifikationen vorgelesen werden DAMIT ich informiert werde ohne meine Arbeit zu unterbrechen & F0x \\
+        U8          & Als Praxismitarbeiter möchte ich einen physischen Knopf am Behandlungsstuhl haben damit ich notifikationen darüber versenden kann. & F0x \\
         \hline
-        U9          & ALS Praxismitarbeiter WILL ich einen anderen Client anrufen können DAMIT Fragen direkt geklärt werden können. & F0x \\
+        U9          & Als Praxismitarbeiter möchte ich, dass mir Benachrichtigungen vorgelesen werden, damit ich informiert werde, ohne meine Arbeit unterbrechen zu müssen. & F0x \\
         \hline
-        U10         & ALS Praxismitarbeiter WILL ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können DAMIT komplexe Fragen direkt geklärt werden können. & F0x \\
+        U10          & Als Praxismitarbeiter möchte ich einen anderen Client anrufen können damit Fragen direkt geklärt werden können. & F0x \\
+        \hline
+        U11         & Als Praxismitarbeiter möchte ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können damit komplexe Fragen direkt geklärt werden können. & F0x \\
         \hline
     \end{tabular}\label{tab:userstories1}
 \end{table}
@@ -46,13 +48,15 @@ Nummeriert mit U01-Uxx - High Level - Fachliche Anforderung
         \hline
         \textbf{Id} & \textbf{Anforderung}                                                                                                                                                     & \textbf{Features} \\
         \hline
-        U11         & ALS Praxisverantwortlicher WILL mehrere Geräte verwalten kann DAMIT jedes Gerät für Verwendungsort optimiert werden kann. & F0x \\
+        U12         & Als Praxisverantwortlicher möchte ich mehrere Geräte verwalten können, damit jedes Gerät für Verwendungsort optimiert ist. & F0x \\
         \hline
-        U12         & ALS Praxisverantwortlicher WILL ich definieren können welches Gerät, welche Anfragen versenden kann DAMIT jedes Gerät für Ort und Zweck optimiert werden kann & F0x \\
+        U13         & Als Praxisverantwortlicher möchte ich definieren können welches Gerät, welche Anfragen versenden kann, damit jedes Gerät Verwendungsort optimiert ist. & F0x \\
         \hline
-        U13         & ALS Praxisverantwortlicher WILL ich die Verwaltung und Konfiguration des Praxisrufsystems zentral verwalten DAMIT overhead minimiert wird. & F0x \\
+        U14         & Als Praxisverantwortlicher möchte ich die Konfiguration des Praxisrufsystems zentral verwalten können, damit das Praxisrufsystem für die Anwender optimiert werden kann. & F0x \\
         \hline
-        U14         & ALS Praxisverantwortlicher WILL ich definieren können, welche Geräte mit welchen anderen Geräten telefonieren können DAMIT meinen Mitarbeitern das Arbeiten erleichtere. & F0x \\
+        U15         & Als Praxisverantwortlicher möchte ich definieren können, welche Geräte mit welchen anderen Geräten telefonieren können damit meinen Mitarbeitern das Arbeiten erleichtere. & F0x \\
+        \hline
+        U16         & Als Praxisverantwortlicher möchte ich definieren können, welche Benachrichtigung über einen physischen Knopf am Behandlungsstuhl versendet wird damit der Knopf für den Mitarbeiter optimiert ist. & F0x \\
         \hline
     \end{tabular}\label{tab:userstories2}
 \end{table}
@@ -60,10 +64,7 @@ Nummeriert mit U01-Uxx - High Level - Fachliche Anforderung
 
 \clearpage
 
-\subsection{Technisch}\label{subsec:technisch}
-
-
-\subsubsection*{Mobile CLient}
+\subsection{Rahmenbedingungen}\label{subsec:rahmenbedingungen}
 
 \begin{table}[h]
     \centering
@@ -71,27 +72,17 @@ Nummeriert mit U01-Uxx - High Level - Fachliche Anforderung
         \hline
         \textbf{Id} & \textbf{Anforderung}                                                              & \textbf{Features} \\
         \hline
-        T01         & Die Codebasis des Mobile Client MUSS für Android und IOS verwendet werden können. & F0x \\
+        T01         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über IPads bedient werden kann, damit ich von bestehender Infrastruktur profitieren kann. & F0x \\
         \hline
-        T02         & Der Mobile CLient MUSS für IOS auf IPad optimiert werden.                         & F0x               \\
+        T02         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über Android Tablets bedient werden kann, damit es in Zukunft für eine weitere Zielgruppe verwendet werden kann. & F0x \\
         \hline
-        T03         & Der Mobile CLient SOLL für Android Tablets opitimiert werden.                     & F0x               \\
+        T03         & Als Auftraggeber möchte ich, dass die Codebasis für das Praxisrufsystem für Android und IOS verwendet werden kann, damit ich die Weiterentwicklung optimieren kann. & F0x \\
+        \hline
+        T04         & Als Auftraggeber möchte ich, dass wo möglich der Betrieb von Serverseitigen Dienstleistungen über AWS betrieben wird, damit ich von bestehender Infrastruktur und Erfahrung profitieren kann. & F0x               \\
         \hline
     \end{tabular}\label{tab:userstories3}
 \end{table}
 
-\subsubsection*{Betrieb}
-\begin{table}[h]
-
-    \centering
-    \begin{tabular}{|l|p{13cm}|c|}
-        \hline
-        \textbf{Id} & \textbf{Anforderung}                                                 & \textbf{Features} \\
-        \hline
-        T10         & Der Betrieb aller Cloud Services und Web UIs MUSS über AWS erfolgen. & F0x               \\
-        \hline
-    \end{tabular}\label{tab:userstories4}
-\end{table}
 
 \clearpage
 
@@ -109,15 +100,15 @@ Nummeriert mit F01-Fxx - Lower Level, näher am technischen - Spezifiziert die A
         \hline
         \textbf{Id} & \textbf{Feature}                                                                                                      & \textbf{User Stories} \\
         \hline
-        F01         & Der Betrieb aller Cloud Services und Web UIs MUSS über AWS erfolgen.                                                  & Uxx                 \\
+        F01        & Der Betrieb aller Cloud Services und Web UIs muss über AWS erfolgen.                                                  & Uxx                 \\
         \hline
-        F02        & Muss einen Mobile Client geben                                                                                        & Uxx                 \\
+        F02        & Das Praxisrufsystem muss über einen Mobile Client auf IPads und Android Tables verwendbar sein.                                                                                        & Uxx                 \\
         \hline
-        F03        & Muss einen Cloud Service geben um Notifications zu pushen                                                             & Uxx                 \\
+        F03        & Benachrichtigungen müssen über einen zentralen Cloud Service versendet werden.                                                              & Uxx                 \\
         \hline
-        F04        & Muss ein Admin Web UI geben.                                                                                          & Uxx                 \\
+        F04        & Das Praxisrufsystem muss über einen zentralen Cloud Service verwaltet werden können.                                                                                           & Uxx                 \\
         \hline
-        F05        & Mobile Client muss Ton abspielen, wenn Notification eingeht                                                           & Uxx                 \\
+        F05        & Der Mobile Client muss Ton abspielen, wenn Notification eingeht                                                           & Uxx                 \\
         \hline
         F06        & Mobile Client muss Ton nach X Sekunden abspielen wenn Notifikation nicht quittiert wurde & Uxx \\
         \hline
