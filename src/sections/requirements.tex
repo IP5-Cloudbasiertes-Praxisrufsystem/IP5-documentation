@@ -3,9 +3,30 @@
 Die im Rahmen des Projektes umzusetzenden Anforderungen wurden während des Projektes iterativ zusammen mit dem Kunden erarbeitet.
 Alle Anforderungen werden zuerst aus Fachlicher sicht mit User Stories festgehalten, die ein konkretes Bedürfnis der Benutzer beschreiben.
 Weiter werden User Stories aus Sicht des Kunden festhalten, welche Rahmenbedingungen und Bedürfnisse des Auftraggebers festhalten.
-Aufgrund der User Stories werden anschliessend Features definiert, welche umsetzbare Anforderungen an die Systemkomponenten definieren.
+Aufgrund der User Stories werden anschliessend Features definiert, welche konkrete Szenarien und die erwarteten Ergebnisse an definieren.
 
 \subsection{User Stories}\label{subsec:user-stories}
+
+\subsubsection*{Auftraggeber}\label{subsec:auftraggeber}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{13cm}|c|}
+        \hline
+        \textbf{Id} & \textbf{Anforderung}                                                              & \textbf{Features} \\
+        \hline
+        T01         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über IPads bedient werden kann, damit ich von bestehender Infrastruktur profitieren kann. & F0x \\
+        \hline
+        T02         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über Android Tablets bedient werden kann, damit es in Zukunft für eine weitere Zielgruppe verwendet werden kann. & F0x \\
+        \hline
+        T03         & Als Auftraggeber möchte ich, dass die Codebasis für das Praxisrufsystem für Android und IOS verwendet werden kann, damit ich die Weiterentwicklung optimieren kann. & F0x \\
+        \hline
+        T04         & Als Auftraggeber möchte ich, dass wo möglich der Betrieb von Serverseitigen Dienstleistungen über AWS betrieben wird, damit ich von bestehender Infrastruktur und Erfahrung profitieren kann. & F0x               \\
+        \hline
+    \end{tabular}\label{tab:userstories3}
+\end{table}
+
+\clearpage
 
 \subsubsection*{Praxismitarbeiter}
 
@@ -40,6 +61,8 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche umsetz
     \end{tabular}\label{tab:userstories1}
 \end{table}
 
+\clearpage
+
 \subsubsection*{Praxisverantwortlicher}
 
 \begin{table}[h]
@@ -64,104 +87,17 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche umsetz
 
 \clearpage
 
-\subsection{Rahmenbedingungen}\label{subsec:rahmenbedingungen}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|l|p{13cm}|c|}
-        \hline
-        \textbf{Id} & \textbf{Anforderung}                                                              & \textbf{Features} \\
-        \hline
-        T01         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über IPads bedient werden kann, damit ich von bestehender Infrastruktur profitieren kann. & F0x \\
-        \hline
-        T02         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über Android Tablets bedient werden kann, damit es in Zukunft für eine weitere Zielgruppe verwendet werden kann. & F0x \\
-        \hline
-        T03         & Als Auftraggeber möchte ich, dass die Codebasis für das Praxisrufsystem für Android und IOS verwendet werden kann, damit ich die Weiterentwicklung optimieren kann. & F0x \\
-        \hline
-        T04         & Als Auftraggeber möchte ich, dass wo möglich der Betrieb von Serverseitigen Dienstleistungen über AWS betrieben wird, damit ich von bestehender Infrastruktur und Erfahrung profitieren kann. & F0x               \\
-        \hline
-    \end{tabular}\label{tab:userstories3}
-\end{table}
-
-
-\clearpage
-
 \subsection{Features}\label{subsec:features}
 
-Nummeriert mit F01-Fxx - Lower Level, näher am technischen - Spezifiziert die Anforderungen die Umgesetzt werden sollen
-
-\subsubsection*{Projekt Scope}
-
-
-\begin{table}[h]
-
-    \centering
-    \begin{tabular}{|l|p{13cm}|c|}
-        \hline
-        \textbf{Id} & \textbf{Feature}                                                                                                      & \textbf{User Stories} \\
-        \hline
-        F01        & Der Betrieb aller Cloud Services und Web UIs muss über AWS erfolgen.                                                  & Uxx                 \\
-        \hline
-        F02        & Das Praxisrufsystem muss über einen Mobile Client auf IPads und Android Tables verwendbar sein.                                                                                        & Uxx                 \\
-        \hline
-        F03        & Benachrichtigungen müssen über einen zentralen Cloud Service versendet werden.                                                              & Uxx                 \\
-        \hline
-        F04        & Das Praxisrufsystem muss über einen zentralen Cloud Service verwaltet werden können.                                                                                           & Uxx                 \\
-        \hline
-        F05        & Der Mobile Client muss Ton abspielen, wenn Notification eingeht                                                           & Uxx                 \\
-        \hline
-        F06        & Mobile Client muss Ton nach X Sekunden abspielen wenn Notifikation nicht quittiert wurde & Uxx \\
-        \hline
-        F07        & Mobile Client muss Möglichkeit bieten Notifikationen zu quittieren                                                    & Uxx                 \\
-        \hline
-        F08        & Praxismitarbeiter muss sich anmelden können                                                                           & Uxx                 \\
-        \hline
-        F09        & Praxismitarbeiter muss relevanten client auswählen können                                                             & Uxx                 \\
-        \hline
-        F10        & Mobile Client muss Buttons anzeigen, die vorkonfigurierte Notifikationen versenden & Uxx \\
-        \hline
-        F11        & Verfügbare Buttons und Notifications müssen gemäss gewähltem client angezeigt werden & Uxx \\
-        \hline
-        F12        & Der Mobile Client muss den Praxismitarbeiter darauf hinweisen, wenn der Versand einer Notifikation fehlgeschlagen ist & Uxx \\
-        \hline
-        F13        & Der Mobile Client muss es ermöglichen fehlgeschlagene sends direkt zu wiederholen & Uxx \\
-        \hline
-        F14        & CRUD für alle Konfigurationen müssen über ein Web UI möglich sein                                                     & Uxx                 \\
-        \hline
-        F15        & CRUD müssen syntaktisch korrekt sein.                                                                                 & Uxx                 \\
-        \hline
-        F15        & CRUD sollen semantisch korrekt sein.                                                                                 & Uxx                 \\
-        \hline
-        F16        & Notification Types müssen Konfigurierbar sein                                                                         & Uxx                 \\
-        \hline
-        F17        & Clients müssen Konfigurierbar sein                                                                                    & Uxx                 \\
-        \hline
-        F18        & Clients müssen Konfigurationen haben können                                                                           & Uxx                 \\
-        \hline
-        F19        & Pro Client muss definiert werden können, welche Notifikationen ihn interessieren & Uxx \\
-        \hline
-        F20        & Pro Client muss definiert werden können, welche Notifikationen versendet werden können & Uxx \\
-        \hline
-        F21        & Pro Client muss definiert werden können, welche Notifikationen versendet werden können & Uxx \\
-        \hline
-        F22        & Administrator muss sich anmelden können & Uxx \\
-        \hline
-        F22        & Mobile Client muss Background Push Benachrichtigungen unterstützen & Uxx \\
-        \hline
-
-    \end{tabular}\label{tab:features1}
-\end{table}
-
-
-\subsubsection*{Out Of Scope}
-
-Weitere Features wurden noch nicht konkreter definiert. Da jeweils je "Sprint" die als nächstes umzusetzenden Features definiert wurden.
-
-\begin{itemize}
-    \item Soll Client für Raspberry Pi geben
-    \item Client Configuration für einzelnen Button soll möglich sein
-    \item Mobile Client soll 1:1 Unterhaltungen unterstützen
-    \item Mobile Client soll 1:n Unterhaltungen unterstützen.
-\end{itemize}
+    \subsubsection*{F01 - Benachrichtigungen Versenden}
+    \subsubsection*{F02 - Benachrichtigungen Empfangen}
+    \subsubsection*{F03 - Fehlgeschlagene Benachrichtigungen}
+    \subsubsection*{F04 - Über Benachrichtigungen Notifizieren}
+    \subsubsection*{F05 - Login Mobile Client}
+    \subsubsection*{F06 - Integration Behandlungsstuhl}
+    \subsubsection*{F07 - Text To Speech}
+    \subsubsection*{F08 - Direkte Anrufe}
+    \subsubsection*{F09 - Gruppen Anrufe}
+    \subsubsection*{F10 - Konfigurationsverwaltung}
 
 
