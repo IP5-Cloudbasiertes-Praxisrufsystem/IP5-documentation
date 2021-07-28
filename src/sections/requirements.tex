@@ -13,29 +13,29 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
     \centering
     \begin{tabular}{|l|p{13cm}|c|}
         \hline
-        \textbf{Id} & \textbf{Anforderung}                                                                                                                                      & \textbf{Features} \\
+        \textbf{Id} & \textbf{Anforderung}                                                                                                                                      & \textbf{Feature} \\
         \hline
-        U01         & Als Praxismitarbeiter möchte ich Benachrichtigungen versenden können, damit ich andere Mitarbeiter über Probleme und Anfragen informieren kann. & F0x \\
+        U01         & Als Praxismitarbeiter möchte ich Benachrichtigungen versenden können, damit ich andere Mitarbeiter über Probleme und Anfragen informieren kann. & F01 \\
         \hline
-        U02         & Als Praxismitarbeiter möchte ich Benachrichtigungen empfangen können, damit ich auf Probleme und Anfragen anderer Mitarbeiter reagieren kann. & F0x \\
+        U02         & Als Praxismitarbeiter möchte ich Benachrichtigungen empfangen können, damit ich auf Probleme und Anfragen anderer Mitarbeiter reagieren kann. & F02 \\
         \hline
-        U03         & Als Praxismitarbeiter möchte ich nur Benachrichtigungen sehen, die für mich relevant sind, damit ich meine Arbeit effizient gestalten kann. & F0x \\
+        U03         & Als Praxismitarbeiter möchte ich nur Benachrichtigungen sehen, die für mich relevant sind, damit ich meine Arbeit effizient gestalten kann. & F02 \\
         \hline
-        U04         & Als Praxismitarbeiter möchte ich über empfangene Benachrichtigungen aufmerksam gemacht werden, damit ich keine Benachrichtigungen verpasse. & F0x \\
+        U04         & Als Praxismitarbeiter möchte ich über empfangene Benachrichtigungen aufmerksam gemacht werden, damit ich keine Benachrichtigungen verpasse. & F04 \\
         \hline
-        U05         & Als Praxismitarbeiter möchte ich sehen welche Benachrichtigungen ich verpasst habe, damit ich auf verpasste Benachrichtigungen reagieren kann. & F0x \\
+        U05         & Als Praxismitarbeiter möchte ich sehen welche Benachrichtigungen ich verpasst habe, damit ich auf verpasste Benachrichtigungen reagieren kann. & F04 \\
         \hline
-        U06         & Als Praxismitarbeiter möchte ich eine Rückmeldung erhalten, wenn eine Benachrichtigung nicht versendet werden kann, damit Benachrichtigungen nicht verloren gehen. & F0x \\
+        U06         & Als Praxismitarbeiter möchte ich eine Rückmeldung erhalten, wenn eine Benachrichtigung nicht versendet werden kann, damit Benachrichtigungen nicht verloren gehen. & F03 \\
         \hline
-        U07         & Als Praxismitarbeiter möchte ich auswählen können an welchem Gerät ich das Praxisrufsystem verwende und die dafür erstellte Konfiguration erhalten, damit das Praxisrufsystem optimal verwendet werden kann. & F0x \\
+        U07         & Als Praxismitarbeiter möchte ich auswählen können an welchem Gerät ich das Praxisrufsystem verwende und die dafür erstellte Konfiguration erhalten, damit das Praxisrufsystem optimal verwendet werden kann. & F05 \\
         \hline
-        U8          & Als Praxismitarbeiter möchte ich einen physischen Knopf am Behandlungsstuhl haben damit ich notifikationen darüber versenden kann. & F0x \\
+        U8          & Als Praxismitarbeiter möchte ich einen physischen Knopf am Behandlungsstuhl haben damit ich notifikationen darüber versenden kann. & F07 \\
         \hline
-        U9          & Als Praxismitarbeiter möchte ich, dass mir Benachrichtigungen vorgelesen werden, damit ich informiert werde, ohne meine Arbeit unterbrechen zu müssen. & F0x \\
+        U9          & Als Praxismitarbeiter möchte ich, dass mir Benachrichtigungen vorgelesen werden, damit ich informiert werde, ohne meine Arbeit unterbrechen zu müssen. & F08 \\
         \hline
-        U10          & Als Praxismitarbeiter möchte ich einen anderen Client anrufen können damit Fragen direkt geklärt werden können. & F0x \\
+        U10          & Als Praxismitarbeiter möchte ich einen anderen Client anrufen können damit Fragen direkt geklärt werden können. & F09 \\
         \hline
-        U11         & Als Praxismitarbeiter möchte ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können damit komplexe Fragen direkt geklärt werden können. & F0x \\
+        U11         & Als Praxismitarbeiter möchte ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können damit komplexe Fragen direkt geklärt werden können. & F10 \\
         \hline
     \end{tabular}\label{tab:userstories1}
 \end{table}
@@ -91,156 +91,143 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 
     \subsubsection*{F01 - Benachrichtigungen Versenden}
 
-        Scenario: Benachrichtigung versenden
-
-        Given:  Benutzer ist vollständig angemeldet
-        And:    Mindestens 1 Empfänger ist konfiguriert
-        When:   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button
-        Then:   Benachrichtigung wird an den zentralen Cloud Service gesendet
-        And:    Benachrichtitung wird an alle Mobile Clients versendet die sich für diese Benachrichtigung subscribed haben weitergeleitet
-        And:    Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde
-
-
-        Scenario: Keine Empfänger konfiguriert
-
-        Given:  Benutzer ist vollständig angemeldet
-        And:    Kein Empfänger ist konfiguriert
-        When:   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button
-        Then:   Benachrichtigung wird an den zentralen Cloud Service gesendet
-        And:    Benachrichtitung wird nicht weitergeleitet
+        Scenario: Benachrichtigung versenden\\
+        Given:  Benutzer ist vollständig angemeldet\\
+        And:    Mindestens 1 Empfänger ist konfiguriert\\
+        When:   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
+        Then:   Benachrichtigung wird an den zentralen Cloud Service gesendet\\
+        And:    Benachrichtitung wird an alle Mobile Clients versendet die sich für diese Benachrichtigung subscribed haben weitergeleitet\\
+        And:    Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde\\
 
 
+        Scenario: Keine Empfänger konfiguriert\\
+        Given:  Benutzer ist vollständig angemeldet\\
+        And:    Kein Empfänger ist konfiguriert\\
+        When:   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
+        Then:   Benachrichtigung wird an den zentralen Cloud Service gesendet\\
+        And:    Benachrichtitung wird nicht weitergeleitet\\
 
     \subsubsection*{F02 - Benachrichtigungen Empfangen}
 
-        Scenario: Empfangen
-
-        Given:  Eine Benachrichtigung wurde von Mobile Client versendet
-        When:   Cloud Service Notification an Empfänger Mobile Client weiterleitet
-        Then:   Wird die Benachrichtigung vom Empfänger Mobile Client empfangen
-        And:    In einer Übersicht für empfangene Benachrichtigung angezeigt.
+        Scenario: Empfangen\\
+        Given:  Eine Benachrichtigung wurde von Mobile Client versendet\\
+        When:   Cloud Service Notification an Empfänger Mobile Client weiterleitet\\
+        Then:   Wird die Benachrichtigung vom Empfänger Mobile Client empfangen\\
+        And:    In einer Übersicht für empfangene Benachrichtigung angezeigt.\\
 
 
     \subsubsection*{F03 - Fehlgeschlagene Benachrichtigungen}
 
-        Scenario: Fehler Rückmeldung
+        Scenario: Fehler Rückmeldung\\
+        Given:  Eine Benachrichtigung wurde von Mobile Client versendet\\
+        When:   Weiterleitung von Cloud Service Notification an Empfänger schlägt auf Service Seite fehl\\
+        Then:   Der Praxismitarbeiter wird über den Fehler Informiert\\
+        And:    Der Praxismitarbeiter hat die Möglichkeit die Fehlgeschlagenen Benachrichtigungen zu wiederholen\\
 
-        Given:  Eine Benachrichtigung wurde von Mobile Client versendet
-        When:   Weiterleitung von Cloud Service Notification an Empfänger schlägt auf Service Seite fehl
-        Then:   Der Praxismitarbeiter wird über den Fehler Informiert
-        And:    Der Praxismitarbeiter hat die Möglichkeit die Fehlgeschlagenen Benachrichtigungen zu wiederholen
+        Scenario: Confirm Retry\\
+        Given:  Benachrichtigung ist fehlgeschlagen\\
+        And:    Dialog zum wiederholen wird angezeigt\\
+        When:   Praxismitarbeiter bestätigt, dass wiederholt werden soll\\
+        Then:   Der Cloudservice versucht erneut, die fehlgeschlagenen zuzustellen\\
 
-        Scenario: Confirm Retry
-
-        Given:  Benachrichtigung ist fehlgeschlagen
-        And:    Dialog zum wiederholen wird angezeigt
-        When:   Praxismitarbeiter bestätigt, dass wiederholt werden soll
-        Then:   Der Cloudservice versucht erneut, die fehlgeschlagenen zuzustellen
-
-        Scenario: Cancel Retry
-
-        Given:  Benachrichtigung ist fehlgeschlagen
-        And:    Dialog zum wiederholen wird angezeigt
-        When:   Praxismitarbeiter klick, dass nicht wiederholt werden soll
-        Then:   Werden die fehlgeschlagenen nicht wiederholt
-        And:    Zurück zur Notificationsansicht
+        Scenario: Cancel Retry\\
+        Given:  Benachrichtigung ist fehlgeschlagen\\
+        And:    Dialog zum wiederholen wird angezeigt\\
+        When:   Praxismitarbeiter klick, dass nicht wiederholt werden soll\\
+        Then:   Werden die fehlgeschlagenen nicht wiederholt\\
+        And:    Zurück zur Notificationsansicht\\
 
 
     \subsubsection*{F04 - Über Benachrichtigungen Notifizieren}
 
-        Scenario: Foreground
-
-        Given:  Mobile Client ist geöffnet
-        When:   Eine Benachrichtigung wird vom Mobile Client emfpangen
-        Then:   Ein Audio Signal erklingt
-
-        Scenario: Background
-
-        Given:  Mobile Client läuft im Hintergrund
-        When:   Eine Benachrichtigung wird vom Mobile Client empfangen
-        Then:   Ein Audio Signal erklingt
-        And:    Eine Push Benachrichtigung wird angezeigt
-
-        Scenario: Nicht Quittiert
-
-        Given:  Mobile Client ist geöffnet
-        And:    Eine Benachrichtigung wurde empfangen
-        When:   Benachrichtigung wird nicht quittiert
-        Then:   Ein Audio Signal erklingt
-        And:    Das Audio Signal wiederholt sich alle 30 Sekunden, bis die Benachrichtigung Quittiert wurde.
+        Scenario: Foreground\\
+        Given:  Mobile Client ist geöffnet\\
+        When:   Eine Benachrichtigung wird vom Mobile Client emfpangen\\
+        Then:   Ein Audio Signal erklingt\\
+        \\
+        Scenario: Background\\
+        Given:  Mobile Client läuft im Hintergrund\\
+        When:   Eine Benachrichtigung wird vom Mobile Client empfangen\\
+        Then:   Ein Audio Signal erklingt\\
+        And:    Eine Push Benachrichtigung wird angezeigt\\
+        \\
+        Scenario: Nicht Quittiert\\
+        Given:  Mobile Client ist geöffnet\\
+        And:    Eine Benachrichtigung wurde empfangen\\
+        When:   Benachrichtigung wird nicht quittiert\\
+        Then:   Ein Audio Signal erklingt\\
+        And:    Das Audio Signal wiederholt sich alle 30 Sekunden, bis die Benachrichtigung Quittiert wurde.\\
 
 
     \subsubsection*{F05 - Login Mobile Client}
 
-        Scenario: Startbildschirm wenn nicht angemeldet
-
-        Given:  Mobile Client is geöffnet
-        When: Benutzer ist nicht angemeldet
-        Then: Benutzer wird zum Login aufgefordert
-
-        Scenario: Startbildschirm wenn angemeldet
-
-        Given:  Mobile Client is geöffnet
-        When: Benutzer ist angemeldet
-        Then: Konfiguration die der Benutzer zuletzt gewählt hat wird angezeigt
-        And:   Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.
-
-
-        Scenario: Anmelden korrekt
-
-        Given: Benutzer ist nicht angemeldet
-        And:   Login Screen wird angezeigt
-        And:    Für den Benutzer sind gültige Konfigurationen erfasst
-        When:  Benutzer meldet sich mit korrekten Daten an
-        Then:  Benutzer wird auf nächste Seite geleitet und kann dort die Konfiguration auswählen, die er Benutzen möchte.
-
-        Scenario: Anmelden falsch
-
-        Given: Benutzer ist nicht angemeldet
-        And:   Login Screen wird angezeigt
-        When:  Benutzer meldet sich mit falschen Daten an
-        Then:  Fehlermeldung
-        And: Benutzer wird nicht weitergeleitet
-
-
-        Scenario: Konfiguration Wählen
-
-        Given: Benutzer hat sich korrekt angemeldet
-        And:   Konfiguration Auswählen Screen wird angezeigt
-        When:  Der Benutzer wählt die gewünschte Konfiguration
-        Then:  Der Benutzer wird weitergeleitet
-        And:   Die gewählte Konfiguration wird geladen
-        And:   Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.
+        Scenario: Startbildschirm wenn nicht angemeldet\\
+        Given:  Mobile Client is geöffnet\\
+        When: Benutzer ist nicht angemeldet\\
+        Then: Benutzer wird zum Login aufgefordert\\
+        \\
+        Scenario: Startbildschirm wenn angemeldet\\
+        Given:  Mobile Client is geöffnet\\
+        When: Benutzer ist angemeldet\\
+        Then: Konfiguration die der Benutzer zuletzt gewählt hat wird angezeigt\\
+        And:   Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\
+        \\
+        Scenario: Anmelden korrekt\\
+        Given: Benutzer ist nicht angemeldet\\
+        And:   Login Screen wird angezeigt\\
+        And:    Für den Benutzer sind gültige Konfigurationen erfasst\\
+        When:  Benutzer meldet sich mit korrekten Daten an\\
+        Then:  Benutzer wird auf nächste Seite geleitet und kann dort die Konfiguration auswählen, die er Benutzen möchte.\\
+        \\
+        Scenario: Anmelden falsch\\
+        Given: Benutzer ist nicht angemeldet\\
+        And:   Login Screen wird angezeigt\\
+        When:  Benutzer meldet sich mit falschen Daten an\\
+        Then:  Fehlermeldung\\
+        And: Benutzer wird nicht weitergeleitet\\
+        \\
+        Scenario: Konfiguration Wählen\\
+        Given: Benutzer hat sich korrekt angemeldet\\
+        And:   Konfiguration Auswählen Screen wird angezeigt\\
+        When:  Der Benutzer wählt die gewünschte Konfiguration\\
+        Then:  Der Benutzer wird weitergeleitet\\
+        And:   Die gewählte Konfiguration wird geladen\\
+        And:   Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\
 
 
-        Scenario Logout
-
-        Given: Benutzer ist angemeldet
-        When:  Benutzer klickt logout
-        Then: Benutzer wird zur Login Seite weitergeleitet
+        Scenario Logout\\
+        Given: Benutzer ist angemeldet\\
+        When:  Benutzer klickt logout\\
+        Then: Benutzer wird zur Login Seite weitergeleitet\\
 
 
     \subsubsection*{F06 - Konfigurationsverwaltung}
 
-        Scenario: Login
+        Scenario: Login\\
+        Given: Benutzer ist nicht angemeldet\\
+        And:   Admin UI Login Screen wird angezeigt\\
+        When:  Admin meldet sich mit korrekten Daten an\\
+        Then:  Admin wird auf Übersichtsseite weitergeleitet\\
 
-        Scenario: Logout
+        Scenario: Anmelden falsch\\
+        Given: Benutzer ist nicht angemeldet\\
+        And:   Admin UI Login Screen wird angezeigt\\
+        When:  Admin meldet sich mit falschen Daten an\\
+        Then:  Fehlermeldung wird angezeigt\\
+        And:  Admin wird nicht weitergeleitet.\\
 
-        Scenario: Anzeigen
-
-        Scenario: Erstellen
-
-        Scenario: Bearbeiten
-
-        Scenario: Löschen
-
-
-
-
+        Scenario: CRUD\\
+        Given: Admin ist angemeldet\\
+        When: Admin UI wird aufgerufen\\
+        Then: Alle existierenden Konfigurationen werden angezeigt\\
+        And: Neue Konfigurationen können erstellt werden\\
+        And: Bestehende Konfigurationen können verändert werden\\
+        And: Bestehende Konfigurationen können gelöscht werden\\
 
     \subsubsection*{F07 - Integration Behandlungsstuhl}
     \subsubsection*{F08 - Text To Speech}
     \subsubsection*{F09 - Direkte Anrufe}
     \subsubsection*{F10 - Gruppen Anrufe}
+
 
 
