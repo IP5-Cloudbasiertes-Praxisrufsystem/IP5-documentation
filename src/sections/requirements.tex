@@ -13,7 +13,7 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
     \centering
     \begin{tabular}{|l|p{13cm}|c|}
         \hline
-        \textbf{Id} & \textbf{Anforderung}                                                                                                                                      & \textbf{Feature} \\
+        \textbf{Id} & \textbf{Anforderung}                                                                                                                                                                                         & \textbf{Feature} \\
         \hline
         U01         & Als Praxismitarbeiter möchte ich Benachrichtigungen versenden können, damit ich andere Mitarbeiter über Probleme und Anfragen informieren kann. & F01 \\
         \hline
@@ -33,7 +33,7 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
         \hline
         U9          & Als Praxismitarbeiter möchte ich, dass mir Benachrichtigungen vorgelesen werden, damit ich informiert werde, ohne meine Arbeit unterbrechen zu müssen. & F08 \\
         \hline
-        U10          & Als Praxismitarbeiter möchte ich einen anderen Client anrufen können damit Fragen direkt geklärt werden können. & F09 \\
+        U10         & Als Praxismitarbeiter möchte ich einen anderen Client Unterhaltungen führen können damit Fragen direkt geklärt werden können. & F09 \\
         \hline
         U11         & Als Praxismitarbeiter möchte ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können damit komplexe Fragen direkt geklärt werden können. & F10 \\
         \hline
@@ -48,9 +48,9 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
     \centering
     \begin{tabular}{|l|p{13cm}|c|}
         \hline
-        \textbf{Id} & \textbf{Anforderung}                                                                                                                                                     & \textbf{Features} \\
+        \textbf{Id} & \textbf{Anforderung}                                                                                                                                                                               & \textbf{Features} \\
         \hline
-        U12         & Als Praxisverantwortlicher möchte ich mehrere Geräte verwalten können, damit jedes Gerät für Verwendungsort optimiert ist. & F0x \\
+        U12         & Als Praxisverantwortlicher möchte ich mehrere Geräte verwalten können, damit das Praxisrufsystem in mehreren Zimmern gleichzeitig genutzt werden kann. & F0x \\
         \hline
         U13         & Als Praxisverantwortlicher möchte ich definieren können welches Gerät, welche Anfragen versenden kann, damit jedes Gerät Verwendungsort optimiert ist. & F0x \\
         \hline
@@ -72,7 +72,7 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
     \centering
     \begin{tabular}{|l|p{13cm}|c|}
         \hline
-        \textbf{Id} & \textbf{Anforderung}                                                              & \textbf{Features} \\
+        \textbf{Id} & \textbf{Anforderung}                                                                                                                                                                          & \textbf{Features} \\
         \hline
         T01         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über IPads bedient werden kann, damit ich von bestehender Infrastruktur profitieren kann. & F0x \\
         \hline
@@ -89,149 +89,173 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 
 \subsection{Features}\label{subsec:features}
 
-    \subsubsection*{F01 - Benachrichtigungen Versenden}
-        \begin{tabbing}
-            Left \= Middle \= Right \kill
-            Scenario: \> \> Benachrichtigung versenden\\
-            \textbf{Given:}  \> \> Benutzer ist vollständig angemeldet\\
-            And:    \> \> Mindestens 1 Empfänger ist konfiguriert\\
-            \textbf{When:}  \> \> Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
-            \textbf{Then:}   \> \> Benachrichtigung wird an den zentralen Cloud Service gesendet\\
-            And:    \> \> Benachrichtitung wird an alle Mobile Clients versendet\\
-                  \> \> die sich für diese Benachrichtigung subscribed haben weitergeleitet\\
-            And:    \> \> Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde\\
-        \end{tabbing}
+\subsubsection*{F01 - Benachrichtigungen Versenden}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \> Benachrichtigung versenden\\ \\
+    Given:  \> \> Benutzer ist vollständig angemeldet\\
+    And:    \> \> Mindestens 1 Empfänger ist konfiguriert\\
+    When:  \> \> Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
+    Then:   \> \> Benachrichtigung wird an den zentralen Cloud Service gesendet\\
+    And:    \> \> Benachrichtitung wird an alle Mobile Clients versendet\\
+    \> \> die sich für diese Benachrichtigung subscribed haben weitergeleitet\\
+    And:    \> \> Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde\\
+
+    \\
+    Scenario: \> \> Keine Empfänger konfiguriert\\ \\
+    Given:  \> \>  Benutzer ist vollständig angemeldet\\
+    And:  \> \>    Kein Empfänger ist konfiguriert\\
+    When:  \> \>   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
+    Then:  \> \>   Benachrichtigung wird an den zentralen Cloud Service gesendet\\
+    And:  \> \>    Benachrichtitung wird nicht weitergeleitet\\
+
+\end{tabbing}
 
 
+\subsubsection*{F02 - Benachrichtigungen Empfangen}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
 
-        Scenario: Keine Empfänger konfiguriert\\
-        Given:  Benutzer ist vollständig angemeldet\\
-        And:    Kein Empfänger ist konfiguriert\\
-        When:   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
-        Then:   Benachrichtigung wird an den zentralen Cloud Service gesendet\\
-        And:    Benachrichtitung wird nicht weitergeleitet\\
+    Scenario:  \> \> Empfangen\\ \\
+    Given:  \> \>  Eine Benachrichtigung wurde von Mobile Client versendet\\
+    When:  \> \>   Cloud Service Notification an Empfänger Mobile Client weiterleitet\\
+    Then:  \> \>   Wird die Benachrichtigung vom Empfänger Mobile Client empfangen\\
+    And:  \> \>    In einer Übersicht für empfangene Benachrichtigung angezeigt.\\
 
-    \subsubsection*{F02 - Benachrichtigungen Empfangen}
+\end{tabbing}
 
-        Scenario: Empfangen\\
-        Given:  Eine Benachrichtigung wurde von Mobile Client versendet\\
-        When:   Cloud Service Notification an Empfänger Mobile Client weiterleitet\\
-        Then:   Wird die Benachrichtigung vom Empfänger Mobile Client empfangen\\
-        And:    In einer Übersicht für empfangene Benachrichtigung angezeigt.\\
+\clearpage
+\subsubsection*{F03 - Fehlgeschlagene Benachrichtigungen}
 
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \>  Fehler Rückmeldung\\ \\
+    Given: \> \>   Eine Benachrichtigung wurde von Mobile Client versendet\\
+    When: \> \>    Weiterleitung von Cloud Service Notification an Empfänger schlägt auf Service Seite fehl\\
+    Then: \> \>    Der Praxismitarbeiter wird über den Fehler Informiert\\
+    And: \> \>     Der Praxismitarbeiter hat die Möglichkeit die Fehlgeschlagenen Benachrichtigungen zu wiederholen\\
+    \\
+    Scenario: \> \>  Confirm Retry\\ \\
+    Given: \> \>   Benachrichtigung ist fehlgeschlagen\\
+    And: \> \>     Dialog zum wiederholen wird angezeigt\\
+    When: \> \>    Praxismitarbeiter bestätigt, dass wiederholt werden soll\\
+    Then: \> \>    Der Cloudservice versucht erneut, die fehlgeschlagenen zuzustellen\\
+    \\
+    Scenario: \> \>  Cancel Retry\\ \\
+    Given: \> \>   Benachrichtigung ist fehlgeschlagen\\
+    And: \> \>     Dialog zum wiederholen wird angezeigt\\
+    When: \> \>    Praxismitarbeiter klick, dass nicht wiederholt werden soll\\
+    Then: \> \>    Werden die fehlgeschlagenen nicht wiederholt\\
+    And: \> \>     Zurück zur Notificationsansicht\\
 
-    \subsubsection*{F03 - Fehlgeschlagene Benachrichtigungen}
+\end{tabbing}
 
-        Scenario: Fehler Rückmeldung\\
-        Given:  Eine Benachrichtigung wurde von Mobile Client versendet\\
-        When:   Weiterleitung von Cloud Service Notification an Empfänger schlägt auf Service Seite fehl\\
-        Then:   Der Praxismitarbeiter wird über den Fehler Informiert\\
-        And:    Der Praxismitarbeiter hat die Möglichkeit die Fehlgeschlagenen Benachrichtigungen zu wiederholen\\
+\subsubsection*{F04 - Über Benachrichtigungen Notifizieren}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \>  Foreground\\ \\
+    Given: \> \>   Mobile Client ist geöffnet\\
+    When: \> \>    Eine Benachrichtigung wird vom Mobile Client emfpangen\\
+    Then: \> \>    Ein Audio Signal erklingt\\
+    \\
+    Scenario: \> \>  Background\\ \\
+    Given: \> \>   Mobile Client läuft im Hintergrund\\
+    When: \> \>    Eine Benachrichtigung wird vom Mobile Client empfangen\\
+    Then: \> \>    Ein Audio Signal erklingt\\
+    And: \> \>     Eine Push Benachrichtigung wird angezeigt\\
+    \\
+    Scenario: \> \>  Nicht Quittiert\\ \\
+    Given: \> \>   Mobile Client ist geöffnet\\
+    And: \> \>     Eine Benachrichtigung wurde empfangen\\
+    When: \> \>    Benachrichtigung wird nicht quittiert\\
+    Then: \> \>    Ein Audio Signal erklingt\\
+    And: \> \>     Das Audio Signal wiederholt sich alle 30 Sekunden, bis die Benachrichtigung Quittiert wurde.\\
+\end{tabbing}
 
-        Scenario: Confirm Retry\\
-        Given:  Benachrichtigung ist fehlgeschlagen\\
-        And:    Dialog zum wiederholen wird angezeigt\\
-        When:   Praxismitarbeiter bestätigt, dass wiederholt werden soll\\
-        Then:   Der Cloudservice versucht erneut, die fehlgeschlagenen zuzustellen\\
+\clearpage
 
-        Scenario: Cancel Retry\\
-        Given:  Benachrichtigung ist fehlgeschlagen\\
-        And:    Dialog zum wiederholen wird angezeigt\\
-        When:   Praxismitarbeiter klick, dass nicht wiederholt werden soll\\
-        Then:   Werden die fehlgeschlagenen nicht wiederholt\\
-        And:    Zurück zur Notificationsansicht\\
-
-
-    \subsubsection*{F04 - Über Benachrichtigungen Notifizieren}
-
-        Scenario: Foreground\\
-        Given:  Mobile Client ist geöffnet\\
-        When:   Eine Benachrichtigung wird vom Mobile Client emfpangen\\
-        Then:   Ein Audio Signal erklingt\\
-        \\
-        Scenario: Background\\
-        Given:  Mobile Client läuft im Hintergrund\\
-        When:   Eine Benachrichtigung wird vom Mobile Client empfangen\\
-        Then:   Ein Audio Signal erklingt\\
-        And:    Eine Push Benachrichtigung wird angezeigt\\
-        \\
-        Scenario: Nicht Quittiert\\
-        Given:  Mobile Client ist geöffnet\\
-        And:    Eine Benachrichtigung wurde empfangen\\
-        When:   Benachrichtigung wird nicht quittiert\\
-        Then:   Ein Audio Signal erklingt\\
-        And:    Das Audio Signal wiederholt sich alle 30 Sekunden, bis die Benachrichtigung Quittiert wurde.\\
-
-
-    \subsubsection*{F05 - Login Mobile Client}
-
-        Scenario: Startbildschirm wenn nicht angemeldet\\
-        Given:  Mobile Client is geöffnet\\
-        When: Benutzer ist nicht angemeldet\\
-        Then: Benutzer wird zum Login aufgefordert\\
-        \\
-        Scenario: Startbildschirm wenn angemeldet\\
-        Given:  Mobile Client is geöffnet\\
-        When: Benutzer ist angemeldet\\
-        Then: Konfiguration die der Benutzer zuletzt gewählt hat wird angezeigt\\
-        And:   Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\
-        \\
-        Scenario: Anmelden korrekt\\
-        Given: Benutzer ist nicht angemeldet\\
-        And:   Login Screen wird angezeigt\\
-        And:    Für den Benutzer sind gültige Konfigurationen erfasst\\
-        When:  Benutzer meldet sich mit korrekten Daten an\\
-        Then:  Benutzer wird auf nächste Seite geleitet und kann dort die Konfiguration auswählen, die er Benutzen möchte.\\
-        \\
-        Scenario: Anmelden falsch\\
-        Given: Benutzer ist nicht angemeldet\\
-        And:   Login Screen wird angezeigt\\
-        When:  Benutzer meldet sich mit falschen Daten an\\
-        Then:  Fehlermeldung\\
-        And: Benutzer wird nicht weitergeleitet\\
-        \\
-        Scenario: Konfiguration Wählen\\
-        Given: Benutzer hat sich korrekt angemeldet\\
-        And:   Konfiguration Auswählen Screen wird angezeigt\\
-        When:  Der Benutzer wählt die gewünschte Konfiguration\\
-        Then:  Der Benutzer wird weitergeleitet\\
-        And:   Die gewählte Konfiguration wird geladen\\
-        And:   Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\
-
-
-        Scenario Logout\\
-        Given: Benutzer ist angemeldet\\
-        When:  Benutzer klickt logout\\
-        Then: Benutzer wird zur Login Seite weitergeleitet\\
+\subsubsection*{F05 - Login Mobile Client}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \>  Startbildschirm wenn nicht angemeldet\\ \\
+    Given: \> \>   Mobile Client is geöffnet\\
+    When: \> \>  Benutzer ist nicht angemeldet\\
+    Then: \> \>  Benutzer wird zum Login aufgefordert\\
+    \\
+    Scenario: \> \>  Startbildschirm wenn angemeldet\\ \\
+    Given: \> \>   Mobile Client is geöffnet\\
+    When: \> \>  Benutzer ist angemeldet\\
+    Then: \> \>  Konfiguration die der Benutzer zuletzt gewählt hat wird angezeigt\\
+    And: \> \>    Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\
+    \\
+    Scenario: \> \>  Anmelden korrekt\\ \\
+    Given: \> \>  Benutzer ist nicht angemeldet\\
+    And: \> \>    Login Screen wird angezeigt\\
+    And: \> \>     Für den Benutzer sind gültige Konfigurationen erfasst\\
+    When: \> \>   Benutzer meldet sich mit korrekten Daten an\\
+    Then: \> \>   Benutzer wird auf nächste Seite geleitet und kann dort die Konfiguration auswählen, die er Benutzen möchte.\\
+    \\
+    Scenario: \> \>  Anmelden falsch\\ \\
+    Given: \> \>  Benutzer ist nicht angemeldet\\
+    And: \> \>    Login Screen wird angezeigt\\
+    When: \> \>   Benutzer meldet sich mit falschen Daten an\\
+    Then: \> \>   Fehlermeldung\\
+    And: \> \>  Benutzer wird nicht weitergeleitet\\
+    \\
+    Scenario: \> \>  Konfiguration Wählen\\ \\
+    Given: \> \>  Benutzer hat sich korrekt angemeldet\\
+    And: \> \>    Konfiguration Auswählen Screen wird angezeigt\\
+    When: \> \>   Der Benutzer wählt die gewünschte Konfiguration\\
+    Then: \> \>   Der Benutzer wird weitergeleitet\\
+    And: \> \>    Die gewählte Konfiguration wird geladen\\
+    And: \> \>    Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\ \\
 
 
-    \subsubsection*{F06 - Konfigurationsverwaltung}
+    Scenario:  \> \> Logout\\ \\
+    Given: \> \>  Benutzer ist angemeldet\\
+    When: \> \>   Benutzer klickt logout\\
+    Then: \> \>  Benutzer wird zur Login Seite weitergeleitet\\
+\end{tabbing}
 
-        Scenario: Login\\
-        Given: Benutzer ist nicht angemeldet\\
-        And:   Admin UI Login Screen wird angezeigt\\
-        When:  Admin meldet sich mit korrekten Daten an\\
-        Then:  Admin wird auf Übersichtsseite weitergeleitet\\
+\clearpage
 
-        Scenario: Anmelden falsch\\
-        Given: Benutzer ist nicht angemeldet\\
-        And:   Admin UI Login Screen wird angezeigt\\
-        When:  Admin meldet sich mit falschen Daten an\\
-        Then:  Fehlermeldung wird angezeigt\\
-        And:  Admin wird nicht weitergeleitet.\\
+\subsubsection*{F06 - Konfigurationsverwaltung}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \>  Login\\ \\
+    Given: \> \>  Benutzer ist nicht angemeldet\\
+    And: \> \>    Admin UI Login Screen wird angezeigt\\
+    When: \> \>   Admin meldet sich mit korrekten Daten an\\
+    Then: \> \>   Admin wird auf Übersichtsseite weitergeleitet\\ \\
 
-        Scenario: CRUD\\
-        Given: Admin ist angemeldet\\
-        When: Admin UI wird aufgerufen\\
-        Then: Alle existierenden Konfigurationen werden angezeigt\\
-        And: Neue Konfigurationen können erstellt werden\\
-        And: Bestehende Konfigurationen können verändert werden\\
-        And: Bestehende Konfigurationen können gelöscht werden\\
+    Scenario: \> \>  Anmelden falsch\\ \\
+    Given: \> \>  Benutzer ist nicht angemeldet\\
+    And: \> \>    Admin UI Login Screen wird angezeigt\\
+    When: \> \>   Admin meldet sich mit falschen Daten an\\
+    Then: \> \>   Fehlermeldung wird angezeigt\\
+    And: \> \>   Admin wird nicht weitergeleitet.\\ \\
 
-    \subsubsection*{F07 - Integration Behandlungsstuhl}
-    \subsubsection*{F08 - Text To Speech}
-    \subsubsection*{F09 - Direkte Anrufe}
-    \subsubsection*{F10 - Gruppen Anrufe}
+    Scenario: \> \>  Konfiguration verwalten \\ \\
+    Given: \> \>  Admin ist angemeldet\\
+    When: \> \>  Admin UI wird aufgerufen\\
+    Then: \> \>  Alle existierenden Konfigurationen werden angezeigt\\
+    And: \> \>  Neue Konfigurationen können erstellt werden\\
+    And: \> \>  Bestehende Konfigurationen können verändert werden\\
+    And: \> \>  Bestehende Konfigurationen können gelöscht werden\\
+\end{tabbing}
+
+\subsubsection*{F07 - Integration Behandlungsstuhl}
+
+Dieses Feature fällt ausserhalb des Projekt Scopes. Dementsprechend wurden dafür noch keine Szenarien definiert.
+
+\subsubsection*{F08 - Text To Speech}
+Dieses Feature fällt ausserhalb des Projekt Scopes. Dementsprechend wurden dafür noch keine Szenarien definiert.
+
+\subsubsection*{F09 - Direkte Anrufe}
+Dieses Feature fällt ausserhalb des Projekt Scopes. Dementsprechend wurden dafür noch keine Szenarien definiert.
+
+\subsubsection*{F10 - Gruppen Anrufe}
+Dieses Feature fällt ausserhalb des Projekt Scopes. Dementsprechend wurden dafür noch keine Szenarien definiert.
 
 
 
