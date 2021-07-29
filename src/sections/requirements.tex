@@ -90,14 +90,18 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 \subsection{Features}\label{subsec:features}
 
     \subsubsection*{F01 - Benachrichtigungen Versenden}
+        \begin{tabbing}
+            Left \= Middle \= Right \kill
+            Scenario: \> \> Benachrichtigung versenden\\
+            Given:  \> \> Benutzer ist vollständig angemeldet\\
+            And:    \> \> Mindestens 1 Empfänger ist konfiguriert\\
+            When:   \> \> Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
+            Then:   \> \> Benachrichtigung wird an den zentralen Cloud Service gesendet\\
+            And:    \> \> Benachrichtitung wird an alle Mobile Clients versendet\\
+                 \> \> \> die sich für diese Benachrichtigung subscribed haben weitergeleitet\\
+            And:    \> \> Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde\\
+        \end{tabbing}
 
-        Scenario: Benachrichtigung versenden\\
-        Given:  Benutzer ist vollständig angemeldet\\
-        And:    Mindestens 1 Empfänger ist konfiguriert\\
-        When:   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
-        Then:   Benachrichtigung wird an den zentralen Cloud Service gesendet\\
-        And:    Benachrichtitung wird an alle Mobile Clients versendet die sich für diese Benachrichtigung subscribed haben weitergeleitet\\
-        And:    Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde\\
 
 
         Scenario: Keine Empfänger konfiguriert\\
