@@ -1,0 +1,13 @@
+<Page loaded="onPageLoaded" navigatingTo="onNavigatingTo"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:profile="components/profile">
+    <StackLayout id="profile" class="home-body">
+        <profile:profile-container/>
+        <StackLayout class="btn-box">
+            <Label textAlignment="center" text="Meldungen" class="section_title"/>
+            <GridLayout loaded="onGridLoaded" columns="auto, auto, auto" rows="auto auto auto" horizontalAlignment="center">
+
+            </GridLayout>
+        </StackLayout>
+    </StackLayout>
+</Page>

@@ -1,99 +1,261 @@
 \section{Anforderungen}\label{sec:anforderungen}
 
+Die im Rahmen des Projektes umzusetzenden Anforderungen wurden während des Projektes iterativ zusammen mit dem Kunden erarbeitet.
+Alle Anforderungen werden zuerst aus Fachlicher sicht mit User Stories festgehalten, die ein konkretes Bedürfnis der Benutzer beschreiben.
+Weiter werden User Stories aus Sicht des Kunden festhalten, welche Rahmenbedingungen und Bedürfnisse des Auftraggebers festhalten.
+Aufgrund der User Stories werden anschliessend Features definiert, welche konkrete Szenarien und die erwarteten Ergebnisse an definieren.
+
 \subsection{User Stories}\label{subsec:user-stories}
 
-\subsubsection*{Projekt Scope}
-
-
-Nummeriert mit U01-Uxx - High Level - Fachliche Anforderung
-
-\subsubsection*{Benutzer}
+\subsubsection*{Praxismitarbeiter}
 
 \begin{table}[h]
     \centering
     \begin{tabular}{|l|p{13cm}|c|}
         \hline
-        \textbf{Id} & \textbf{Anforderung}                                                                                                     & \textbf{Features} \\
+        \textbf{Id} & \textbf{Anforderung}                                                                                                                                                                                         & \textbf{Feature} \\
         \hline
-        U01         & ALS Benutzer WILL ich relevante Anfragen versenden können, DAMIT ich über Probleme und Bedarf notifizieren kann. & F0x \\
+        U01         & Als Praxismitarbeiter möchte ich Benachrichtigungen versenden können, damit ich andere Mitarbeiter über Probleme und Anfragen informieren kann. & F01 \\
         \hline
-        U02         & ALS Benutzer WILL ich relevante Notifikationen empfangen können, DAMIT ich über Probleme und Bedarf notifiziert werde. & F0x \\
+        U02         & Als Praxismitarbeiter möchte ich Benachrichtigungen empfangen können, damit ich auf Probleme und Anfragen anderer Mitarbeiter reagieren kann. & F02 \\
         \hline
-        U03         & ALS Benutzer WILL will nur Notifikationen sehen die für mich relevant sind, DAMIT nicht unnötig belästigt werde. & F0x \\
+        U03         & Als Praxismitarbeiter möchte ich nur Benachrichtigungen sehen, die für mich relevant sind, damit ich meine Arbeit effizient gestalten kann. & F02 \\
         \hline
-        U04         & ALS Benutzer WILL ich über eingehende Notifikationen aufmerksam gemacht werden, DAMIT ich Notifikationen nicht übersehe. & F0x \\
+        U04         & Als Praxismitarbeiter möchte ich über empfangene Benachrichtigungen aufmerksam gemacht werden, damit ich keine Benachrichtigungen verpasse. & F04 \\
         \hline
-        U05         & ALS Benutzer WILL ich sehen welche Notifikationen ich verpasst habe, DAMIT ich vergessenes nachholen kann. & F0x \\
+        U05         & Als Praxismitarbeiter möchte ich sehen welche Benachrichtigungen ich verpasst habe, damit ich auf verpasste Benachrichtigungen reagieren kann. & F04 \\
+        \hline
+        U06         & Als Praxismitarbeiter möchte ich eine Rückmeldung erhalten, wenn eine Benachrichtigung nicht versendet werden kann, damit Benachrichtigungen nicht verloren gehen. & F03 \\
+        \hline
+        U07         & Als Praxismitarbeiter möchte ich auswählen können an welchem Gerät ich das Praxisrufsystem verwende und die dafür erstellte Konfiguration erhalten, damit das Praxisrufsystem optimal verwendet werden kann. & F05 \\
+        \hline
+        U8          & Als Praxismitarbeiter möchte ich einen physischen Knopf am Behandlungsstuhl haben damit ich notifikationen darüber versenden kann. & F07 \\
+        \hline
+        U9          & Als Praxismitarbeiter möchte ich, dass mir Benachrichtigungen vorgelesen werden, damit ich informiert werde, ohne meine Arbeit unterbrechen zu müssen. & F08 \\
+        \hline
+        U10         & Als Praxismitarbeiter möchte ich einen anderen Client Unterhaltungen führen können damit Fragen direkt geklärt werden können. & F09 \\
+        \hline
+        U11         & Als Praxismitarbeiter möchte ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können damit komplexe Fragen direkt geklärt werden können. & F10 \\
         \hline
     \end{tabular}\label{tab:userstories1}
 \end{table}
 
-\subsubsection*{Admin}
+\clearpage
+
+\subsubsection*{Praxisverantwortlicher}
 
 \begin{table}[h]
     \centering
     \begin{tabular}{|l|p{13cm}|c|}
         \hline
-        \textbf{Id} & \textbf{Anforderung}                                                                                                                                 & \textbf{Features} \\
+        \textbf{Id} & \textbf{Anforderung}                                                                                                                                                                               & \textbf{Features} \\
         \hline
-        U10         & ALS Administrator WILL mehrere Geräte verwalten kann DAMIT jedes Gerät für Verwendungsort optimiert werden kann. & F0x \\
+        U12         & Als Praxisverantwortlicher möchte ich mehrere Geräte verwalten können, damit das Praxisrufsystem in mehreren Zimmern gleichzeitig genutzt werden kann. & F0x \\
         \hline
-        U11         & ALS Administrator WILL ich definieren können welches Gerät, welche Anfragen versenden kann DAMIT jedes Gerät für Ort und Zweck optimiert werden kann & F0x \\
+        U13         & Als Praxisverantwortlicher möchte ich definieren können welches Gerät, welche Anfragen versenden kann, damit jedes Gerät Verwendungsort optimiert ist. & F0x \\
         \hline
-        U12         & ALS Administrator WILL ich die Verwalung und Konfiguration des Praxisrufsystems zentral verwalten DAMIT overhead minimiert wird. & F0x \\
+        U14         & Als Praxisverantwortlicher möchte ich die Konfiguration des Praxisrufsystems zentral verwalten können, damit das Praxisrufsystem für die Anwender optimiert werden kann. & F0x \\
+        \hline
+        U15         & Als Praxisverantwortlicher möchte ich definieren können, welche Geräte mit welchen anderen Geräten telefonieren können damit meinen Mitarbeitern das Arbeiten erleichtere. & F0x \\
+        \hline
+        U16         & Als Praxisverantwortlicher möchte ich definieren können, welche Benachrichtigung über einen physischen Knopf am Behandlungsstuhl versendet wird damit der Knopf für den Mitarbeiter optimiert ist. & F0x \\
         \hline
     \end{tabular}\label{tab:userstories2}
 \end{table}
 
-\subsubsection*{Out Of Scope}
 
-TODO: User Stories für Out Of Scope
+\clearpage
 
-\subsection{Technisch}\label{subsec:technisch}
-
-
-\subsubsection*{Mobile CLient}
+\subsubsection*{Auftraggeber}\label{subsec:auftraggeber}
 
 \begin{table}[h]
     \centering
     \begin{tabular}{|l|p{13cm}|c|}
         \hline
-        \textbf{Id} & \textbf{Anforderung}                                                              & \textbf{Features} \\
+        \textbf{Id} & \textbf{Anforderung}                                                                                                                                                                          & \textbf{Features} \\
         \hline
-        T01         & Die Codebasis des Mobile Client MUSS für Android und IOS verwendet werden können. & F0x \\
+        T01         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über IPads bedient werden kann, damit ich von bestehender Infrastruktur profitieren kann. & F0x \\
         \hline
-        T02         & Der Mobile CLient MUSS für IOS auf IPad optimiert werden.                         & F0x               \\
+        T02         & Als Auftraggeber möchte ich, dass das Praxisrufsystem über Android Tablets bedient werden kann, damit es in Zukunft für eine weitere Zielgruppe verwendet werden kann. & F0x \\
         \hline
-        T03         & Der Mobile CLient SOLL für Android Tablets opitimiert werden.                     & F0x               \\
+        T03         & Als Auftraggeber möchte ich, dass die Codebasis für das Praxisrufsystem für Android und IOS verwendet werden kann, damit ich die Weiterentwicklung optimieren kann. & F0x \\
+        \hline
+        T04         & Als Auftraggeber möchte ich, dass wo möglich der Betrieb von Serverseitigen Dienstleistungen über AWS betrieben wird, damit ich von bestehender Infrastruktur und Erfahrung profitieren kann. & F0x               \\
         \hline
     \end{tabular}\label{tab:userstories3}
 \end{table}
+
 \clearpage
-
-\subsubsection*{Betrieb}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|l|p{13cm}|c|}
-        \hline
-        \textbf{Id} & \textbf{Anforderung}                                                 & \textbf{Features} \\
-        \hline
-        T10         & Der Betrieb aller Cloud Services und Web UIs MUSS über AWS erfolgen. & F0x               \\
-        \hline
-    \end{tabular}\label{tab:userstories4}
-\end{table}
 
 \subsection{Features}\label{subsec:features}
 
-Nummeriert mit F01-Fxx - Lower Level, näher am technischen - Spezifiziert die Anforderungen die Umgesetzt werden sollen
+\subsubsection*{F01 - Benachrichtigungen Versenden}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \> Benachrichtigung versenden\\ \\
+    Given:  \> \> Benutzer ist vollständig angemeldet\\
+    And:    \> \> Mindestens 1 Empfänger ist konfiguriert\\
+    When:  \> \> Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
+    Then:   \> \> Benachrichtigung wird an den zentralen Cloud Service gesendet\\
+    And:    \> \> Benachrichtitung wird an alle Mobile Clients versendet\\
+    \> \> die sich für diese Benachrichtigung subscribed haben weitergeleitet\\
+    And:    \> \> Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde\\
 
-\subsubsection*{Projekt Scope}
+    \\
+    Scenario: \> \> Keine Empfänger konfiguriert\\ \\
+    Given:  \> \>  Benutzer ist vollständig angemeldet\\
+    And:  \> \>    Kein Empfänger ist konfiguriert\\
+    When:  \> \>   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
+    Then:  \> \>   Benachrichtigung wird an den zentralen Cloud Service gesendet\\
+    And:  \> \>    Benachrichtitung wird nicht weitergeleitet\\
 
-TODO: Document Features
+\end{tabbing}
 
 
-\subsubsection*{Out Of Scope}
+\subsubsection*{F02 - Benachrichtigungen Empfangen}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
 
-TODO: Document some features that were discussed but de-prioritized. (e.g. Raspi, Calls)
+    Scenario:  \> \> Empfangen\\ \\
+    Given:  \> \>  Eine Benachrichtigung wurde von Mobile Client versendet\\
+    When:  \> \>   Cloud Service Notification an Empfänger Mobile Client weiterleitet\\
+    Then:  \> \>   Wird die Benachrichtigung vom Empfänger Mobile Client empfangen\\
+    And:  \> \>    In einer Übersicht für empfangene Benachrichtigung angezeigt.\\
 
-Weitere Features wurden noch nicht konkreter definiert. Da jeweils je "Sprint" die als nächstes umzusetzenden Features definiert wurden.
+\end{tabbing}
+
+\clearpage
+\subsubsection*{F03 - Fehlgeschlagene Benachrichtigungen}
+
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \>  Fehler Rückmeldung\\ \\
+    Given: \> \>   Eine Benachrichtigung wurde von Mobile Client versendet\\
+    When: \> \>    Weiterleitung von Cloud Service Notification an Empfänger schlägt auf Service Seite fehl\\
+    Then: \> \>    Der Praxismitarbeiter wird über den Fehler Informiert\\
+    And: \> \>     Der Praxismitarbeiter hat die Möglichkeit die Fehlgeschlagenen Benachrichtigungen zu wiederholen\\
+    \\
+    Scenario: \> \>  Confirm Retry\\ \\
+    Given: \> \>   Benachrichtigung ist fehlgeschlagen\\
+    And: \> \>     Dialog zum wiederholen wird angezeigt\\
+    When: \> \>    Praxismitarbeiter bestätigt, dass wiederholt werden soll\\
+    Then: \> \>    Der Cloudservice versucht erneut, die fehlgeschlagenen zuzustellen\\
+    \\
+    Scenario: \> \>  Cancel Retry\\ \\
+    Given: \> \>   Benachrichtigung ist fehlgeschlagen\\
+    And: \> \>     Dialog zum wiederholen wird angezeigt\\
+    When: \> \>    Praxismitarbeiter klick, dass nicht wiederholt werden soll\\
+    Then: \> \>    Werden die fehlgeschlagenen nicht wiederholt\\
+    And: \> \>     Zurück zur Notificationsansicht\\
+
+\end{tabbing}
+
+\subsubsection*{F04 - Über Benachrichtigungen Notifizieren}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \>  Foreground\\ \\
+    Given: \> \>   Mobile Client ist geöffnet\\
+    When: \> \>    Eine Benachrichtigung wird vom Mobile Client emfpangen\\
+    Then: \> \>    Ein Audio Signal erklingt\\
+    \\
+    Scenario: \> \>  Background\\ \\
+    Given: \> \>   Mobile Client läuft im Hintergrund\\
+    When: \> \>    Eine Benachrichtigung wird vom Mobile Client empfangen\\
+    Then: \> \>    Ein Audio Signal erklingt\\
+    And: \> \>     Eine Push Benachrichtigung wird angezeigt\\
+    \\
+    Scenario: \> \>  Nicht Quittiert\\ \\
+    Given: \> \>   Mobile Client ist geöffnet\\
+    And: \> \>     Eine Benachrichtigung wurde empfangen\\
+    When: \> \>    Benachrichtigung wird nicht quittiert\\
+    Then: \> \>    Ein Audio Signal erklingt\\
+    And: \> \>     Das Audio Signal wiederholt sich alle 30 Sekunden, bis die Benachrichtigung Quittiert wurde.\\
+\end{tabbing}
+
+\clearpage
+
+\subsubsection*{F05 - Login Mobile Client}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \>  Startbildschirm wenn nicht angemeldet\\ \\
+    Given: \> \>   Mobile Client is geöffnet\\
+    When: \> \>  Benutzer ist nicht angemeldet\\
+    Then: \> \>  Benutzer wird zum Login aufgefordert\\
+    \\
+    Scenario: \> \>  Startbildschirm wenn angemeldet\\ \\
+    Given: \> \>   Mobile Client is geöffnet\\
+    When: \> \>  Benutzer ist angemeldet\\
+    Then: \> \>  Konfiguration die der Benutzer zuletzt gewählt hat wird angezeigt\\
+    And: \> \>    Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\
+    \\
+    Scenario: \> \>  Anmelden korrekt\\ \\
+    Given: \> \>  Benutzer ist nicht angemeldet\\
+    And: \> \>    Login Screen wird angezeigt\\
+    And: \> \>     Für den Benutzer sind gültige Konfigurationen erfasst\\
+    When: \> \>   Benutzer meldet sich mit korrekten Daten an\\
+    Then: \> \>   Benutzer wird auf nächste Seite geleitet und kann dort die Konfiguration auswählen, die er Benutzen möchte.\\
+    \\
+    Scenario: \> \>  Anmelden falsch\\ \\
+    Given: \> \>  Benutzer ist nicht angemeldet\\
+    And: \> \>    Login Screen wird angezeigt\\
+    When: \> \>   Benutzer meldet sich mit falschen Daten an\\
+    Then: \> \>   Fehlermeldung\\
+    And: \> \>  Benutzer wird nicht weitergeleitet\\
+    \\
+    Scenario: \> \>  Konfiguration Wählen\\ \\
+    Given: \> \>  Benutzer hat sich korrekt angemeldet\\
+    And: \> \>    Konfiguration Auswählen Screen wird angezeigt\\
+    When: \> \>   Der Benutzer wählt die gewünschte Konfiguration\\
+    Then: \> \>   Der Benutzer wird weitergeleitet\\
+    And: \> \>    Die gewählte Konfiguration wird geladen\\
+    And: \> \>    Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\ \\
+
+
+    Scenario:  \> \> Logout\\ \\
+    Given: \> \>  Benutzer ist angemeldet\\
+    When: \> \>   Benutzer klickt logout\\
+    Then: \> \>  Benutzer wird zur Login Seite weitergeleitet\\
+\end{tabbing}
+
+\clearpage
+
+\subsubsection*{F06 - Konfigurationsverwaltung}
+\begin{tabbing}
+    Left \= Middle \= Right \kill
+    Scenario: \> \>  Login\\ \\
+    Given: \> \>  Benutzer ist nicht angemeldet\\
+    And: \> \>    Admin UI Login Screen wird angezeigt\\
+    When: \> \>   Admin meldet sich mit korrekten Daten an\\
+    Then: \> \>   Admin wird auf Übersichtsseite weitergeleitet\\ \\
+
+    Scenario: \> \>  Anmelden falsch\\ \\
+    Given: \> \>  Benutzer ist nicht angemeldet\\
+    And: \> \>    Admin UI Login Screen wird angezeigt\\
+    When: \> \>   Admin meldet sich mit falschen Daten an\\
+    Then: \> \>   Fehlermeldung wird angezeigt\\
+    And: \> \>   Admin wird nicht weitergeleitet.\\ \\
+
+    Scenario: \> \>  Konfiguration verwalten \\ \\
+    Given: \> \>  Admin ist angemeldet\\
+    When: \> \>  Admin UI wird aufgerufen\\
+    Then: \> \>  Alle existierenden Konfigurationen werden angezeigt\\
+    And: \> \>  Neue Konfigurationen können erstellt werden\\
+    And: \> \>  Bestehende Konfigurationen können verändert werden\\
+    And: \> \>  Bestehende Konfigurationen können gelöscht werden\\
+\end{tabbing}
+
+\subsubsection*{F07 - Integration Behandlungsstuhl}
+
+Dieses Feature fällt ausserhalb des Projekt Scopes. Dementsprechend wurden dafür noch keine Szenarien definiert.
+
+\subsubsection*{F08 - Text To Speech}
+Dieses Feature fällt ausserhalb des Projekt Scopes. Dementsprechend wurden dafür noch keine Szenarien definiert.
+
+\subsubsection*{F09 - Direkte Anrufe}
+Dieses Feature fällt ausserhalb des Projekt Scopes. Dementsprechend wurden dafür noch keine Szenarien definiert.
+
+\subsubsection*{F10 - Gruppen Anrufe}
+Dieses Feature fällt ausserhalb des Projekt Scopes. Dementsprechend wurden dafür noch keine Szenarien definiert.
+
+
+
