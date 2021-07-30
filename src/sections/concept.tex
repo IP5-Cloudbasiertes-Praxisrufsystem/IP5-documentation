@@ -2,22 +2,34 @@
 \subsection{Systemarchitektur}\label{subsec:systemarchitektur}
 \subsubsection*{Überblick}
 
-Für das Cloudbasierte Praxisruf System sehen wir fünf Komponenten vor:
+Das Cloudbasierte Praxisrufsystem wird in vier Komponenten unterteilt.
+Abbildung 4.1 gibt einen Überblick über das System als ganzes:
 
-\begin{itemize}
-    \item Messaging Service
-    \item Cloud Service
-    \item Mobile Client
-    \item Admin UI
-    \item VOIP Mediator
-\end{itemize}
-
-
-\begin{figure}
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{graphics/IP5_POC_Cloud_Architecture}\label{fig:architecure}
+    \begin{minipage}[b]{0.8\textwidth}
+        \includegraphics[width=\textwidth]{graphics/IP5_POC_Cloud_Architecture}
+        \caption{System}
+    \end{minipage}
 \end{figure}
 
+Die Anforderungen U12 setzt voraus, dass die Kommunikation im Praxisrufsystem
+zwischen mehreren Geräten erfolgen kann.
+
+Die Anforderungen U06, U07 und U13 setzten voraus, dass die es eine zentrale Stelle gibt
+die Konfigurationen zur Verfügung stellt und das Versenden von Notifikationen koordiniert.
+
+
+
+
+Für das Cloudbasierte Praxisruf System sehen wir vier Komponenten vor:
+
+\begin{itemize}
+    \item Mobile Client
+    \item Cloud Service
+    \item Messaging Service
+    \item Admin UI
+\end{itemize}
 
 \subsubsection*{Mobile Client}
 
@@ -147,15 +159,7 @@ So z.~B. die REST-Calls zur API.
 
 \clearpage
 
-\subsection{Cloud Service}\label{subsec:cloud-service}
-
-\subsubsection{Architektur}
-
-\subsubsection{Domänenmodell}
-
-\subsubsection{Laufzeitmodell}
-
-\clearpage
+\input{sections/conceptcloud}
 
 \subsection{Admin UI}\label{subsec:admin-ui}
 
