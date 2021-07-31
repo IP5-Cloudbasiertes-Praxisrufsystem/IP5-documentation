@@ -156,4 +156,95 @@ Anschliessend wird der send prozess anhand der tokens in dieser NotificationSend
 
 \subsubsection{API}
 
-S gibt da n paar controller und die brauchen ein paar services.
+\subsubsection*{Verwaltung}
+
+Um die Verwaltung der Konfigurationen zu ermöglichen, bietet der Cloud Service eine REST-API an über die Konfigurationsobjekte verwaltet werden können.
+Der Cloud Service bietet Verwaltungs APIs für die Folgenden Domänenobjekte:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{13cm}|}
+        \hline
+        \textbf{Domänenobjekt} & \textbf{Entity Name} \\
+        \hline
+        Client         & /api/clients \\
+        \hline
+        Client Configuration         & /api/client-configurations \\
+        \hline
+        Notification Types         & /api/notification-types \\
+        \hline
+        Users         & /api/users \\
+        \hline
+    \end{tabular}\label{tab:adminapimethods}
+\end{table}
+
+Für jedes dieser Domänenobjekte ist ein dedizierter Endpoint definiert, der unter dem Subpfad /api/entity-name erreichbar ist.
+Jeder dieser Kontroller bietet eine API zu Verwaltung dieses Domänenobjekts, welche dem folgenden Schema folgt:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{Action} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+        \hline
+            Alle Elemente lesen         & GET & /api/entity-name & - & [EntityDto] \\
+        \hline
+            Einzelnes Element lesen         & GET & /api/entity-name/id & - & EntityDto \\
+        \hline
+            Neues Element erstellen         & POST & /api/entity-name  & EntityDto & EntityDto\\
+        \hline
+            Bestehendes Element ändern          & PUT & /api/entity-name  & EntityDto & EntityDto\\
+        \hline
+            Einzelnes Element löschen          & DELETE & /api/entity-name/id  & - & -  \\
+        \hline
+            Mehrere Elemente löschen          & DELETE & /api/entity-name/ids  & - & - \\
+        \hline
+    \end{tabular}\label{tab:apimethods}
+\end{table}
+
+Eine Ausnahme bildet hier das Domänenobjekt Registration.
+Die Registrierung darf nie manuell von einem Administrator erfasst werden.
+Sie muss immer von einem Mobile Client her kommen der sich beim Cloud Service registriert oder de-registriert.
+Lesender Zugriff auf die Registrierungen ist nur nötig, wenn der Cloud Service eine Benachrichtigung versendet und die Messaging Tokens der relevanten Empfänger laden muss.
+Dementsprechend bietet der RegistrationController nicht die volle Verwaltungs API sondern nur folgendes Subset:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+        \hline
+        Registrierung aktualisiern         & POST & /api/registrations/ & ClientId, Messaging Token & - \\
+        \hline
+        Registrierung entfernen         & DELETE & /api/registrations/ & ClientId & - \\
+        \hline
+        Relevante Registrierung finden         & Post & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
+        \hline
+    \end{tabular}\label{tab:registrationsapimethods}
+\end{table}
+
+\clearpage
+
+\subsubsection*{Fachliches}
+
+Weiter gibt es Operationen welche eine fachliche Handlung darstellen die nicht der Verwaltung von Konfigurationen dienen.
+Die API für diese Operationen folgen dem folgenden Schema:
+
+/api/entity-name/action-name
+
+Der Cloud Service bietet die folgenden fachlichen Endpunkte an:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+        \hline
+        Notifikation versenden         & POST & /api/notifications/send & NotificationDto & NotificationSendResult \\
+        \hline
+        Notifikation wiederholen        & POST & /api/notifications/retry & Notification Id  & NotificationSendResult \\
+        \hline
+    \end{tabular}\label{tab:notificationapimethods}
+\end{table}
+
+\clearpage
