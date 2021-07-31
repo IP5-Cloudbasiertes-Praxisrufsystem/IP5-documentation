@@ -1,6 +1,11 @@
 
 \subsection{Cloud Service}\label{subsec:cloud-service}
 
+\subsubsection{Technologie}
+
+// TODO: We used spring
+// TODO: Explain why we used spring
+
 \subsubsection{Architektur}
 
 Der Cloud Service wird in die zwei Domänen Notification und Configuration aufgeteilt.
@@ -93,6 +98,7 @@ Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluator
 \clearpage
 \subsubsection*{Rules Engine}
 
+// TODO: Explain the Engine (Or should that happen with the sequence diags?)
 // TODO: Mention how nice Strategy Pattern with Spring can be
 
 \begin{figure}[h]
@@ -106,7 +112,7 @@ Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluator
 \clearpage
 \subsubsection*{Domäne Notification}
 
-Joa, und die Notifikationen selbst muss ja auch noch wer verschicken.
+Hier gehts darum Benachrichtigungen zu versenden.
 
 \begin{figure}[h]
     \centering
@@ -116,8 +122,20 @@ Joa, und die Notifikationen selbst muss ja auch noch wer verschicken.
     \end{minipage}
 \end{figure}
 
-Damit man weiss was passiert und teil Zeuch wiederholt werden kann.
-Braucht dann klar auch noch n paar Services.
+\textbf{PraxisNotification}
+Jede Notification die der CloudService erhält wird bereits vor dem Versenden persistiert.
+Dient der Nachvollziehbarkeit.
+Ermöglicht das Wiederholen von fehlgeschlagenen.
+
+\textbf{SendNotificationProcess}
+Für jeden Empfänger an den versucht wird eine Notification zu versenden, wird ein SendNotificationProcess erstellt.
+Dient der Nachvollziehbarkeit.
+Ermöglicht das Wiederholen von fehlgeschlagenen.
+
+\subsubsection*{Services Notification}
+
+// TODO: Create and Add Class Diagramm
+// TODO: Some descriptions
 
 
 
