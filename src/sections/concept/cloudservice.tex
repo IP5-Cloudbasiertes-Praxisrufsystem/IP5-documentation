@@ -3,17 +3,29 @@
 
 \subsubsection{Architektur}
 
-Es gibt deren Domänen 2. Configuration und Notification.
+Der Cloud Service wird in die zwei Domänen Notification und Configuration aufgeteilt.
+Dabei ist die Domäne Notification für das Versenden von Benachrichtigungen zuständig.
+Die Domäne Configuration ist für die Verwaltung der Konfigurationen und Subscriptions verantwortlich.
+ie Domäne Notification benötigt zum Versenden von Benachrichtigungen Informationen, die aus der Domäne Configuration stammen.
+Grundsätzlich braucht sie dazu aber nur ein kleines Subset dieser Informationen.
+Sobald identifiziert ist, an wen eine Benachrichtigung gesendet werden soll und wie dieser Client erreicht werden kann, funktioniert das Versenden der Benachrichtigung komplett unabhängig von der Domäne Configuration.
 
-So quasi als ob man 2 Microservices haben kann. Aber wär halt doof das für den stand jetzt schon so zu trennen, deshalb vorerst mal erst ein einzelnes.
+Wäre eigentlich als 2 Microservices umsetzbar, damit die beiden Teile separat skalierbar sind.
+Durch das Aufteilen wirds aber auch komplizierter.
+Für den kleinen Umfang ist der overhead grösser als der gewinn.
+Es ist aber auf jeden Fall darauf zu achten, dass Abhängigkeiten zwischen den beiden Domänen minimiert werden.
+So kann die Applikation in Zukunft einfach und auf die tatsächlichen Bedürfnisse zugeschnitten in mehrere Microservices aufgeteilt werden.
+
+
+// TODO: package structure
+// TODO: few words on onion
 
 \clearpage
 
 \subsubsection{Domänenmodell}
 
-
-Für die beiden Domänen gibt es natürlich auch so n paar Diagramme. Die gibts jetzt hier:
-
+Wie in Kapitel 4.3.1 beschrieben, teilt sich der Cloud Service in die zwei Domänenbereiche Notification und Configuration auf.
+Im Folgenden wird detailliert beschrieben, wie diese Domänen aufgebaut sind.
 
 \subsubsection*{Domäne Configuration}
 
@@ -24,13 +36,41 @@ Für die beiden Domänen gibt es natürlich auch so n paar Diagramme. Die gibts 
         \caption{Domänenmodell Configuration}
     \end{minipage}
 \end{figure}
-Also erstmal gibts da son halb generischen konfigurationsmodel.
-Wär auch fast mandantenfähig.
-Aber halt nur fast.
 
+\textbf{PraxisUser}
+Ein Benutzer für das Praxisrufsystem.
+Jeder Benutzer kann entweder die Rolel Admin oder User haben.
+Admin ist für Admin UI (Praxisverantwortlicher).
+User ist für Mobile Client (Praxismitarbeiter) Nutzer.
 
+\textbf{Client}
+Ein Client repräsentiert ein Gerät auf welchem der Mobile Client läuft.
 
-\clearpage
+\textbf{Registration}
+Die Registrierung eines Clients beinhaltet die Informationen die vom Messaging Service verwendet werden können um diesem spezifischen Client eine Benachrichtigung zu stellen.
+Ein Client kann nie mehrere Registrierungen haben.
+
+\textbf{ClientConfiguration}
+Stellt die Konfiguration eines Clients dar.
+Die Beziehung von Client zu ClientConfiguration ist immer 1:1.
+Client und ClientConfiguration sind getrennt, damit Clients auch ohne Configuration erfasst werden können.
+So kann der Administrator die Geräte die er hat von Anfang an erfassen aber ers nach und nach die Konfigurationen dazu erstellen.
+
+\textbf{NotificationType}
+Der NotificationType ist die Grundlage für Notifications die versendet werden.
+Der NotificationType definiert Informationen für den Inhalt von Benachrichtigungen die versendet werden.
+Er beinhaltet weiter Schlüssel für Texte die in einem Client angezeigt werden können.
+
+\textbf{RuleParameters}
+RuleParameters sind die parameterisierten Werte für eine Regel.
+Sie werden pro ClientConfiguration erfasst.
+Sie werden von der RulesEngine ausgewertet um zu identifizieren ob ein Client sich für eine gegebene Benachrichtigung interessiert.
+
+\textbf{RuleType}
+Der RuleType bestimmt wie die Parameter für eine Regel (siehe RulePrameters) ausgewertet werden.
+Für jeden Eintrag in der Tabelle RuleType muss es eine Implementierung des Interfaces RuleEvaluator geben, welche die RulesParameter Werte für den Regeltyp auswerten kann.
+
+\subsubsection*{Configuration Services}
 
 \begin{figure}[h]
     \centering
@@ -39,18 +79,21 @@ Aber halt nur fast.
         \caption{Klassendiagramm Configuration Service Interfaces}
     \end{minipage}
 \end{figure}
-Services mit CRUD gibts hier.
-Pro Service genau eine Instanz mit Default Prefix.
-RulesEngine integration ist hier.
-Details see Rules Engine.
-Die RulesEngine sowie die RuleEvalautor Services werden ausschliesslich innerhalb der Applikation verwendet und sind nicht über die API zugreifbar.
-Alle anderen Services bieten ihre Methoden über eine REST API an. Es wird darauf verzichtet, dass alles nochmal hier zu kopieren.
-URL Konzept im Kapitel API.
 
+Abbildung 4.6 zeigt die Interfaces für Services welche es in der Configuration Domäne gibt.
+ClientConfigurationService, ClientService, NotificationTypeService, RegistrationService und UserService bieten Create, Read, Update und Delete Methoden für das jeweilige Domänenobjekt an.
+Diese Methoden sind zu Verwaltungszwecken über eine REST-API ansprechbar. Siehe Kapitel xy (API).
+
+Der RegistrationService bietet dabei eine Ausnahme.
+Der RegistrationService bietet Methoden um Registrierungen zu erfassen und wieder zu löschen.
+Er bietet zudem die Möglichkeit anhand einer gegebenen Notification zu identifizieren, welche der registrierten Clients sich für diese Notification interessieren.
+Diese Auswertungen werden mithilfe der RulesEngine gemacht.
+Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluators und findet alle relevanten tokens. Siehe Kapitel Rules Engine.
 
 \clearpage
-Dann muss man ja noch sachen darauf auswerten können und zeug.
-Das Bild zeigt: Strategy Pattern mit Spring is noch nice.
+\subsubsection*{Rules Engine}
+
+// TODO: Mention how nice Strategy Pattern with Spring can be
 
 \begin{figure}[h]
     \centering
