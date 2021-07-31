@@ -2,8 +2,6 @@
 
 \input{sections/concept/system.tex}
 
-
-
 \subsection{Mobile Client}\label{subsec:mobile-client}
 
 \subsubsection{Framework Grundlagen}
@@ -104,23 +102,10 @@ So z.~B. die REST-Calls zur API.
 
 \clearpage
 
-\input{sections/concept/cloudservice}
+\input{sections/concept/cloudservice.tex}
 
 \subsection{Admin UI}\label{subsec:admin-ui}
 
 \clearpage
 
-\subsection{Proof Of Concept}\label{subsec:proof-of-concept}
-\subsubsection*{Anforderungen}
-\begin{itemize}
-    \item Als \textless Sender Rolle\textgreater möchte ich Notifikationen versenden können.
-    \item Als \textless Empfänger Rolle\textgreater möchte ich Notifikationen in der Applikation sehen, wenn die Applikation geöffnet ist.
-    \item Als \textless Empfänger Rolle\textgreater möchte ich Notifikationen über das OS erhalten, wenn die Applikation minimiert ist.
-\end{itemize}
-\subsubsection*{Restriktionen}
-\begin{itemize}
-    \item Nur 1 Client.
-    \item Nur 1 fixe Notifikation. Keine Types.
-    \item Notifikation wird vom Client gesendet und vom selben Client empfangen.
-    \item Keine Authentication oder Authorization.
-\end{itemize}
+\input{sections/concept/poc.tex}
