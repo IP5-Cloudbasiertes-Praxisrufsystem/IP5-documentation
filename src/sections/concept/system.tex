@@ -24,37 +24,61 @@ Welche Benachrichtigungen ein Mobile Client senden kann und an wen diese Benachr
 
 \clearpage
 
-Die Anforderungen U12 setzt voraus, dass die Kommunikation im Praxisrufsystem
-zwischen mehreren Geräten erfolgen kann.
-
-Die Anforderungen U06, U07 und U13 setzten voraus, dass die es eine zentrale Stelle gibt
-die Konfigurationen zur Verfügung stellt und das Versenden von Notifikationen koordiniert.
-
-
 \subsubsection*{Mobile Client}
 
-\begin{itemize}
-    \item Der Mobile Client implementiert die Anbindung an den Messaging Service.
-    \item Als Reaktion auf eine Notification wird eine Rückmeldung im UI angezeigt.
-    \item Als Reaktion auf eine Notification wird eine OS Push Notifikation gesendet.
-    Das UI bietet einen Button der eine Anfrage an die REST Schnittstelle im Cloud Service sendet.
-\end{itemize}
+Damit der Praxismitarbeiter wie in den Anforderungen U01 und U02 beschrieben Benachrichtigungen versenden und empfangen kann,
+benötigt das System einen Client, welcher dem Praxismitarbeiter diese Oprationen ermöglicht. Die technischen Anforderungen
+T01, T02 und T03 setzen voraus, dass dieser Client über die Mobil Geräte (IPads und Android Tablets) bedient werden kann.
 
+\begin{itemize}
+    \item T01
+    \item T02
+    \item T03
+    \item U01
+    \item U02
+    \item U03
+    \item U04
+    \item U05
+    \item U06
+    \item U07
+\end{itemize}
 
 \subsubsection*{Cloud Service}
 
+Der Cloud Service ermöglicht Konfigurationen persistent zu verwalten und das Versenden von Benachrichtigungen anhand dieser Konfigurationen koordiniert.
+Der Cloud Service benutzt einen externen Messaging Service zum Versenden von Benachrichtigungen.
+
 \begin{itemize}
-    \item Responsibilities (Notification and Configuration)
-    \item Microservice Granularity
+    \item U01
+    \item U02
+    \item U03
+    \item U06
+    \item U07
 \end{itemize}
 
 
 \subsubsection*{Messaging Service}
 
+Der Messaging Service ist für die Zustellung von Benachrichtigungen verantwortlich.
+
 \begin{itemize}
-    \item Dies wird ein externer Service den wir in die Applikationen einbinden. Standard hierfür ist Firebase Notifications.
-    \item Der Messaging Service nimmt Notifikationen vom Cloud Service entgegen und gibt diese an den Mobile Client wieder.
-    \item Dafür müssen auf beiden Seiten Komponenten eingebaut werden, die mit dem Messaging Service kommunizieren.
+    \item U01
+    \item U02
+    \item U03
+    \item U04
+    \item U06
+\end{itemize}
+
+\subsubsection*{Admin UI}
+
+Damit der Praxisverantwortliche die Konfiguration des Praxisrufsystems verwalten kann ist es notwendig, dass alle
+Lese und Schreib Zugriffe auf die Konfiguration über eine Zentrale Stelle gehen, auf die der Praxisverantwortliche Zugriff hat.
+
+\begin{itemize}
+    \item U12
+    \item U13
+    \item U14
+    \item T04
 \end{itemize}
 
 \clearpage
