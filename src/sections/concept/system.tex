@@ -1,0 +1,60 @@
+\subsection{Systemarchitektur}\label{subsec:systemarchitektur}
+\subsubsection*{Abgrenzung}
+
+Dieses Kapitel gibt einen Übersicht über die Systemarchitektur als ganzes. Die Architektur beschränkt sich dabei auf die
+Anforderungen die innerhalb des Projektrahmens umgesetzt wurden. Komponenten für Teile die Out Of Scope gefallen sind,
+werden hier nicht behandelt.
+
+\subsubsection*{Übersicht}
+
+Das cloudbasierte Praxisrufsystem wird in vier Komponenten unterteilt.
+Im Zentrum steht eine cloudbasierte Applikation (Cloud Service) welche es ermöglicht Konfigurationen persistent zu verwalten und das Versenden von Benachrichtigungen anhand dieser Konfigurationen koordiniert.
+Der Cloud Service benutzt einen externen Messaging Service zum Versenden von Benachrichtigungen. Dabei ist der Messaging Service lediglich für die Zustellung von Benachrichtigungen verantwortlich.
+Zur Verwaltung der Konfigurationen wird ein Web Frontend (Admin UI) erstellt. Dieses bietet einem Administrator die Möglichkeit Konfigurationen aus dem Cloud Service zu lesen, erstellen, bearbeiten und löschen.
+Die Konfigurationen die über Admin UI und Cloud Service erstellt wurden, werden schliesslich von einem Mobile Client. Mit dem Mobile Client kann der Benutzer Benachrichtigungen an andere Mobile Clients senden.
+Welche Benachrichtigungen ein Mobile Client senden kann und an wen diese Benachrichtungen zugstellt werden, wird anhand der Konfiguration aus dem Cloud Service bestimmt.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Component_System}
+        \caption{System}
+    \end{minipage}
+\end{figure}
+
+\clearpage
+
+Die Anforderungen U12 setzt voraus, dass die Kommunikation im Praxisrufsystem
+zwischen mehreren Geräten erfolgen kann.
+
+Die Anforderungen U06, U07 und U13 setzten voraus, dass die es eine zentrale Stelle gibt
+die Konfigurationen zur Verfügung stellt und das Versenden von Notifikationen koordiniert.
+
+
+\subsubsection*{Mobile Client}
+
+\begin{itemize}
+    \item Der Mobile Client implementiert die Anbindung an den Messaging Service.
+    \item Als Reaktion auf eine Notification wird eine Rückmeldung im UI angezeigt.
+    \item Als Reaktion auf eine Notification wird eine OS Push Notifikation gesendet.
+    Das UI bietet einen Button der eine Anfrage an die REST Schnittstelle im Cloud Service sendet.
+\end{itemize}
+
+
+\subsubsection*{Cloud Service}
+
+\begin{itemize}
+    \item Responsibilities (Notification and Configuration)
+    \item Microservice Granularity
+\end{itemize}
+
+
+\subsubsection*{Messaging Service}
+
+\begin{itemize}
+    \item Dies wird ein externer Service den wir in die Applikationen einbinden. Standard hierfür ist Firebase Notifications.
+    \item Der Messaging Service nimmt Notifikationen vom Cloud Service entgegen und gibt diese an den Mobile Client wieder.
+    \item Dafür müssen auf beiden Seiten Komponenten eingebaut werden, die mit dem Messaging Service kommunizieren.
+\end{itemize}
+
+\clearpage
