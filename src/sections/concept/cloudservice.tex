@@ -311,7 +311,13 @@ Ist dies nicht der Fall wird der Retry-Process auf Client Seite gestartet.
 \clearpage
 \subsubsection*{Benachrichtigung wiederholen}
 
-Pre-Condition: Benachrichtigung versendet und mind. 1 Versand fehlgeschlagen.
+\textbf{Vorbedingung:} Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
+Es wurde ein zweiter Client inklusive ClientConfiguration erfasst.
+Der zweite Client wurde so konfiguriert, dass er Benachrichtigungen die vom ersten Client empfängt.
+Beide Clients laufen und haben sich bei Messaging Service sowie Cloud Service registriert.
+Der Sender Client hat eine Benachrichtung versendet.
+Das Versenden an mindestens einen Client aus dem Cloud Service ist fehlgeschlagen und der Cloud Service gibt ein negatives SendNotificationResult zurück.
+
 
 Der Client zeigt einen Dialog an in dem der Benutzer informiert wird und gefragt wird, ob er die Fehlgeschlagenen wiederholen möchte.
 Bestätigt der Benutzer wird eine Retry-Anfrage an den NotificationController gesendet.
