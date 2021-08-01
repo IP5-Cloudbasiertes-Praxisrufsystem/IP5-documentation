@@ -231,15 +231,31 @@ Für jeden Empfänger an den versucht wird eine Notification zu versenden, wird 
 Dient der Nachvollziehbarkeit.
 Ermöglicht das Wiederholen von fehlgeschlagenen.
 
+\clearpage
+
 \subsubsection*{Services Notification}
 
-// TODO: Create and Add Class Diagramm
-// TODO: Some descriptions
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.9\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Class_Notification_Services}
+        \caption{Klassendiagramm Notification Service Interfaces}
+    \end{minipage}
+\end{figure}
 
 
+Der \textbf{NotificationService} bietet Methoden um eine Notifikation zu versenden und zu wiederholen.
+Für das initiale Versenden werden die Informationen benötigt um eine Notifikation zu erstellen.
+Im Fall der Wiederholung werden diese Informationen nicht mehr benötigt.
+Da die Notifikation beim ersten Versuch sie zu versenden persistiert wurde.
 
+Der \textbf{NotificationSendProcessService} dient dazu Sendevorgänge zu erstellen und fehlgeschlagene Sendevorgänge zu finden.
+Dies ermöglicht es, eine Notifikation im Fehlerfall zu wiederholen.
 
-\clearpage
+Der \textbf{NotificationTestService} dient zu Test und Administrationszwecken.
+Er kann verwendet werden um einem einzelnen Client eine Testnachricht zu senden oder allen Registrierten Clients eine Nachricht zu schicken.
+Die Nachricht die hier versendet wird ist im Cloud Service vorgegeben.
+Sie beinhaltet lediglich Platzhaltertexte und ist nicht konfigurierbar.
 
 \clearpage
 \subsubsection{Laufzeitmodell}
@@ -248,7 +264,7 @@ Im Folgenden werden die Abläufe für das Versenden und Empfangen von Benachrich
 
 \subsubsection*{Client Registration}
 
-Pre-Condition: Gültige Konfiguration für Benutzer und Client sind erfasst.
+Vorbedingung: Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
 
 In einem ersten Schritt muss sich der Praxismitarbeiter am Mobile Client anmelden.
 Hat er gültige Benutzerdaten angegeben, werden Informationen zu allen verfügbaren Konfigurationen vom Cloud Service geladen und der Benutzer kann die gewünschte Konfiguration auswählen.
