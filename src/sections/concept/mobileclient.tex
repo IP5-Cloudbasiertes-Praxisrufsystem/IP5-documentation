@@ -27,8 +27,33 @@ Im Umkehrschluss findet eine Typenkonversion via Marshalling Service statt\cite{
 
 Der Mobile-Client wird mit modularen Komponenten aufgebaut.
 Dem App-Kontext werden zwei voneinander getrennte Root-Module zur Verfügung gestellt.
+Ein Modul besteht aus [1..N] Page-Modulen.
+Diese Page-Module wiederum setzen sich aus eigens erstellten Komponenten und vordefinierten Komponenten des Frameworks zusammen.
+Das Verhalten dieser Komponenten wird durch deren Scripts und allgemein verfügbaren Services definiert.
+Der Mobile-Client wird so nach einem Objekt-orientierten Paradigma aufgebaut.
 
+\clearpage
 
+\begin{figure}[h]
+    \label{fig:mobileClient-flow}
+    \includegraphics[width=\linewidth]{graphics/MobileClient-Flow-export}
+    \caption[Mobile-Client Flow Chart]{Mobile-Client Flow Chart}
+\end{figure}
+
+Das eigentliche \emph{\nameref{fig:MobileClient-Mocks}} besteht aus dem Homescreen,
+der es dem Benutzer erlaubt Nachrichten zu versenden, und der Inbox welche eingegangene Nachrichten anzeigt.
+Diese Ansicht ist erst nach erfolgreicher Authentifizierung erreichbar.
+Hat sich der Benutzer erfolgreich angemeldet, erhält er eine Auswahl der ihm zur verfügungstehenden Konfigurationen.
+Mit der Auswahl einer dieser Konfigurationen werden die vordefinierten Notification Buttons geladen und auf dem Homescreen erstellt.
+
+Innerhalb des App-Root Kontextes sind zwei Workflows parallel aktiv.
+Zum einen können die vordefinierten Nachrichten durch Betätigen des entsprechenden Buttons versendet werden.
+Die Empfänger werden durch die Rule-Engine des Cloudservices ermittelt.
+Bei einem Fehlschlag wird dies dem Benutzer via Pop-Up mitgeteilt und er kann entscheiden, ob die Nachricht nochmals neu versendet werden soll.
+
+Gleichzeitig ist immer der Listener auf Firebase aktiv.
+Dieser wird auf dem Client eingegangene Nachrichten in der Inbox ablegen und ein akustisches Signal abspielen.
+Wird die Meldung nicht innerhalb eines definierten Zeitraums quittiert, wird das akustische Signal wiederholt.
 \clearpage
 
 \subsubsection{User Interface}
@@ -45,5 +70,23 @@ Dem App-Kontext werden zwei voneinander getrennte Root-Module zur Verfügung ges
     \end{minipage}\label{fig:MobileClient-Mocks}
 \end{figure}
 
+Die Buttons der Meldungen werden in einem 3x3 Grid auf dem Homescreen dynamisch angelegt.
+Nach Betätigung eines Buttons wird dieser in Rot eingefärbt, bis eine Rückmeldung über Erfolg oder Misserfolg vom Cloudservice eingegangen ist.
+
+Die Gegensprechfunktion ist ebenfalls auf dem Homescreen angedacht.
+Hier sollten die Gesprächspartner direkt mit einem entsprechenden Button angewählt werden.
+Diese Funktionalität wie beschrieben in den Userstories U10 und U11 sind im Projektverlauf ausserhalb des Umsetzungsscopes gefallen und daher nicht weiter spezifiziert worden.
+
+Die Inbox besteht aus einer Scrollview, welche eingegangene Nachrichten als Cards darstellt.
+Eine Nachricht enthält:
+\begin{itemize}
+    \item Titel der Nachricht
+    \item Absender der Nachricht
+    \item Detail Text
+    \item Icon
+\end{itemize}
+
+Das Icon könnte noch dynamisch mit dem jeweiligen Nachrichtentyp verknüpft werden.
+Solche wurden fachlich jedoch noch nicht definiert.
 
 \clearpage
