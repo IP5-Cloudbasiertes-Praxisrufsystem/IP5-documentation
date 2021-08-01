@@ -1,0 +1,45 @@
+\subsection{Mobile Client}\label{subsec:mobile-client}
+
+\subsubsection{Framework Grundlagen}
+NativeScript bietet eine Abstraktion zu den nativen Plattformen Android und IOS.
+Die jeweilige NativeScript Runtime erlaubt es in Javascript (oder einem entsprechenden Application Framework) Code zu schreiben,
+welcher direkt für die entsprechende native Umgebung kompiliert wird~\cite{ns-core-overview}.
+\begin{figure}[h]
+    \centering
+    \label{fig:howNSWorks}
+    \includegraphics[width=0.7\textwidth]{graphics/ns-common}\caption[NativeScript-Overview]{NativeScript-Overview}\textcopyright OpenJS Foundation
+\end{figure}
+
+
+Die Runtime agiert als Proxy zwischen Javascript und dem jeweiligen Ökosystem.
+Im Falle von IOS bedeutet dies u.A. das für alle Objective-C types ein JavaScript Prototype angeboten wird.
+Dies ermöglicht es direkt mit nativen Objekten zu interagieren.
+Im Umkehrschluss findet eine Typenkonversion via Marshalling Service statt\cite{ns-ios-runtime}.
+
+\input{sections/concept/nativeScriptGuide.tex}
+
+\subsubsection{Architektur}
+\begin{figure}[h]
+    \label{fig:mobileClient-packages}
+    \includegraphics[width=\linewidth]{graphics/MobileClient-Architecture-export}
+    \caption[Mobile-Client Package Diagramm]{Mobile-Client Package Diagramm}
+\end{figure}
+
+\clearpage
+
+\subsubsection{User Interface}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/homescreen-mockup}
+        \caption{HomeScreen Mockup}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/mockup-received}
+        \caption{Inbox Mockup}
+    \end{minipage}\label{fig:MobileClient-Mocks}
+\end{figure}
+
+
+\clearpage
