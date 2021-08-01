@@ -1,0 +1,311 @@
+
+\subsection{Cloud Service}\label{subsec:cloud-service}
+
+\subsubsection{Technologie}
+
+// TODO: We used spring
+// TODO: Explain why we used spring
+
+\subsubsection{Architektur}
+
+Der Cloud Service wird in die zwei Domänen Notification und Configuration aufgeteilt.
+Dabei ist die Domäne Notification für das Versenden von Benachrichtigungen zuständig.
+Die Domäne Configuration ist für die Verwaltung der Konfigurationen und Subscriptions verantwortlich.
+ie Domäne Notification benötigt zum Versenden von Benachrichtigungen Informationen, die aus der Domäne Configuration stammen.
+Grundsätzlich braucht sie dazu aber nur ein kleines Subset dieser Informationen.
+Sobald identifiziert ist, an wen eine Benachrichtigung gesendet werden soll und wie dieser Client erreicht werden kann, funktioniert das Versenden der Benachrichtigung komplett unabhängig von der Domäne Configuration.
+
+Wäre eigentlich als 2 Microservices umsetzbar, damit die beiden Teile separat skalierbar sind.
+Durch das Aufteilen wirds aber auch komplizierter.
+Für den kleinen Umfang ist der overhead grösser als der gewinn.
+Es ist aber auf jeden Fall darauf zu achten, dass Abhängigkeiten zwischen den beiden Domänen minimiert werden.
+So kann die Applikation in Zukunft einfach und auf die tatsächlichen Bedürfnisse zugeschnitten in mehrere Microservices aufgeteilt werden.
+
+
+// TODO: package structure
+// TODO: few words on onion
+
+\clearpage
+
+\subsubsection{Domänenmodell}
+
+Wie in Kapitel 4.3.1 beschrieben, teilt sich der Cloud Service in die zwei Domänenbereiche Notification und Configuration auf.
+Im Folgenden wird detailliert beschrieben, wie diese Domänen aufgebaut sind.
+
+\subsubsection*{Domäne Configuration}
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Class_Configuration_Domain}
+        \caption{Domänenmodell Configuration}
+    \end{minipage}
+\end{figure}
+
+\textbf{PraxisUser}
+Ein Benutzer für das Praxisrufsystem.
+Jeder Benutzer kann entweder die Rolel Admin oder User haben.
+Admin ist für Admin UI (Praxisverantwortlicher).
+User ist für Mobile Client (Praxismitarbeiter) Nutzer.
+
+\textbf{Client}
+Ein Client repräsentiert ein Gerät auf welchem der Mobile Client läuft.
+
+\textbf{Registration}
+Die Registrierung eines Clients beinhaltet die Informationen die vom Messaging Service verwendet werden können um diesem spezifischen Client eine Benachrichtigung zu stellen.
+Ein Client kann nie mehrere Registrierungen haben.
+
+\textbf{ClientConfiguration}
+Stellt die Konfiguration eines Clients dar.
+Die Beziehung von Client zu ClientConfiguration ist immer 1:1.
+Client und ClientConfiguration sind getrennt, damit Clients auch ohne Configuration erfasst werden können.
+So kann der Administrator die Geräte die er hat von Anfang an erfassen aber ers nach und nach die Konfigurationen dazu erstellen.
+
+\textbf{NotificationType}
+Der NotificationType ist die Grundlage für Notifications die versendet werden.
+Der NotificationType definiert Informationen für den Inhalt von Benachrichtigungen die versendet werden.
+Er beinhaltet weiter Schlüssel für Texte die in einem Client angezeigt werden können.
+
+\textbf{RuleParameters}
+RuleParameters sind die parameterisierten Werte für eine Regel.
+Sie werden pro ClientConfiguration erfasst.
+Sie werden von der RulesEngine ausgewertet um zu identifizieren ob ein Client sich für eine gegebene Benachrichtigung interessiert.
+
+\textbf{RuleType}
+Der RuleType bestimmt wie die Parameter für eine Regel (siehe RulePrameters) ausgewertet werden.
+Für jeden Eintrag in der Tabelle RuleType muss es eine Implementierung des Interfaces RuleEvaluator geben, welche die RulesParameter Werte für den Regeltyp auswerten kann.
+
+\subsubsection*{Configuration Services}
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Class_Configuration_Services}
+        \caption{Klassendiagramm Configuration Service Interfaces}
+    \end{minipage}
+\end{figure}
+
+Abbildung 4.6 zeigt die Interfaces für Services welche es in der Configuration Domäne gibt.
+ClientConfigurationService, ClientService, NotificationTypeService, RegistrationService und UserService bieten Create, Read, Update und Delete Methoden für das jeweilige Domänenobjekt an.
+Diese Methoden sind zu Verwaltungszwecken über eine REST-API ansprechbar. Siehe Kapitel xy (API).
+
+Der RegistrationService bietet dabei eine Ausnahme.
+Der RegistrationService bietet Methoden um Registrierungen zu erfassen und wieder zu löschen.
+Er bietet zudem die Möglichkeit anhand einer gegebenen Notification zu identifizieren, welche der registrierten Clients sich für diese Notification interessieren.
+Diese Auswertungen werden mithilfe der RulesEngine gemacht.
+Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluators und findet alle relevanten tokens. Siehe Kapitel Rules Engine.
+
+\clearpage
+\subsubsection*{Rules Engine}
+
+// TODO: Explain the Engine (Or should that happen with the sequence diags?)
+// TODO: Mention how nice Strategy Pattern with Spring can be
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Class_Configuration_RulesEngine}
+        \caption{Klassendiagramm Rules Engine}
+    \end{minipage}
+\end{figure}
+
+\clearpage
+\subsubsection*{Domäne Notification}
+
+Hier gehts darum Benachrichtigungen zu versenden.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Class_Notification_Domain}
+        \caption{Domänenmodell Notification}
+    \end{minipage}
+\end{figure}
+
+\textbf{PraxisNotification}
+Jede Notification die der CloudService erhält wird bereits vor dem Versenden persistiert.
+Dient der Nachvollziehbarkeit.
+Ermöglicht das Wiederholen von fehlgeschlagenen.
+
+\textbf{SendNotificationProcess}
+Für jeden Empfänger an den versucht wird eine Notification zu versenden, wird ein SendNotificationProcess erstellt.
+Dient der Nachvollziehbarkeit.
+Ermöglicht das Wiederholen von fehlgeschlagenen.
+
+\subsubsection*{Services Notification}
+
+// TODO: Create and Add Class Diagramm
+// TODO: Some descriptions
+
+
+
+
+\clearpage
+
+\clearpage
+\subsubsection{Laufzeitmodell}
+
+Im Folgenden werden die Abläufe für das Versenden und Empfangen von Benachrichtigungen im Detail definiert.
+
+\subsubsection*{Client Registration}
+
+Pre-Condition: Gültige Konfiguration für Benutzer und Client sind erfasst.
+
+In einem ersten Schritt muss sich der Praxismitarbeiter am Mobile Client anmelden.
+Hat er gültige Benutzerdaten angegeben, werden Informationen zu allen verfügbaren Konfigurationen vom Cloud Service geladen und der Benutzer kann die gewünschte Konfiguration auswählen.
+Dabei werden nur Name und Id der Konfigurationen geladen, damit nicht mehr Daten als nötig übertragen werden.
+Sobald eine Konfiguration ausgewählt ist, werden alle dafür Konfigurierten NotificationTypes geladen und im UI die entsprechenden Buttons erstellt.
+Sobald eine Konfiguration geladen ist, registriert sich der Mobile Client beim Messageing Service.
+Als Antwort erhält er ein eindeutiges Token, welches verwendet werden kann, um an diesem Client Nachrichten zu senden.
+Der Mobile Client Registriert sich schliesslich mit dem Token vom Messaging Service und der ausgewählten Konfiguration beim Cloud Service.
+In diesem Zustand ist der Client dem Messaging Service und dem Cloud Service bekannt und ist bereit Benachrichtigungen zu empfangen.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Register}
+        \caption{Ablauf Registration}
+    \end{minipage}
+\end{figure}
+
+
+\subsubsection*{Benachrichtigung versenden und empfangen}
+
+Pre-Condition: Client Registrierung ist für 2 Clients abgeschlossen. Es bestehen gültige Subscriber Configs. Konfiguration ist geladen.
+
+Der Benutzer tippt auf einen der Benachrichtigungsbuttons.
+Pro Button ist die Id des verbundenen NotificationTypes hinterlegt.
+Es wird nun eine Anfrage an den NotificationController im Cloud Service gesendet.
+Darin enthalten sind die Id des Absender Clients und die Id des NotificationTypes.
+Der NotificationController macht eine Anfrage an den ConfigurationController um alle relevanten empfänger zu finden.
+Im ConfigurationController werden alle konfigurierten ClientConfigurations nach Subscriber Regeln evaluiert.
+Der ConfigurationController gibt schliesslich eine Liste der Registrations zurück die zu einer ClientConfiguration gehören für die eine der Konfigurierten Regeln zugetroffen hat.
+Der NotificationController lädt den NotificationType aus der Send-Anfrage und benutzt diese Daten um eine Benachrichtigung an alle Empfänger für die er gerade Registrations geladen hat zu senden.
+Der NotificationController meldet zurück, ob der Versand an alle Empfänger funktioniert hat.
+Ist dies nicht der Fall wird der Retry-Process auf Client Seite gestartet.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Send}
+        \caption{Ablauf Benachrichtigung Senden und Empfangen}
+    \end{minipage}
+\end{figure}
+
+
+\clearpage
+\subsubsection*{Benachrichtigung wiederholen}
+
+Pre-Condition: Benachrichtigung versendet und mind. 1 Versand fehlgeschlagen.
+
+Der Client zeigt einen Dialog an in dem der Benutzer informiert wird und gefragt wird, ob er die Fehlgeschlagenen wiederholen möchte.
+Bestätigt der Benutzer wird eine Retry-Anfrage an den NotificationController gesendet.
+Parameter ist die technische id der Notification die fehlgeschlagen ist.
+NotificationController durchsucht die NotificationSendProcess tabelle nach der gegebenen id und filtert auf fehlgeschlagene.
+Anschliessend wird der send prozess anhand der tokens in dieser NotificationSendProcess Instanzen wiederholt.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{1.0\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Retry}
+        \caption{Ablauf Benachrichtigung Wiederholen}
+    \end{minipage}
+\end{figure}
+
+
+\clearpage
+
+\subsubsection{API}
+
+\subsubsection*{Verwaltung}
+
+Um die Verwaltung der Konfigurationen zu ermöglichen, bietet der Cloud Service eine REST-API an über die Konfigurationsobjekte verwaltet werden können.
+Der Cloud Service bietet Verwaltungs APIs für die Folgenden Domänenobjekte:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|p{13cm}|}
+        \hline
+        \textbf{Domänenobjekt} & \textbf{Entity Name} \\
+        \hline
+        Client         & /api/clients \\
+        \hline
+        Client Configuration         & /api/client-configurations \\
+        \hline
+        Notification Types         & /api/notification-types \\
+        \hline
+        Users         & /api/users \\
+        \hline
+    \end{tabular}\label{tab:adminapimethods}
+\end{table}
+
+Für jedes dieser Domänenobjekte ist ein dedizierter Endpoint definiert, der unter dem Subpfad /api/entity-name erreichbar ist.
+Jeder dieser Kontroller bietet eine API zu Verwaltung dieses Domänenobjekts, welche dem folgenden Schema folgt:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{Action} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+        \hline
+            Alle Elemente lesen         & GET & /api/entity-name & - & [EntityDto] \\
+        \hline
+            Einzelnes Element lesen         & GET & /api/entity-name/id & - & EntityDto \\
+        \hline
+            Neues Element erstellen         & POST & /api/entity-name  & EntityDto & EntityDto\\
+        \hline
+            Bestehendes Element ändern          & PUT & /api/entity-name  & EntityDto & EntityDto\\
+        \hline
+            Einzelnes Element löschen          & DELETE & /api/entity-name/id  & - & -  \\
+        \hline
+            Mehrere Elemente löschen          & DELETE & /api/entity-name/ids  & - & - \\
+        \hline
+    \end{tabular}\label{tab:apimethods}
+\end{table}
+
+Eine Ausnahme bildet hier das Domänenobjekt Registration.
+Die Registrierung darf nie manuell von einem Administrator erfasst werden.
+Sie muss immer von einem Mobile Client her kommen der sich beim Cloud Service registriert oder de-registriert.
+Lesender Zugriff auf die Registrierungen ist nur nötig, wenn der Cloud Service eine Benachrichtigung versendet und die Messaging Tokens der relevanten Empfänger laden muss.
+Dementsprechend bietet der RegistrationController nicht die volle Verwaltungs API sondern nur folgendes Subset:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+        \hline
+        Registrierung aktualisiern         & POST & /api/registrations/ & ClientId, Messaging Token & - \\
+        \hline
+        Registrierung entfernen         & DELETE & /api/registrations/ & ClientId & - \\
+        \hline
+        Relevante Registrierung finden         & Post & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
+        \hline
+    \end{tabular}\label{tab:registrationsapimethods}
+\end{table}
+
+\clearpage
+
+\subsubsection*{Fachliches}
+
+Weiter gibt es Operationen welche eine fachliche Handlung darstellen die nicht der Verwaltung von Konfigurationen dienen.
+Die API für diese Operationen folgen dem folgenden Schema:
+
+/api/entity-name/action-name
+
+Der Cloud Service bietet die folgenden fachlichen Endpunkte an:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+        \hline
+        Notifikation versenden         & POST & /api/notifications/send & NotificationDto & NotificationSendResult \\
+        \hline
+        Notifikation wiederholen        & POST & /api/notifications/retry & Notification Id  & NotificationSendResult \\
+        \hline
+    \end{tabular}\label{tab:notificationapimethods}
+\end{table}
+
+\clearpage
