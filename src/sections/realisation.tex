@@ -4,7 +4,28 @@
 
 \subsubsection{Übersicht}
 
-\subsection{Mobile Client}\label{subsec:mobile-client-realisation}
+Geschafft:
+
+\begin{itemize}
+    \item Mobile Client, Cloud Service und Admin UI umgesetzt
+    \item Cloud Service mit AWS eingerichtet und betrieben
+    \item Admin UI mit Cloud Service eingerichtet und betrieben
+    \item Firebase Messaging als Message Broker angebunden
+    \item Subscriptions funktionieren
+    \item Benachrichtigungen dynamisch pro client
+    \item Benutzer kann sich anmelden und einfach config wählen
+    \item Admin kann sich anmelden und config erfassen
+\end{itemize}
+
+Nicht Geschafft:
+
+\begin{itemize}
+    \item Text to speech
+    \item Raspberry
+    \item Voice Calls
+    \item Benachrichtigungen Quittieren
+\end{itemize}
+
 Abweichungen vom Konzept
 \begin{itemize}
     \item Die Gegensprechanlage ist komplett Weggefallen.
@@ -12,9 +33,51 @@ Abweichungen vom Konzept
     \item Die Rückfärbung der Buttons auf Grün ist weggefallen da der Handshake so nicht implmentiert wurde.
 \end{itemize}
 
+\clearpage
+\subsubsection{Mobile Client}\label{subsec:mobile-client-realisation}
+
+Dieses Kapitel zeigt die umgesetzten Ansichten des Mobile Clients.
+Eine detaillierte Beschreibung, wie der Mobile Client bedient werden kann, befindet sich im Anhang der Projektdokumentation.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshot-login}
+        \caption{Login}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/mobileclient/screenshot-select-config}
+        \caption{Konfiguration}
+    \end{minipage}
+    \label{fig:MobileClient-Screens1}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/mobileclient/screenshot-homescreen}
+        \caption{Home}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/mobileclient/screenshots-inbox}
+        \caption{Inbox}
+    \end{minipage}
+    \label{fig:MobileClient-Screens2}
+\end{figure}
+
+\clearpage
+
 \subsubsection{Cloud Service}
 
+Doku was wo und wieso
+
 \subsubsection{Admin UI}
+
+Add some screen shots
 
 \subsection{Tests}
 
