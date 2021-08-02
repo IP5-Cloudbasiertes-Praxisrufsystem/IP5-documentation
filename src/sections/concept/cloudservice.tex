@@ -1,29 +1,102 @@
 
 \subsection{Cloud Service}\label{subsec:cloud-service}
 
-\subsubsection{Technologie}
-
-// TODO: We used spring
-// TODO: Explain why we used spring
-
 \subsubsection{Architektur}
+
+\subsubsection*{Überblick}
 
 Der Cloud Service wird in die zwei Domänen Notification und Configuration aufgeteilt.
 Dabei ist die Domäne Notification für das Versenden von Benachrichtigungen zuständig.
 Die Domäne Configuration ist für die Verwaltung der Konfigurationen und Subscriptions verantwortlich.
-ie Domäne Notification benötigt zum Versenden von Benachrichtigungen Informationen, die aus der Domäne Configuration stammen.
+Die Domäne Notification benötigt zum Versenden von Benachrichtigungen Informationen, die aus der Domäne Configuration stammen.
 Grundsätzlich braucht sie dazu aber nur ein kleines Subset dieser Informationen.
 Sobald identifiziert ist, an wen eine Benachrichtigung gesendet werden soll und wie dieser Client erreicht werden kann, funktioniert das Versenden der Benachrichtigung komplett unabhängig von der Domäne Configuration.
 
-Wäre eigentlich als 2 Microservices umsetzbar, damit die beiden Teile separat skalierbar sind.
-Durch das Aufteilen wirds aber auch komplizierter.
-Für den kleinen Umfang ist der overhead grösser als der gewinn.
-Es ist aber auf jeden Fall darauf zu achten, dass Abhängigkeiten zwischen den beiden Domänen minimiert werden.
+Da die beiden Domänen nicht eng gekoppelt sind, wäre es denkbar die Domänenspezifische Logik in zwei separate Microservices aufzuteilen.
+Die Aufteilung auf mehrere Microservices macht das System als ganzes aber direkt komplizierter.
+Insbesondere Betrieb und Entwicklung wird aufwändiger, da diese Arbeiten nun über mehrere Applikationen verteilt sind.
+Für den Umfang dieser Arbeit wird deshalb darauf verzichtet, den Cloud Service als echtes Micro Service System umzusetzen.
+Der Cloud Service wird in als eine einzelne Spring Boot Applikation umgesetzt.
+Innerhalb dieser Applikation sollen die Domänen Configuration und Notification wo immer mit vertretbarem Aufwand möchlich, getrennt bleiben.
+Abhängigkeiten zwischen den beiden Domänen sind zu vermeiden.
+An den Stellen wo Informationen aus der anderen Domäne nötig sind, sollen diese über ein Rest Interface abgefragt werden.
 So kann die Applikation in Zukunft einfach und auf die tatsächlichen Bedürfnisse zugeschnitten in mehrere Microservices aufgeteilt werden.
 
+\clearpage
 
-// TODO: package structure
-// TODO: few words on onion
+\subsubsection*{Service Architektur}
+
+Der Cloud Service wird nach dem Prinzip von Onion Architecture / Clean Architecture aufgebaut.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{graphics/clean-architecture}
+        \caption{Clean Architecture}
+    \end{minipage}
+\end{figure}
+
+In Onion Architecture wird die Applikation in Layern von der Domäne im Zentrum bis hin zur Infrastruktur an den äusseren Enden definiert.
+Im Wesentlichen gibt es die folgenden Layers\cite{medium-onion}.
+
+\textbf{Domain Model}
+Im Zentrum des Modells steht die Domain selbst.
+Der Domain Layer darf nur Dependencies auf sich selbst haben.
+Abhängigkeiten aus anderen Layers sind um jeden Preis zu vermeiden.
+Abhängigkeiten aus äusseren Layer auf den Domain Layer sind hingegen immer erlaubt.
+
+\textbf{Domain Services}
+Bieten die fachliche Logik und Verhaltensweise des Domain Model Layers an.
+
+\textbf{Application Services}
+Bildet die Brücke zwischen externer Infrastruktur und den DomainServices.
+Dies beinhaltet Repository Services und Rest Controllers.
+
+\textbf{Infrastructure}
+Veranschaulicht die Infrastruktur ausserhalb des Systems.
+Dies beinhaltet unter anderem Datenbanken, Messaging Services und Applikationen die auf Web APIs welche der Applikation zugreifen.
+
+\clearpage
+
+\subsubsection*{Package Struktur}
+
+Der Cloud Service definiert die folgenden top level Packages:
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.9\textwidth}
+
+        \dirtree{%
+        .1 ch.fhnw.ip5.praxiscloudservice.
+        .2 api.
+        .2 config.
+        .2 domain.
+        .2 persistence.
+        .2 service.
+        .2 web.
+    }
+    \caption{Package Struktur Cloud Service}\label{fig:packagescloudservice}
+    \end{minipage}
+\end{figure}
+
+\\ \\
+
+Im Zentrum steht das Package \textbf{domain}.
+Es beinhaltet alle Domänenobjekte und stellt damit alleine den Domain Layer dar.
+
+Das Package \textbf{api} definiert Interfaces für sämtliche Domain Services.
+Es beinhaltet weiter Data Transition Objects (DTOs), welche verwendet werden um Daten ausserhalb der Domain (UI oder andere Domain) abzubilden.
+Es beinhaltet zudem Exceptions welche für den Cloud Service definiert werden.
+
+Das Package \textbf{persistence} beinhaltet Services welche für Interaktion mit der Datenbank verwendet werden und  gehört zum Application Services Layer.
+
+Das Package \textbf{service} beinhaltet die Services welche das Verhalten der Applikation modellieren und entspricht dem Domain Service Layer.
+
+Das Package \textbf{web} beinhaltet die Controller welche REST Endpoints anbieten, sowie Clients die verwendet werden um andere REST Endpoints zu konsumieren.
+Es gehört zum Application Services Layer.
+
+Das Package \textbf{config} beinhaltet technische Konfiguration der Applikation.
+
 
 \clearpage
 
@@ -36,7 +109,7 @@ Im Folgenden wird detailliert beschrieben, wie diese Domänen aufgebaut sind.
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{1.0\textwidth}
+    \begin{minipage}[b]{0.9\textwidth}
         \includegraphics[width=\textwidth]{graphics/Class_Configuration_Domain}
         \caption{Domänenmodell Configuration}
     \end{minipage}
@@ -79,7 +152,7 @@ Für jeden Eintrag in der Tabelle RuleType muss es eine Implementierung des Inte
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{1.0\textwidth}
+    \begin{minipage}[b]{0.9\textwidth}
         \includegraphics[width=\textwidth]{graphics/Class_Configuration_Services}
         \caption{Klassendiagramm Configuration Service Interfaces}
     \end{minipage}
@@ -98,16 +171,42 @@ Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluator
 \clearpage
 \subsubsection*{Rules Engine}
 
-// TODO: Explain the Engine (Or should that happen with the sequence diags?)
-// TODO: Mention how nice Strategy Pattern with Spring can be
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{1.0\textwidth}
+    \begin{minipage}[b]{0.9\textwidth}
         \includegraphics[width=\textwidth]{graphics/Class_Configuration_RulesEngine}
         \caption{Klassendiagramm Rules Engine}
     \end{minipage}
 \end{figure}
+
+Die RulesEngine ermöglicht es dem Cloud Service festzustellen, welche Benachrichtigungen an welche Clients versendet werden sollen.
+Die RulesEngine selbst bietet dazu eine einzelne öffentliche Methode.
+Diese nimmt eine Liste von Regelparametern (RulesParameters) und eine Notification entgegen.
+Zurückgegeben wird ein Boolean wert, der sagt ob mindestens eine der übergebenen Regelparameter für die Benachrichtigung relevant ist.
+Da jeder aktive Client eine ClientConfiguration definiert, die eine Liste an Regelparametern beinhaltet kann so mit der RulesEngine bewertet werden, ob ein bestimmter Client sich für eine Benachrichtigung interessiert.
+
+Die Auswertung der einzelnen Regelparameter innerhalb der RulesEngine wird an einzelne RuleEvaluatoren delegiert.
+Umgesetzt wird dieses Konzept mit einem Stragegy Pattern.
+Wobei das RuleEvaluator Interface das Strategy Interface darstellt.
+Der Zugriff auf die einzelnen Strategies innerhalb der RulesEngine wird über eine RuleEvaluatorFactory gelöst.
+Diese Factory kennt alle existierenden RuleEvaluator Instanzen und bietet eine öffentliche Methode, über welche der RuleEvaluator für einen bestimmten Typ geladen werden kann.
+Über die Dependency Injection des Spring Frameworks, kann diese RuleEvaluatorFactory einfach und erweiterbar implementiert werden:
+
+
+
+\clearpage
+
+\lstinputlisting[caption=RuleEvaluatorFactory.java,language=java,label={lst:RuleEvaluatorFactory.java}]{listings/RuleEvaluatorFactory.java}
+
+Über den @Autowired Konstruktor nimmt die Factory eine Liste des Types RuleEvaluator entgegen.
+Die Spring Dependency Injection wird hier automatisch alle verfügbaren RuleEvaluator Instanzen in einer Liste sammeln und als Konstruktorparameter entgegennehmen.
+Da jeder RuleEvalutaor eine Methode bietet, über die der relevante RuleType abgefragt werden kann, kann nun aus dieser Liste eine Map gebaut werden, die RuleTypes auf die relevanten RuleEvaluator Instanzen mapped.
+Das Laden eines RuleEvaluators ahnand des RuleTypes kann nun über ein einfaches Lookup in der Map erfolgen.
+Werden in der Zukunft weitere RuleTypes unterstützt, reicht es die entsprechende RuleEvaluatorFactory zu implementieren.
+Der neue RuleEvaluator wird danach automatisch über dei RuleEvaluatorFactory verfügbar sein.
+Anpassungen an der RulesEngine oder der RuleEvaluatorFactory sind nicht nötig.
+
 
 \clearpage
 \subsubsection*{Domäne Notification}
@@ -132,15 +231,31 @@ Für jeden Empfänger an den versucht wird eine Notification zu versenden, wird 
 Dient der Nachvollziehbarkeit.
 Ermöglicht das Wiederholen von fehlgeschlagenen.
 
+\clearpage
+
 \subsubsection*{Services Notification}
 
-// TODO: Create and Add Class Diagramm
-// TODO: Some descriptions
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.9\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Class_Notification_Services}
+        \caption{Klassendiagramm Notification Service Interfaces}
+    \end{minipage}
+\end{figure}
 
 
+Der \textbf{NotificationService} bietet Methoden um eine Notifikation zu versenden und zu wiederholen.
+Für das initiale Versenden werden die Informationen benötigt um eine Notifikation zu erstellen.
+Im Fall der Wiederholung werden diese Informationen nicht mehr benötigt.
+Da die Notifikation beim ersten Versuch sie zu versenden persistiert wurde.
 
+Der \textbf{NotificationSendProcessService} dient dazu Sendevorgänge zu erstellen und fehlgeschlagene Sendevorgänge zu finden.
+Dies ermöglicht es, eine Notifikation im Fehlerfall zu wiederholen.
 
-\clearpage
+Der \textbf{NotificationTestService} dient zu Test und Administrationszwecken.
+Er kann verwendet werden um einem einzelnen Client eine Testnachricht zu senden oder allen Registrierten Clients eine Nachricht zu schicken.
+Die Nachricht die hier versendet wird ist im Cloud Service vorgegeben.
+Sie beinhaltet lediglich Platzhaltertexte und ist nicht konfigurierbar.
 
 \clearpage
 \subsubsection{Laufzeitmodell}
@@ -149,7 +264,7 @@ Im Folgenden werden die Abläufe für das Versenden und Empfangen von Benachrich
 
 \subsubsection*{Client Registration}
 
-Pre-Condition: Gültige Konfiguration für Benutzer und Client sind erfasst.
+Vorbedingung: Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
 
 In einem ersten Schritt muss sich der Praxismitarbeiter am Mobile Client anmelden.
 Hat er gültige Benutzerdaten angegeben, werden Informationen zu allen verfügbaren Konfigurationen vom Cloud Service geladen und der Benutzer kann die gewünschte Konfiguration auswählen.
@@ -162,7 +277,7 @@ In diesem Zustand ist der Client dem Messaging Service und dem Cloud Service bek
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{1.0\textwidth}
+    \begin{minipage}[b]{0.9\textwidth}
         \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Register}
         \caption{Ablauf Registration}
     \end{minipage}
@@ -186,7 +301,7 @@ Ist dies nicht der Fall wird der Retry-Process auf Client Seite gestartet.
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{1.0\textwidth}
+    \begin{minipage}[b]{0.9\textwidth}
         \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Send}
         \caption{Ablauf Benachrichtigung Senden und Empfangen}
     \end{minipage}
@@ -196,7 +311,13 @@ Ist dies nicht der Fall wird der Retry-Process auf Client Seite gestartet.
 \clearpage
 \subsubsection*{Benachrichtigung wiederholen}
 
-Pre-Condition: Benachrichtigung versendet und mind. 1 Versand fehlgeschlagen.
+\textbf{Vorbedingung:} Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
+Es wurde ein zweiter Client inklusive ClientConfiguration erfasst.
+Der zweite Client wurde so konfiguriert, dass er Benachrichtigungen die vom ersten Client empfängt.
+Beide Clients laufen und haben sich bei Messaging Service sowie Cloud Service registriert.
+Der Sender Client hat eine Benachrichtung versendet.
+Das Versenden an mindestens einen Client aus dem Cloud Service ist fehlgeschlagen und der Cloud Service gibt ein negatives SendNotificationResult zurück.
+
 
 Der Client zeigt einen Dialog an in dem der Benutzer informiert wird und gefragt wird, ob er die Fehlgeschlagenen wiederholen möchte.
 Bestätigt der Benutzer wird eine Retry-Anfrage an den NotificationController gesendet.
@@ -206,7 +327,7 @@ Anschliessend wird der send prozess anhand der tokens in dieser NotificationSend
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{1.0\textwidth}
+    \begin{minipage}[b]{0.9\textwidth}
         \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Retry}
         \caption{Ablauf Benachrichtigung Wiederholen}
     \end{minipage}
