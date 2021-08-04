@@ -1,0 +1,56 @@
+\subsubsection{Admin UI}
+
+Mit dem Admin UI bietet das Praxisrufsystem dem Praxisverantwortlichen die Möglichkeit die Konfiguration des Systems zu verwalten.
+Da nur der Praxisverantworliche das Admin UI verwenden soll, ist die Benutzeroberfläche durch ein Login geschützt.
+Die entsprechenden Anmeldeinformationen müssen bei Installation des Cloud Services vom Betreiber manuell konfiguriert werden.
+Das Admin UI beinhaltet vier Bereiche.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/adminui/login}
+        \caption{Login}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/adminui/configuration-all}
+        \caption{Configuration Overview}
+    \end{minipage}
+    \label{fig:AdminUI-Screens1}
+\end{figure}
+
+Der Bereich \textbf{Users} dient dazu Benutzer zu erstellen, welche sich als Benutzer am Mobile Client anmelden können.
+
+Unter \textbf{Clients} können Geräte verwaltet werden.
+Jeder Client ist eindeutig einem Benutzer zugewiesen.
+
+Im Bereich \textbf{Notification Types} können Benachrichtigungen verwaltet werden.
+Hier wird konfiguriert, welchen Text der Button für diese Benachrichtigungen im Mobile Client hat und welchen Inhalt die Benachrichtigung hat, wenn sie versendet wird.
+
+Unter \textbf{Configurations} kommen schliesslich alle Teile zusammen.
+Hier kann die Konfiguration für einen Client erfasst werden.
+Dabei wird die Konfiguration einem Client zugewiesen.
+Die Konfiguration hat eine Liste von Notification Types, welche auf dem zugewiesenen Mobile Client als Versenden Button angezeigt werden.
+Weiter beinhaltet die Konfiguration eine Liste von Regel Parametern, welche bestimmen, welche Benachrichtigungen dem zugewiesenen Client weitergeleitet werden.
+
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/adminui/configuration}
+        \caption{Login}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/adminui/notification-type}
+        \caption{Configuration Overview}
+    \end{minipage}
+    \label{fig:AdminUI-Screens2}
+\end{figure}
+
+Jeder der Bereiche im Admin UI bietet dem Benutzer die Möglichkeit, dieses Konfigurationsobjekt anzuzeigen, erstellen, bearbeiten und löschen.
+Auf der Startseite jedes Bereiches wird eine Liste mit allen relevanten Einträgen angezeigt.
+Über die Schlatfläche "Create" kann der Benutzer neue Elemente erfassen.
+Durch einen Klick auf ein einzelnes Element, kommt der Benutzer auf eine Ansicht, wo das Element bearbeitet werden kann.
+
+\clearpage
