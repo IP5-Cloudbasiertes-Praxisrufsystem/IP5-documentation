@@ -1,0 +1,40 @@
+\subsection{Resultate}
+
+Das Praxisrufsystem wurde wie im Kapitel 5 - Konzept beschrieben umgesetzt.
+Es wurden die drei Komponenten Mobile Client, Cloud Service und Admin UI implementiert.
+Über den angebundenen Messaging Service Firebase Messaging ist es möglich, Benachrichtigungen zwischen Mobile Clients zu versenden.
+Cloud Service und Admin UI ermöglichen es dabei die Benachrichtigungen die Versendet werden können und welcher Client welche Benachrichtungen erhalten soll zu konfigurieren.
+Weiter wurde mit Amazon Web Services (AWS) eine CI/CD Umgebung aufgebaut, die es erlaubt Cloud Service und das Admin UI zu betreiben und testen.
+Diese Umgebung wird dem Kunden als Template dienen, wie er das Praxisrufsystem in der Praxis betreiben kann\footnote{Siehe Anhang Betriebshandbuch}.
+
+Im Rahmen des Projektes wurden damit die Milestones M01 bis M06\footnote{Siehe Kapitel 2.2} erreicht.
+Umgesetzt wurden die Milestones mit den folgenden User Stories inklusive aller dazu definierten Features und Szenarien\footnote{Siehe Kapitel 3}:
+
+\begin{itemize}
+    \item U01 - Benachrichtigung versenden
+    \item U02 - Benachrichtigungen empfangen
+    \item U03 - Nur relevante Benachrichtigungen empfangen
+    \item U04 - Auf Benachrichtigungen aufmerksam machen
+    \item U05 - Verpasste Benachrichtigungen anzeigen
+    \item U06 - Fehler beim Versenden von Benachrichtigungen anzeigen
+    \item U07 - Konfiguration auf Mobile Client auswählen
+    \item U12 - Mehrere Mobile Clients konfigurieren
+    \item U13 - Individuelle Konfiguration pro Mobile Client
+    \item U14 - Zentrale Konfigurationsverwaltung
+    \item T01 - Mobile Client unterstützt IPads
+    \item T02 - Mobile Client unterstützt Android Tablets
+    \item T03 - Geteilte Code Basis für Android and IOS
+    \item T04 - Betrieb mit AWS
+\end{itemize}
+
+Die Milestones M06 bis M10 konnten im Rahmen dieses Projektes nicht umgesetzt werden.
+Damit sind folgende User Stories ausserhalb des Projektrahmens gefallen:
+
+\begin{itemize}
+    \item U08 - Physicher Knopf am Behandlungsstuhl
+    \item U09 - Text To Speech für Benachrichtigungen
+    \item U10 - Direkte Unterhaltungen zwischen Mobile Clients
+    \item U11 - Gruppenunterhaltungen zwischen Mobile Clients
+    \item U15 - Konfiguration von direkten Anrufen
+    \item U16 - Konfiguration von Gruppenanrufen
+\end{itemize}

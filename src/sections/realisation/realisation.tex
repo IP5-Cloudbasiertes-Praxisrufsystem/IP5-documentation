@@ -1,0 +1,104 @@
+\section{Umsetzung}\label{sec:umsetzung}
+
+\input{sections/realisation/results/overview.tex}
+
+
+
+
+\subsubsection{Cloud Service}
+
+Der Cloud Service wurde wie im Konzept beschrieben umgesetzt und an den Messaging Service angebunden.
+
+Die API ist unter www.praxisruf.ch/api erreichbar.
+www.praxisruf.ch/swagger-ui.html bietet zudem zu Testzwecken die Möglichkei die Endpoints direkt anzusprechen.
+
+\begin{minipage}[b]{1\textwidth}
+    \includegraphics[width=\textwidth]{graphics/screenshots/cloud/swagger-home}
+    \caption{Home}
+\end{minipage}
+
+Sorgt neben der API auch die Authentifikation die umgesetzt wurde.
+
+\clearpage
+
+\subsubsection{Admin UI}
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/adminui/login}
+        \caption{Login}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/adminui/configuration-all}
+        \caption{Configuration Overview}
+    \end{minipage}
+    \label{fig:AdminUI-Screens1}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/adminui/configuration}
+        \caption{Login}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{graphics/screenshots/adminui/notification-type}
+        \caption{Configuration Overview}
+    \end{minipage}
+    \label{fig:AdminUI-Screens2}
+\end{figure}
+
+
+
+
+Add some screen shots
+
+\subsection{Tests}
+
+\subsubsection*{Benutzertests}
+Wurden mit Daniel Jossen zusannem an der FH gemacht.
+Mehr Tests waren wegen Ferienabwesenheiten auf Kundenseite nicht möglich.
+Macht nicht so viel sinn mit nur einem Ipad.
+
+
+\subsubsection*{Benutzertests}
+Macht nicht so viel sinn mit nur einem Ipad.
+
+\clearpage
+\subsection{Lessons Learned}
+
+\clearpage
+\begin{itemize}
+    \item Die Gegensprechanlage ist komplett Weggefallen.
+    \subitem Grundsätzlich Stünde eine Lib. für IOS in NS zur Verfügung. Der Android Teil ist da noch "TODO"
+    \item Die Rückfärbung der Buttons auf Grün ist weggefallen da der Handshake so nicht implmentiert wurde.
+\end{itemize}
+
+
+Hearusforderungen waren:
+\begin{itemize}
+    \item Dokumentation fehlt komplett in der Planung
+    \item IOS Recherche viel aufwändiger als erwartet.
+    \item Nativescript aufwändiger zu gebrauchen als erwartet.
+    \item AWS aufsetzen ist alles andere als trivial
+    \item Keine Erfahrung mit Mobile Development
+    \item Stärkerer Roter Faden von Anfang an hätte geholfen
+    \item Mehr testing, viel Mehr Testing.
+    \item Refactoring kostet Zeit, kanns aber wert sein.
+\end{itemize}
+
+Darus mitgenommen haben wir:
+\begin{itemize}
+    \item Gute Planung macht sich bezahlt. (Roter Faden, Doku mit einplanen, Standortbestimmung)
+    \item Gute Konzepte machen sich bezahlt.
+    \item Best Practices gibt es aus einem Grund. (Nativ ist besser)
+    \item DevOps ist schwer.
+\end{itemize}
+
+
+
+
+
