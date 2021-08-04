@@ -2,53 +2,46 @@
 
 \subsection{Resultate}
 
-\subsubsection{Zusammenfassung}
-
-Das Praxisrufsystem wurde wie im Kapitel Konzept beschrieben umgesetzt.
+Das Praxisrufsystem wurde wie im Kapitel 5 - Konzept beschrieben umgesetzt.
 Es wurden die drei Komponenten Mobile Client, Cloud Service und Admin UI implementiert.
 Über den angebundenen Messaging Service Firebase Messaging ist es möglich, Benachrichtigungen zwischen Mobile Clients zu versenden.
 Cloud Service und Admin UI ermöglichen es dabei die Benachrichtigungen die Versendet werden können und welcher Client welche Benachrichtungen erhalten soll zu konfigurieren.
 Weiter wurde mit Amazon Web Services (AWS) eine CI/CD Umgebung aufgebaut, die es erlaubt Cloud Service und das Admin UI zu betreiben und testen.
-Diese Umgebung wird dem Kunden als Template dienen, wie er das Praxisrufsystem in der Praxis betreiben kann.
-Detaillierte Informationen dazu finden sich im Betriebshandbuch im Anhang.
+Diese Umgebung wird dem Kunden als Template dienen, wie er das Praxisrufsystem in der Praxis betreiben kann\footnote{Siehe Anhang Betriebshandbuch}.
 
-
-\subsubsection{Umgesetzte Anforderungen}
-
-Im Rahmen des Projektes konnten die folgenden User Stories inklusive aller dazu definierten Features und Szenarien umgesetzt werden:
+Im Rahmen des Projektes wurden damit die Milestones M01 bis M06\footnote{Siehe Kapitel 2.2} erreicht.
+Umgesetzt wurden die Milestones mit den folgenden User Stories inklusive aller dazu definierten Features und Szenarien\footnote{Siehe Kapitel 3}:
 
 \begin{itemize}
-    \item U01: Benachrichtigungen versenden können.
-    \item U02: Als Praxismitarbeiter möchte ich Benachrichtigungen empfangen können, damit ich auf Probleme und Anfragen anderer Mitarbeiter reagieren kann.
-    \item U03: Als Praxismitarbeiter möchte ich nur Benachrichtigungen sehen, die für mich relevant sind, damit ich meine Arbeit effizient gestalten kann.
-    \item U04: Als Praxismitarbeiter möchte ich über empfangene Benachrichtigungen aufmerksam gemacht werden, damit ich keine Benachrichtigungen verpasse.
-    \item U05: Als Praxismitarbeiter möchte ich sehen welche Benachrichtigungen ich verpasst habe, damit ich auf verpasste Benachrichtigungen reagieren kann.
-    \item U06: Als Praxismitarbeiter möchte ich eine Rückmeldung erhalten, wenn eine Benachrichtigung nicht versendet werden kann, damit Benachrichtigungen nicht verloren gehen.
-    \item U07: Als Praxismitarbeiter möchte ich auswählen können an welchem Gerät ich das Praxisrufsystem verwende und die dafür erstellte Konfiguration erhalten, damit das Praxisrufsystem optimal verwendet werden kann.
-    \item U12: Als Praxisverantwortlicher möchte ich mehrere Geräte verwalten können, damit das Praxisrufsystem in mehreren Zimmern gleichzeitig genutzt werden kann.
-    \item U13: Als Praxisverantwortlicher möchte ich definieren können welches Gerät, welche Anfragen versenden kann, damit jedes Gerät Verwendungsort optimiert ist.
-    \item U14: Als Praxisverantwortlicher möchte ich die Konfiguration des Praxisrufsystems zentral verwalten können, damit das Praxisrufsystem für die Anwender optimiert werden kann.
-    \item T01: Als Auftraggeber möchte ich, dass das Praxisrufsystem über IPads bedient werden kann, damit ich von bestehender Infrastruktur profitieren kann.
-    \item T02: Als Auftraggeber möchte ich, dass das Praxisrufsystem über Android Tablets bedient werden kann, damit es in Zukunft für eine weitere Zielgruppe verwendet werden kann.
-    \item T03: Als Auftraggeber möchte ich, dass die Codebasis für das Praxisrufsystem für Android und IOS verwendet werden kann, damit ich die Weiterentwicklung optimieren kann.
-    \item T04: Als Auftraggeber möchte ich, dass wo möglich der Betrieb von Serverseitigen Dienstleistungen über AWS betrieben wird, damit ich von bestehender Infrastruktur und Erfahrung profitieren kann.
+    \item U01 - Benachrichtigung versenden
+    \item U02 - Benachrichtigungen empfangen
+    \item U03 - Nur relevante Benachrichtigungen empfangen
+    \item U04 - Auf Benachrichtigungen aufmerksam machen
+    \item U05 - Verpasste Benachrichtigungen anzeigen
+    \item U06 - Fehler beim Versenden von Benachrichtigungen anzeigen
+    \item U07 - Konfiguration auf Mobile Client auswählen
+    \item U12 - Mehrere Mobile Clients konfigurieren
+    \item U13 - Individuelle Konfiguration pro Mobile Client
+    \item U14 - Zentrale Konfigurationsverwaltung
+    \item T01 - Mobile Client unterstützt IPads
+    \item T02 - Mobile Client unterstützt Android Tablets
+    \item T03 - Geteilte Code Basis für Android and IOS
+    \item T04 - Betrieb mit AWS
 \end{itemize}
 
-\subsubsection{Abgrenzung}
-
-Die folgenden User Stories konnten im Rahmen des Projektes nicht realisiert werden:
+Die Milestones M06 bis M10 konnten im Rahmen dieses Projektes nicht umgesetzt werden.
+Damit sind folgende User Stories ausserhalb des Projektrahmens gefallen:
 
 \begin{itemize}
-    \item U08: Als Praxismitarbeiter möchte ich einen physischen Knopf am Behandlungsstuhl haben damit ich notifikationen darüber versenden kann.
-    \item U09: Als Praxismitarbeiter möchte ich, dass mir Benachrichtigungen vorgelesen werden, damit ich informiert werde, ohne meine Arbeit unterbrechen zu müssen.
-    \item U10: Als Praxismitarbeiter möchte ich einen anderen Client Unterhaltungen führen können damit Fragen direkt geklärt werden können.
-    \item U11: Als Praxismitarbeiter möchte ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können damit komplexe Fragen direkt geklärt werden können.
-    \item U15: Als Praxisverantwortlicher möchte ich definieren können, welche Geräte mit welchen anderen Geräten telefonieren können damit meinen Mitarbeitern das Arbeiten erleichtere.
-    \item U16: Als Praxisverantwortlicher möchte ich definieren können, welche Benachrichtigung über einen physischen Knopf am Behandlungsstuhl versendet wird damit der Knopf für den Mitarbeiter optimiert ist.
+    \item U08 - Physicher Knopf am Behandlungsstuhl
+    \item U09 - Text To Speech für Benachrichtigungen
+    \item U10 - Direkte Unterhaltungen zwischen Mobile Clients
+    \item U11 - Gruppenunterhaltungen zwischen Mobile Clients
+    \item U15 - Konfiguration von direkten Anrufen
+    \item U16 - Konfiguration von Gruppenanrufen
 \end{itemize}
 
-
-Abweichungen vom Konzept
+\clearpage
 \begin{itemize}
     \item Die Gegensprechanlage ist komplett Weggefallen.
     \subitem Grundsätzlich Stünde eine Lib. für IOS in NS zur Verfügung. Der Android Teil ist da noch "TODO"
