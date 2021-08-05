@@ -1,0 +1,47 @@
+\subsubsection*{Benutzertests}
+
+\subsubsection*{Testablauf}
+
+Am xx.Juli 2021 wurden zusammen mit dem Auftraggeber Benutzertests durchgeführt.
+Dazu wurde der Mobile Client auf in physisches Ipad installiert.
+Zusätzlich wurde eine Mobile Client Instanz auf einem Emulator gestartet.
+Der Cloud Service sowie das Admin UI wurden mit Amazon Webservices deployed.
+Ein Firebase Messaging Service wurde angebunden.
+
+\begin{enumerate}
+    \item Client 1 im Admin UI anlegen und Benutzer 1 zuweisen.
+    \item Client 2 im Admin UI anlegen und Benutzer 1 zuweisen.
+    \item Einen neuen Notification Type im Admin UI anlegen
+    \item Eine Client Configuration für Client 1 erstellen und darauf den erfassten Notification Type setzen.
+    \item Eine Client Configuration für Client 2 erstellen und Regel Parameter erfassen, das alle Benachrichtigungen von Client 1 empfangen werden sollen.
+    \item Mobile Client auf Ipad starten
+    \item Auf Ipad mit Benutzer 1 anmelden.
+    \item Auf Ipad Client 2 auswählen.
+    \item Mobile CLient auf Emulator starten.
+    \item Auf Emulator mit Benutzer 1 anmelden.
+    \item Auf Emulator Client 1 auswählen.
+    \item Auf Emulator Benachrichtigung auslösen.
+\end{enumerate}
+
+Ale Ergebnis wird erwartet, dass die Benachrichtigung auf dem physischen Ipad ankommt und angezeigt wird.
+Schritte x bis y werden mit minimiertem Mobile Client wiederholt.
+Dabei wird erwartet dass eine Push Benachrichtigung angezeigt wird.
+
+Mehr oder frühere Benutzertests konnten aufgrund der COVID Situation leider nicht durchgeführt werden.
+
+\subsubsection*{Feedback vom Benutzer}
+
+Als Feedback vom Kunden haben wir zwei weitere Funktionswünsche erhalten:
+
+\begin{itemize}
+    \item Wenn Benachrichtigungen eingehen sollte ein Audiosignal ertönen.
+    \item Wenn Benachrichtigungen nicht quittiert werden, soll ein Erinnerungston ertönen.
+    \item Wenn Benachrichtigungen quittiert werden, soll der Versender darüber informiert werden.
+\end{itemize}
+
+Um diesen Wünschen Gerecht zu werden, wurden die Szenarien S07 und S09 hinzugefügt.
+Diese Anforderungen konnten auch noch umgesetzt werden.
+Der dritte Wunsch des Kunden, die Quittierung von Benachrichtungen an den Sender weitergeleitet wird konnte aus zeitlichen Gründen nicht mehr umgesetzt werden.
+
+\clearpage
+

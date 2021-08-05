@@ -92,7 +92,7 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 \subsubsection*{F01 - Benachrichtigungen Versenden}
 \begin{tabbing}
     Left \= Middle \= Right \kill
-    Scenario: \> \> Benachrichtigung versenden\\ \\
+    Scenario S01: \> \> Benachrichtigung versenden\\ \\
     Given:  \> \> Benutzer ist vollständig angemeldet\\
     And:    \> \> Mindestens 1 Empfänger ist konfiguriert\\
     When:  \> \> Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
@@ -102,7 +102,7 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
     And:    \> \> Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde\\
 
     \\
-    Scenario: \> \> Keine Empfänger konfiguriert\\ \\
+    Scenario S02: \> \> Keine Empfänger konfiguriert\\ \\
     Given:  \> \>  Benutzer ist vollständig angemeldet\\
     And:  \> \>    Kein Empfänger ist konfiguriert\\
     When:  \> \>   Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
@@ -116,7 +116,7 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 \begin{tabbing}
     Left \= Middle \= Right \kill
 
-    Scenario:  \> \> Empfangen\\ \\
+    Scenario S03:  \> \> Empfangen\\ \\
     Given:  \> \>  Eine Benachrichtigung wurde von Mobile Client versendet\\
     When:  \> \>   Cloud Service Notification an Empfänger Mobile Client weiterleitet\\
     Then:  \> \>   Wird die Benachrichtigung vom Empfänger Mobile Client empfangen\\
@@ -129,7 +129,7 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 
 \begin{tabbing}
     Left \= Middle \= Right \kill
-    Scenario: \> \>  Fehler Rückmeldung\\ \\
+    Scenario S04: \> \>  Fehler Rückmeldung\\ \\
     Given: \> \>   Eine Benachrichtigung wurde von Mobile Client versendet\\
     When: \> \>    Weiterleitung von Cloud Service Notification an Empfänger schlägt auf Service Seite fehl\\
     Then: \> \>    Der Praxismitarbeiter wird über den Fehler Informiert\\
@@ -153,18 +153,18 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 \subsubsection*{F04 - Über Benachrichtigungen Notifizieren}
 \begin{tabbing}
     Left \= Middle \= Right \kill
-    Scenario: \> \>  Foreground\\ \\
+    Scenario S05: \> \>  Foreground\\ \\
     Given: \> \>   Mobile Client ist geöffnet\\
     When: \> \>    Eine Benachrichtigung wird vom Mobile Client emfpangen\\
     Then: \> \>    Ein Audio Signal erklingt\\
     \\
-    Scenario: \> \>  Background\\ \\
+    Scenario S06: \> \>  Background\\ \\
     Given: \> \>   Mobile Client läuft im Hintergrund\\
     When: \> \>    Eine Benachrichtigung wird vom Mobile Client empfangen\\
     Then: \> \>    Ein Audio Signal erklingt\\
     And: \> \>     Eine Push Benachrichtigung wird angezeigt\\
     \\
-    Scenario: \> \>  Nicht Quittiert\\ \\
+    Scenario S07: \> \>  Nicht Quittiert\\ \\
     Given: \> \>   Mobile Client ist geöffnet\\
     And: \> \>     Eine Benachrichtigung wurde empfangen\\
     When: \> \>    Benachrichtigung wird nicht quittiert\\
@@ -177,32 +177,32 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 \subsubsection*{F05 - Login Mobile Client}
 \begin{tabbing}
     Left \= Middle \= Right \kill
-    Scenario: \> \>  Startbildschirm wenn nicht angemeldet\\ \\
+    Scenario S08: \> \>  Startbildschirm wenn nicht angemeldet\\ \\
     Given: \> \>   Mobile Client is geöffnet\\
     When: \> \>  Benutzer ist nicht angemeldet\\
     Then: \> \>  Benutzer wird zum Login aufgefordert\\
     \\
-    Scenario: \> \>  Startbildschirm wenn angemeldet\\ \\
+    Scenario S09: \> \>  Startbildschirm wenn angemeldet\\ \\
     Given: \> \>   Mobile Client is geöffnet\\
     When: \> \>  Benutzer ist angemeldet\\
     Then: \> \>  Konfiguration die der Benutzer zuletzt gewählt hat wird angezeigt\\
     And: \> \>    Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\
     \\
-    Scenario: \> \>  Anmelden korrekt\\ \\
+    Scenario S10: \> \>  Anmelden korrekt\\ \\
     Given: \> \>  Benutzer ist nicht angemeldet\\
     And: \> \>    Login Screen wird angezeigt\\
     And: \> \>     Für den Benutzer sind gültige Konfigurationen erfasst\\
     When: \> \>   Benutzer meldet sich mit korrekten Daten an\\
     Then: \> \>   Benutzer wird auf nächste Seite geleitet und kann dort die Konfiguration auswählen, die er Benutzen möchte.\\
     \\
-    Scenario: \> \>  Anmelden falsch\\ \\
+    Scenario S11: \> \>  Anmelden falsch\\ \\
     Given: \> \>  Benutzer ist nicht angemeldet\\
     And: \> \>    Login Screen wird angezeigt\\
     When: \> \>   Benutzer meldet sich mit falschen Daten an\\
     Then: \> \>   Fehlermeldung\\
     And: \> \>  Benutzer wird nicht weitergeleitet\\
     \\
-    Scenario: \> \>  Konfiguration Wählen\\ \\
+    Scenario S12: \> \>  Konfiguration Wählen\\ \\
     Given: \> \>  Benutzer hat sich korrekt angemeldet\\
     And: \> \>    Konfiguration Auswählen Screen wird angezeigt\\
     When: \> \>   Der Benutzer wählt die gewünschte Konfiguration\\
@@ -211,7 +211,7 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
     And: \> \>    Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\ \\
 
 
-    Scenario:  \> \> Logout\\ \\
+    Scenario S13:  \> \> Logout\\ \\
     Given: \> \>  Benutzer ist angemeldet\\
     When: \> \>   Benutzer klickt logout\\
     Then: \> \>  Benutzer wird zur Login Seite weitergeleitet\\
@@ -222,20 +222,20 @@ Aufgrund der User Stories werden anschliessend Features definiert, welche konkre
 \subsubsection*{F06 - Konfigurationsverwaltung}
 \begin{tabbing}
     Left \= Middle \= Right \kill
-    Scenario: \> \>  Login\\ \\
+    Scenario S14: \> \>  Login\\ \\
     Given: \> \>  Benutzer ist nicht angemeldet\\
     And: \> \>    Admin UI Login Screen wird angezeigt\\
     When: \> \>   Admin meldet sich mit korrekten Daten an\\
     Then: \> \>   Admin wird auf Übersichtsseite weitergeleitet\\ \\
 
-    Scenario: \> \>  Anmelden falsch\\ \\
+    Scenario S15: \> \>  Anmelden falsch\\ \\
     Given: \> \>  Benutzer ist nicht angemeldet\\
     And: \> \>    Admin UI Login Screen wird angezeigt\\
     When: \> \>   Admin meldet sich mit falschen Daten an\\
     Then: \> \>   Fehlermeldung wird angezeigt\\
     And: \> \>   Admin wird nicht weitergeleitet.\\ \\
 
-    Scenario: \> \>  Konfiguration verwalten \\ \\
+    Scenario S16: \> \>  Konfiguration verwalten \\ \\
     Given: \> \>  Admin ist angemeldet\\
     When: \> \>  Admin UI wird aufgerufen\\
     Then: \> \>  Alle existierenden Konfigurationen werden angezeigt\\
