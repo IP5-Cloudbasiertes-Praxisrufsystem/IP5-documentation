@@ -1,43 +1,58 @@
 \subsection{Herausforderungen}
 
-\subsubsection*{Subscription System}
+\subsubsection*{Cloud Service}
+
+Eine grosse Herausforderung war das Konzept für den Cloud Service.
+Dieser musste ein konfigurierbares Subscription System bieten über den die Mobile Clients Benachrichtigungen versenden können.
+Bedingung dafür war dass, individuell Regeln konfiguriert werden können die an unterschiedlichen Bedingungen prüfen, welche Benachrichtigungen für welche Clients relevant sind.
+Dabei ist es wichtig, dass das Konzept es ermöglicht in Zukunft mit geringen Aufwand weitere Regeln zu implementieren.
 
 \subsubsection*{IOS Entwicklung}
 
-\begin{itemize}
-    \item Keine Erfahrung mit Mobile Development
-    \item IOS Recherche viel aufwändiger als erwartet.
-    \item Nativescript aufwändiger zu gebrauchen als erwartet.
-\end{itemize}
+Eine weitere Herausforderung im Projekt war die Entwicklung und Konzeptierung des Mobile Clients.
+Wir haben beide keine vrogägngige Erfahrung der Entwicklung von Mobilen Applikationen für Android oder IOs.
+Dementsprechend mussten wir teilweise mehr Aufwand in Recherche und Entwicklung stecken als erwartet.
+Hinzu kam, dass die Recherche für die zu Verwendenden Technologien im Mobile CLient sich als aufwändiger als erwartet dargestellt hat.
+Dies insbesondere wegen der Bedingung, dass die gleiche Code Basis für Andorid und IOS verwendet werden kann und den Hindernissen die IOS für die meisten solchen Frameworks bietet.
+Insbesondere haben es Einschränkungen für Background Aktivitäten \textbf{TODO: CITATION} und andere Barrieren im IOS Betriebssystem schwer gemacht, Messaging Services anzubinden und Push Benachrichtigungen zu versenden.
+Wegen diesen Barrieren waren viele der Ansätze die wir als passend und effizient gewertet haben schlicht keine Option.
+
+In der Umsetzung war das wenig anders.
+Mit der gewählten Technologie Native Script konnten wir eine getilete Code Basis haben.
+Allerdings musste die Entwicklungsumgebung schlussendlich genauso aufgesetzt werden wie es für die native Entwicklung nötig gewesen wäre.
+Vom Effizienzgewinn den Nativescroipt in längeren Projekten bieten könnte, konnten wir deshalb nicht profitieren.
+Die Interaktion zwischen Nativesktipt und dem IOS funktioniert über plugins. \textbf{TODO: CITATION}
+Es gibt für fast alle Funktionen plugins.
+Diese sind aber oft unvollständig implementiert oder funktionieren nur mit spezifischen Versionen von NativeSkript / IOS.
+
 
 \subsubsection*{AWS Infrastruktur}
 
-\begin{itemize}
-    \item AWS vielseitig
-    \item Erfahrung fehlt grundätzlich
-    \item Erfahrung fehlt mit AWS
-\end{itemize}
+Ein weiterer grosser Zeitfresser war das Aufsetzen der AWS Infrastruktur.
+Es war uns so schlussendlich Möglich die ganze Infrastruktur die benötigt wurde aufzusetzen.
+Da wir beide wenig bis keine Erfahrung mit dem Aufsetzen von Cloud INfrastrukturen und CI/CD Pipelines haben, hat das allerdings eine Weile gedauert.
+AWS bietet für alles Funktionen die wir benötigt haben ausführliche Dokumentation.
+Das hat die UMsetzung deutlich vereinfacht.
+Die Hürde das Ganze zuv erstehenund Umzusetzen musste trotzdem zuerst einmal genommen werden.
+Insbesondere das Aufsetzen von Elastik Beanstalk mit einem Vorgestchalteten Load Balancer und HTTPS Konfiguration sowie die Anbindung an eine Relationale Datenbank hat viel Zeit gekostet.
+
+\clearpage
 
 \subsubsection*{API Konzept}
 
-\begin{itemize}
-    \item Mehr testing, viel Mehr Testing.
-    \item Refactoring kostet Zeit, kanns aber wert sein.
-\end{itemize}
+Zum Anfang der Konzept Pahse wurde zu wenig Zeit für das planen der API nach aussen umgesetztn.
+Es wurde zuerst alles als ein einzelner Endpunkt dargestellt.
+Intern gab e snur zwei Services für die Logik.
+Die auszuführende Logik war insbesondere dank des Admin UIs umfassender als zuerst geplant.
+Dementsprechend musste die API aufgeteilt werden, um die Weiterentwicklung und Wartbarkeit des Projektes zu gewähren.
+Diese Umstellung hat allerdings wieder Zeit gebraucht.
+
 
 \subsubsection*{Projektplanung}
 
-\begin{itemize}
-    \item Dokumentation fehlt komplett in der Planung
-    \item Stärkerer Roter Faden von Anfang an hätte geholfen
-    \item Mehr testing, viel Mehr Testing.
-    \item Refactoring kostet Zeit, kanns aber wert sein.
-\end{itemize}
-
-\begin{itemize}
-    \item Die Gegensprechanlage ist komplett Weggefallen.
-    \subitem Grundsätzlich Stünde eine Lib. für IOS in NS zur Verfügung.
-    \item Die Rückfärbung der Buttons auf Grün ist weggefallen da der Handshake so nicht implmentiert wurde.
-\end{itemize}g
+Geplant war, dass die Milestones aus der Projektplanung als Roten Faden durch das Projekt führen.
+Der agile Ansatz hat geholfen, das wir immer wussten, was als nächstes zu tun ist.
+Eine leicht feingranularere Planung von Anfang an, hätte aber geholfen besser einzuorden, wie wir im Projektplan stehen.
+So hätte man früher sehen können für was es nicht reicht entsprechende Massnahmen ergreifen können.
 
 \clearpage
