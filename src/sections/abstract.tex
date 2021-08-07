@@ -1,16 +1,23 @@
-\begin{abstract}
-Das Abstract ist eine Art Zusammenfassung des ganzen Dokuments. Es gibt einen Einblick in die Aufgabenstellung, wie diese umgesetzt wurde und welches Ergebnis erreicht wurde. Aus diesem Grund wird das Abstract immer ganz am Schluss der Arbeit verfasst. Es besteht aus einem zusammengehörenden Absatz und umfasst ungefähr 10 bis 20 Zeilen.
-Formeln, Referenzen oder andere Unterbrechungen haben im Text nichts zu suchen.
-Direkt unter dem Abstract folgt eine Liste von drei bis vier Stichworten/Keywords. Diese werden in alphabetischer Reihenfolge aufgelistet und beschreiben das Themengebiet der Arbeit.
+\section*{Zusammenfassung}
 
-\vspace{2ex}
+Ärzte und Zahnärzte haben den Anspruch in Ihren Praxen ein Rufsystem einzusetzen.
+Dieses Rufsystem ermöglicht, dass der behandelnde Arzt über einen Knopfdruck Hilfe anfordern oder Behandlungsmaterial bestellen kann.
+Heute kommerziell erhältlichen Rufsysteme beruhen meistens auf proprietären Standards und setzen veraltete Technologie zur Signalübermittlung ein. TODO: \cite{TODO}
+Die Problemstellung für dieses Projekt besteht darin, ein modernes, leicht konfigurierbares Praxisrufsystem umzusetzen.
+Das Rufsystem soll mit Mobilen Endgeräten (IPads und Android Tablets) bedient werden können und auf modernen cloudbasierten Technologien aufbauen.
+In diesem Projekt wurde ein Konzept erarbeitet, wie ein solches Rufsystem zum Versenden von Benachrichtigungen auf Knopfdruck umgesetzt werden kann.
+Dieses Konzept wurde mit drei Applikationen umgesetzt.
+Eine Mobile Applikation die auf dem Endgerät in der Praxis verwendet wird, eine Web Applikation zur Konfiguration des Rufsystens
+und ein cloudbasierter Backend Service, welcher die Konfiguration des Systems persistent verwaltet und zwischen den Anfragen zwischen den Endgeräten vermittelt.
+Um die Endgeräte über eingehende Benachrichtigungen zu informieren wurde mit Firebase Messaging ein externer Messaging Service angebunden.
+Das Umgesetzte System bietet nun die Möglichkeit ein Praxisrufsystem mit mehreren Mobilgeräten als Endgeräte zu betreiben.
+Es kann pro Endgerät konfiguriert werden, welche Benachrichtigungen das Gerät versenden kann und jedes Gerät zeigt genau nur die Benachrichtigungen an, die es versenden kann.
+Weiter kann pro Endgerät definiert werden, welche Benachrichtigungen das Gerät empfangen möchte.
+Welche Benachrichtigungen relevant sind, kann entweder anhand des Senders oder des Typs der Benachrichtigung eingestellt werden.
 
-\textbf{Keywords: Anleitung, LaTeX, Thesis, Vorlage}
 
-\vspace{2ex}
 
-\textbf{Management Summary} siehe PF-IK.
-
-\end{abstract}	
+\clearpage
+\section*{Management Summary}
 
 \clearpage
