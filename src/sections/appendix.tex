@@ -38,6 +38,7 @@
 
         \begin{enumerate}
             \item Mobile Client Applikation öffnen
+            \item Anmeldedaten eingeben und bestätigen
             \item Gewünschte Konfiguration auswählen
         \end{enumerate}
 
@@ -67,10 +68,65 @@
             \item Logout bestätigen
         \end{enumerate}
 
+        \subsubsection*{Admin UI}
+
+        \textbf{Anmeldung}
+
+        \begin{enumerate}
+            \item Admin UI im Browser öffnen
+            \item Anmeldedaten eingeben und bestätigen. Die Anmeldedaten erhalten Sie nach Installation des Systems vom Betreiber.
+        \end{enumerate}
+
+        \textbf{Einträge hinzufügen}
+        \begin{enumerate}
+            \item Melden Sie sich im Admin UI an.
+            \item Wählen Sie auf der Linken Seite die Kategorie die Sie verwalten möchten.
+            \item Auf dieser Seite können Sie nun Einträge zur gewählten Kategorie verwalten:
+            \item \begin{itemize}
+                      \item Klicken Sie oben rechts auf die Schaltfläche "Create" um einen neuen Eintrag zu erstellen.
+                      \item Klicken Sie auf einen Eintrag in der Liste um ihn zu bearbeiten.
+                      \item Klicken Sie die Checkbox auf der Linken Seite eines Eintrages und dann auf die Schaltfläche "löschen" um einen Eintrag zu löschen.
+            \end{itemize}
+        \end{enumerate}
+
+        \textbf{Praxisruf konfigurieren}
+        \begin{enumerate}
+            \item Melden Sie sich im Admin UI an.
+            \item Erfassen Sie in der Kategorie "User" pro Praxiszimmer einen Benutzer.
+            \item Erfassen Sie in der Kategorie "Client" pro Gerät und Zimmer einen Eintrag und weisen Sie ihn dem Benutzer des entsprechenden Zimmers zu.
+            \item Erfassen Sie in der Kategorie "Notification Types" alle Benachrichtigungen die Sie zur Verfügung stellen möchten.
+            \item Erfassen Sie in der Kategorie "Configurations" pro Gerät und Zimmer einen Eintrag und weisen es dem entsprechenden Client zu.
+            \item Unter Notification Types können die Benachrichtigungen auswählen, die auf diesem Gerät zum Versenden verfügbar sind.
+            \item Unter Rule Parameters können Sie Regeln definieren, welche Benachrichtigungen diesem Client zugestellt werden.
+        \end{enumerate}
+
+    \subsection{Installationsanleitung}
+
+    \subsubsection*{Mobile Client}
+        \textbf{TODO}
+        ?? Cloud Service url configuration \\
+        ?? FCM Integration configuration \\
+
+    \subsubsection*{Admin UI}
+    \begin{enumerate}
+        \item Setup Amplify
+        \item Setup Domain
+    \end{enumerate}
+
+    \subsubsection*{Cloud Service}
+
+        \begin{enumerate}
+            \item Setup FCM
+            \item Setup Beanstalk
+            \item Pipeline
+            \item Setupt RDS
+            \item Setup Domain
+            \item Setup EB
+            \item Configure Environment
+            \item Create administrator
+        \end{enumerate}
 
 
-\subsubsection*{Admin UI}
-
-    \subsection{Betriebshandbuch}
     \subsection{Entwicklerdokumentation}
+
     \subsection{Ehrlichkeitserklärung}
