@@ -22,8 +22,6 @@ Abhängigkeiten zwischen den beiden Domänen sind zu vermeiden.
 An den Stellen wo Informationen aus der anderen Domäne nötig sind, sollen diese über ein Rest Interface abgefragt werden.
 So kann die Applikation in Zukunft einfach und auf die tatsächlichen Bedürfnisse zugeschnitten in mehrere Microservices aufgeteilt werden.
 
-\clearpage
-
 \subsubsection*{Service Architektur}
 
 Der Cloud Service wird nach dem Prinzip von Onion Architecture / Clean Architecture aufgebaut.
@@ -55,8 +53,6 @@ Dies beinhaltet Repository Services und Rest Controllers.
 \textbf{Infrastructure}
 Veranschaulicht die Infrastruktur ausserhalb des Systems.
 Dies beinhaltet unter anderem Datenbanken, Messaging Services und Applikationen die auf Web APIs welche der Applikation zugreifen.
-
-\clearpage
 
 \subsubsection*{Package Struktur}
 
@@ -193,10 +189,6 @@ Der Zugriff auf die einzelnen Strategies innerhalb der RulesEngine wird über ei
 Diese Factory kennt alle existierenden RuleEvaluator Instanzen und bietet eine öffentliche Methode, über welche der RuleEvaluator für einen bestimmten Typ geladen werden kann.
 Über die Dependency Injection des Spring Frameworks, kann diese RuleEvaluatorFactory einfach und erweiterbar implementiert werden:
 
-
-
-\clearpage
-
 \lstinputlisting[caption=RuleEvaluatorFactory.java,language=java,label={lst:RuleEvaluatorFactory.java}]{listings/RuleEvaluatorFactory.java}
 
 Über den @Autowired Konstruktor nimmt die Factory eine Liste des Types RuleEvaluator entgegen.
@@ -207,11 +199,7 @@ Werden in der Zukunft weitere RuleTypes unterstützt, reicht es die entsprechend
 Der neue RuleEvaluator wird danach automatisch über dei RuleEvaluatorFactory verfügbar sein.
 Anpassungen an der RulesEngine oder der RuleEvaluatorFactory sind nicht nötig.
 
-
-\clearpage
 \subsubsection*{Domäne Notification}
-
-Hier gehts darum Benachrichtigungen zu versenden.
 
 \begin{figure}[h]
     \centering
@@ -385,10 +373,8 @@ Jeder dieser Kontroller bietet eine API zu Verwaltung dieses Domänenobjekts, we
 \end{table}
 
 Eine Ausnahme bildet hier das Domänenobjekt Registration.
-Die Registrierung darf nie manuell von einem Administrator erfasst werden.
-Sie muss immer von einem Mobile Client her kommen der sich beim Cloud Service registriert oder de-registriert.
-Lesender Zugriff auf die Registrierungen ist nur nötig, wenn der Cloud Service eine Benachrichtigung versendet und die Messaging Tokens der relevanten Empfänger laden muss.
-Dementsprechend bietet der RegistrationController nicht die volle Verwaltungs API sondern nur folgendes Subset:
+Registrations werden von einem Mobile Client im hintergrund erstellt oder aktualisiert und beim versenden von Benachrichtigungen vom Cloud Service geladen.
+Sie werden nie manuell verwaltet und bieten dementsprechend nur eine eingeschränkte API:
 
 \begin{table}[h]
     \centering
@@ -400,30 +386,15 @@ Dementsprechend bietet der RegistrationController nicht die volle Verwaltungs AP
         \hline
         Registrierung entfernen         & DELETE & /api/registrations/ & ClientId & - \\
         \hline
-        Relevante Registrierung finden         & Post & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
+        Relevante Registrierung finden         & POST & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
         \hline
     \end{tabular}\label{tab:registrationsapimethods}
 \end{table}
 
 \clearpage
+\subsubsection*{Benachrichtigungen}
 
-\subsubsection*{Authentifizierung}
-\begin{figure}[h]
-    \centering
-    \label{fig:authSequence}
-    \includegraphics[width=0.5\textwidth]{graphics/Authentication-export}\caption[Authentifizierung-Sequenz]{Authentifizierung-Sequenz}
-\end{figure}
-
-\clearpage
-
-\subsubsection*{Fachliches}
-
-Weiter gibt es Operationen welche eine fachliche Handlung darstellen die nicht der Verwaltung von Konfigurationen dienen.
-Die API für diese Operationen folgen dem folgenden Schema:
-
-/api/entity-name/action-name
-
-Der Cloud Service bietet die folgenden fachlichen Endpunkte an:
+Zum Versenden von Benachrichtigungen bietet der Cloud Service folgende Endpunkte an:
 
 \begin{table}[h]
     \centering
@@ -439,3 +410,13 @@ Der Cloud Service bietet die folgenden fachlichen Endpunkte an:
 \end{table}
 
 \clearpage
+
+\subsubsection*{Authentifizierung}
+\begin{figure}[h]
+    \centering
+    \label{fig:authSequence}
+    \includegraphics[width=0.5\textwidth]{graphics/Authentication-export}\caption[Authentifizierung-Sequenz]{Authentifizierung-Sequenz}
+\end{figure}
+
+\clearpage
+
