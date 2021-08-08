@@ -1,13 +1,11 @@
 \subsubsection{Cloud Service}
 
 Der Cloud Service wurde wie im Konzept beschrieben umgesetzt.
-Er dient dazu die Konfiguration des Praxisrufsystems persistent zu verwalten und Benachrichtigungen von Mobile CLients entgegenzunehmen und gemäss Konfiguration über den angebundenen Message Service an andere Mobile Clients zu weiterzuleiten.
+Er dient dazu die Konfiguration des Praxisrufsystems persistent zu verwalten und Benachrichtigungen von Mobile Clients entgegenzunehmen, um sie gemäss Konfiguration über den angebundenen Message Service an andere Mobile Clients zu weiterzuleiten.
 
-Um diese Aufgaben zu erfüllen, bietet der Cloud Service eine REST API unter www.praxisruf.ch/api an.
-Diese API ist unter www.praxisruf.ch/api erreichbar und über Baisic Authentication geschützt.
-
-Zu Test- und Entwicklungszwecken ist die API zudem über www.praxisruf.ch/swagger-ui.html erreichbar.
-Das Swagger Interface dokumentiert die API die der Cloud Service anbietet.
+Um diese Aufgaben zu erfüllen, bietet der Cloud Service eine REST API an, welche die benötigten Funktionen zugänglich macht.
+Die umgesetzte API ist unter \url{https://www.praxisruf.ch/swagger-ui.html} dokumentiert.
+Die zugehörige Open API definition ist zudem zusammen mit dem Quellcode des Cloud Services abgelegt\footnote{Siehe Anhang B}.
 Dies Beinhaltet die verfügbaren Endpunkte und das Model welches für Input und Ouput Werte dieser API dienen.
 
 \begin{figure}[h]
