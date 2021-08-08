@@ -3,28 +3,27 @@
 
 \subsubsection{Architektur}
 
-\subsubsection*{Überblick}
-
 Der Cloud Service wird in die zwei Domänen Notification und Configuration aufgeteilt.
-Dabei ist die Domäne Notification für das Versenden von Benachrichtigungen zuständig.
-Die Domäne Configuration ist für die Verwaltung der Konfigurationen und Subscriptions verantwortlich.
-Die Domäne Notification benötigt zum Versenden von Benachrichtigungen Informationen, die aus der Domäne Configuration stammen.
-Grundsätzlich braucht sie dazu aber nur ein kleines Subset dieser Informationen.
-Sobald identifiziert ist, an wen eine Benachrichtigung gesendet werden soll und wie dieser Client erreicht werden kann, funktioniert das Versenden der Benachrichtigung komplett unabhängig von der Domäne Configuration.
+Dabei ist die Domäne Notification für das Versenden von Benachrichtigungen
+und die Domäne Configuration für die Verwaltung und Auswertung der Konfigurationen verantwortlich.
+Zwischen den beiden Domänen besteht eine gerichtete Abhängigkeit.
+Die Domäne Notification benötigt zum Versenden von Benachrichtigungen Informationen aus der Configuration Domäne.
+Das Identifizieren der relevanten Empfänger geschieht in der Configuration Domäne.
+Dementsprechend benötigt die Notification Domäne beim Versenden und die Information an welche Empfänger die Benachrichtigung versendet werden soll.
+Als Identifikation ist hier der technische Identifikator des Clients beim Messaging Service ausreichend.
 
-Da die beiden Domänen nicht eng gekoppelt sind, wäre es denkbar die Domänenspezifische Logik in zwei separate Microservices aufzuteilen.
+Durch die klare Trennung der Verantwortungsbereiche der beiden Domains, wäre es möglich diese in einzelne Microservices aufzuteilen.
+Dies würde das Skalieren der Applikationen vereinfachen.
 Die Aufteilung auf mehrere Microservices macht das System als ganzes aber direkt komplizierter.
 Insbesondere Betrieb und Entwicklung wird aufwändiger, da diese Arbeiten nun über mehrere Applikationen verteilt sind.
 Für den Umfang dieser Arbeit wird deshalb darauf verzichtet, den Cloud Service als echtes Micro Service System umzusetzen.
-Der Cloud Service wird in als eine einzelne Spring Boot Applikation umgesetzt.
-Innerhalb dieser Applikation sollen die Domänen Configuration und Notification wo immer mit vertretbarem Aufwand möchlich, getrennt bleiben.
+Der Cloud Service wird als eine einzelne Spring Boot Applikation umgesetzt.
+Innerhalb dieser Applikation sollen die Domänen Configuration und Notification allerdings, wo immer mit vertretbarem Aufwand möglich, getrennt bleiben.
 Abhängigkeiten zwischen den beiden Domänen sind zu vermeiden.
 An den Stellen wo Informationen aus der anderen Domäne nötig sind, sollen diese über ein Rest Interface abgefragt werden.
 So kann die Applikation in Zukunft einfach und auf die tatsächlichen Bedürfnisse zugeschnitten in mehrere Microservices aufgeteilt werden.
 
-\subsubsection*{Service Architektur}
-
-Der Cloud Service wird nach dem Prinzip von Onion Architecture / Clean Architecture aufgebaut.
+Um einfache Erweiterbarkeit zu gewährleisten, wird der Cloud Service wird nach dem Prinzip von Onion Architecture aufgebaut.
 
 \begin{figure}[h]
     \centering
@@ -54,9 +53,8 @@ Dies beinhaltet Repository Services und Rest Controllers.
 Veranschaulicht die Infrastruktur ausserhalb des Systems.
 Dies beinhaltet unter anderem Datenbanken, Messaging Services und Applikationen die auf Web APIs welche der Applikation zugreifen.
 
-\subsubsection*{Package Struktur}
-
-Der Cloud Service definiert die folgenden top level Packages:
+Da auf die Aufteilung in Microservices für den Rahmen dieses Projektes verzichtet wird, muss sich diese Architektur innerhalb des Services wiederspiegeln.
+Dies soll durch die Aufteilung der Package Struktur geschehen.
 
 \begin{figure}[h]
     \centering
