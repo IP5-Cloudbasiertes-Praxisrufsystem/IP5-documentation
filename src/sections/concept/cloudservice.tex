@@ -73,33 +73,26 @@ Dies soll durch die Aufteilung der Package Struktur geschehen.
     \end{minipage}
 \end{figure}
 
-
-
 Im Zentrum steht das Package \textbf{domain}.
 Es beinhaltet alle Domänenobjekte und stellt damit alleine den Domain Layer dar.
 
 Das Package \textbf{api} definiert Interfaces für sämtliche Domain Services.
-Es beinhaltet weiter Data Transition Objects (DTOs), welche verwendet werden um Daten ausserhalb der Domain (UI oder andere Domain) abzubilden.
-Es beinhaltet zudem Exceptions welche für den Cloud Service definiert werden.
+Es beinhaltet zudem Data Transition Objects (DTO), welche verwendet werden, um Daten nach aussen abzubilden.
+sowie Exceptions welche für den Cloud Service definiert werden.
 
-Das Package \textbf{persistence} beinhaltet Services welche für Interaktion mit der Datenbank verwendet werden und  gehört zum Application Services Layer.
+Das Package \textbf{persistence} definiert Services welche für Interaktion mit der Datenbank verwendet werden und gehört zum Application Services Layer.
 
-Das Package \textbf{service} beinhaltet die Services welche das Verhalten der Applikation modellieren und entspricht dem Domain Service Layer.
+Das Package \textbf{service} implementiert die Services, welche im api Package vorgegeben sind und entspricht dem Domain Service Layer.
 
-Das Package \textbf{web} beinhaltet die Controller welche REST Endpoints anbieten, sowie Clients die verwendet werden um andere REST Endpoints zu konsumieren.
+Das Package \textbf{web} definiert die REST Endpunkte, welche die Applikation nach aussen anbietet,
+sowie Clients die verwendet werden, um andere Systeme anzusprechen.
 Es gehört zum Application Services Layer.
 
 Das Package \textbf{config} beinhaltet technische Konfiguration der Applikation.
 
-
 \clearpage
 
-\subsubsection{Domänenmodell}
-
-Wie in Kapitel 4.3.1 beschrieben, teilt sich der Cloud Service in die zwei Domänenbereiche Notification und Configuration auf.
-Im Folgenden wird detailliert beschrieben, wie diese Domänen aufgebaut sind.
-
-\subsubsection*{Domäne Configuration}
+\subsubsection{Domäne Configuration}
 
 \begin{figure}[h]
     \centering
@@ -111,22 +104,22 @@ Im Folgenden wird detailliert beschrieben, wie diese Domänen aufgebaut sind.
 
 \textbf{PraxisUser}
 Ein Benutzer für das Praxisrufsystem.
-Jeder Benutzer kann entweder die Rolel Admin oder User haben.
-Admin ist für Admin UI (Praxisverantwortlicher).
-User ist für Mobile Client (Praxismitarbeiter) Nutzer.
+Jeder Benutzer kann die Rollen Admin oder User haben.
+Ein Benutzer mit der Rolle Admin hat Recht die Konfiguration über das Admin UI zu verwalten.
+Ein Benutzer mit der Rolle User ist berechtigt, den Mobile Client zu verwenden.
 
 \textbf{Client}
-Ein Client repräsentiert ein Gerät auf welchem der Mobile Client läuft.
+Clients repräsentieren ein Endgeräte, auf welchen die Mobile Client Applikation läuft.
 
 \textbf{Registration}
-Die Registrierung eines Clients beinhaltet die Informationen die vom Messaging Service verwendet werden können um diesem spezifischen Client eine Benachrichtigung zu stellen.
-Ein Client kann nie mehrere Registrierungen haben.
+Die Registrierung eines Clients beinhaltet die technische Identifikation, mit der ein Client sich beim Messaging Service registriert hat.
+Ein Client kann immer nur genau eine Registration haben.
 
 \textbf{ClientConfiguration}
 Stellt die Konfiguration eines Clients dar.
-Die Beziehung von Client zu ClientConfiguration ist immer 1:1.
+Die ClientConiguration beinhaltet die Informationen, welche Benachrichtigung ein Client versenden kann und welche Benachrichtigungen er empfangen soll.
 Client und ClientConfiguration sind getrennt, damit Clients auch ohne Configuration erfasst werden können.
-So kann der Administrator die Geräte die er hat von Anfang an erfassen aber ers nach und nach die Konfigurationen dazu erstellen.
+So kann der Administrator bereits Geräte im System erfassen ohne Sie vollständig zu konfigurieren.
 
 \textbf{NotificationType}
 Der NotificationType ist die Grundlage für Notifications die versendet werden.
@@ -134,15 +127,12 @@ Der NotificationType definiert Informationen für den Inhalt von Benachrichtigun
 Er beinhaltet weiter Schlüssel für Texte die in einem Client angezeigt werden können.
 
 \textbf{RuleParameters}
-RuleParameters sind die parameterisierten Werte für eine Regel.
-Sie werden pro ClientConfiguration erfasst.
-Sie werden von der RulesEngine ausgewertet um zu identifizieren ob ein Client sich für eine gegebene Benachrichtigung interessiert.
+RuleParameters werden pro ClientConfiguration erfasst.
+Die konfigurierten RuleParameters werden von der RulesEngine ausgewertet, um relevante Empfänger für eine Benachrichtigung zu finden.
 
 \textbf{RuleType}
-Der RuleType bestimmt wie die Parameter für eine Regel (siehe RulePrameters) ausgewertet werden.
+Der RuleType bestimmt wie die Parameter für eine Regel ausgewertet werden.
 Für jeden Eintrag in der Tabelle RuleType muss es eine Implementierung des Interfaces RuleEvaluator geben, welche die RulesParameter Werte für den Regeltyp auswerten kann.
-
-\subsubsection*{Configuration Services}
 
 \begin{figure}[h]
     \centering
@@ -152,19 +142,20 @@ Für jeden Eintrag in der Tabelle RuleType muss es eine Implementierung des Inte
     \end{minipage}
 \end{figure}
 
-Abbildung 4.6 zeigt die Interfaces für Services welche es in der Configuration Domäne gibt.
-ClientConfigurationService, ClientService, NotificationTypeService, RegistrationService und UserService bieten Create, Read, Update und Delete Methoden für das jeweilige Domänenobjekt an.
-Diese Methoden sind zu Verwaltungszwecken über eine REST-API ansprechbar. Siehe Kapitel xy (API).
-
+Die Configuration Domäne beinhaltet Services zum Lesen, Erstellen, Ändern und Löschen der Domänenobjekte.
+Diese Verwaltungsfunktionen werden über eine RESTful Web-API exponiert. \footnote{Siehe Kapitel 5.3.4}
 Der RegistrationService bietet dabei eine Ausnahme.
-Der RegistrationService bietet Methoden um Registrierungen zu erfassen und wieder zu löschen.
-Er bietet zudem die Möglichkeit anhand einer gegebenen Notification zu identifizieren, welche der registrierten Clients sich für diese Notification interessieren.
+Er bietet die Funktionen, Registrierungen zu erfassen und aktualisieren.
+Diese werden verwendet, wenn sich ein Mobile Client beim Cloud Service registriert.
+Er bietet zudem die Möglichkeit die Identifikation (Token) aller relevanten Empfänger für eine gegebene Benachrichtigung zu finden.
 Diese Auswertungen werden mithilfe der RulesEngine gemacht.
-Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluators und findet alle relevanten tokens. Siehe Kapitel Rules Engine.
+Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluators und findet alle relevanten Einträge.
 
-\clearpage
-\subsubsection*{Rules Engine}
-
+Die RulesEngine ermöglicht es dem Cloud Service festzustellen, welche Benachrichtigungen an welche Clients versendet werden sollen.
+Die RulesEngine selbst bietet dazu eine einzelne öffentliche Methode.
+Diese nimmt eine Liste von Regelparametern (RulesParameters) und eine Notification entgegen.
+Zurückgegeben wird ein Boolean wert, der sagt ob mindestens eine der übergebenen Regelparameter für die Benachrichtigung relevant ist.
+Da jeder aktive Client eine ClientConfiguration definiert, die eine Liste an Regelparametern beinhaltet kann so mit der RulesEngine bewertet werden, ob ein bestimmter Client sich für eine Benachrichtigung interessiert.
 
 \begin{figure}[h]
     \centering
@@ -173,12 +164,6 @@ Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluator
         \caption{Klassendiagramm Rules Engine}
     \end{minipage}
 \end{figure}
-
-Die RulesEngine ermöglicht es dem Cloud Service festzustellen, welche Benachrichtigungen an welche Clients versendet werden sollen.
-Die RulesEngine selbst bietet dazu eine einzelne öffentliche Methode.
-Diese nimmt eine Liste von Regelparametern (RulesParameters) und eine Notification entgegen.
-Zurückgegeben wird ein Boolean wert, der sagt ob mindestens eine der übergebenen Regelparameter für die Benachrichtigung relevant ist.
-Da jeder aktive Client eine ClientConfiguration definiert, die eine Liste an Regelparametern beinhaltet kann so mit der RulesEngine bewertet werden, ob ein bestimmter Client sich für eine Benachrichtigung interessiert.
 
 Die Auswertung der einzelnen Regelparameter innerhalb der RulesEngine wird an einzelne RuleEvaluatoren delegiert.
 Umgesetzt wird dieses Konzept mit einem Stragegy Pattern.
@@ -197,7 +182,8 @@ Werden in der Zukunft weitere RuleTypes unterstützt, reicht es die entsprechend
 Der neue RuleEvaluator wird danach automatisch über dei RuleEvaluatorFactory verfügbar sein.
 Anpassungen an der RulesEngine oder der RuleEvaluatorFactory sind nicht nötig.
 
-\subsubsection*{Domäne Notification}
+\clearpage
+\subsubsection{Domäne Notification}
 
 \begin{figure}[h]
     \centering
@@ -217,10 +203,6 @@ Für jeden Empfänger an den versucht wird eine Notification zu versenden, wird 
 Dient der Nachvollziehbarkeit.
 Ermöglicht das Wiederholen von fehlgeschlagenen.
 
-\clearpage
-
-\subsubsection*{Services Notification}
-
 \begin{figure}[h]
     \centering
     \begin{minipage}[b]{0.9\textwidth}
@@ -228,7 +210,6 @@ Ermöglicht das Wiederholen von fehlgeschlagenen.
         \caption{Klassendiagramm Notification Service Interfaces}
     \end{minipage}
 \end{figure}
-
 
 Der \textbf{NotificationService} bietet Methoden um eine Notifikation zu versenden und zu wiederholen.
 Für das initiale Versenden werden die Informationen benötigt um eine Notifikation zu erstellen.
