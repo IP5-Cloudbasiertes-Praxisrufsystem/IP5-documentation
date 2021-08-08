@@ -1,0 +1,49 @@
+\subsection{Fazit}
+
+In diesem Kapitel werden die zentralen Herausforderungen während der Projektarbeit und die Schlussfolgerungen die wir daraus ziehen beschrieben.
+
+Die grösste Herausforderung im Projekt waren Entwicklung und Konzept des Mobile Clients mit einer geteilten Codebasis für IOS und Android.
+Die Recherchen und Tests in diesem Bereich haben deutlich mehr Zeit in Anspruch genommen, als ursprünglich geplant.
+Mit der gewählten Technologie Native Script konnten die Anforderungen and den Mobile Client schlussendlich umgesetzt werden.
+Grosse Teile des Mobile Clients konnten für Android und IOS gleichzeitig umgesetzt werden.
+An den Stellen wo die Applikation mit dem Betriebssystem interagieren muss, müssen aber Unterschiede gemacht werden und Betriebssystemspezifische Plugins verwendet werden.
+Die Dokumentation des Frameworks zeigt, das es eine Vielzahl von Plugins gibt und somit fast alle Funktionen die eine native Applikation bietet auch mit Native Script umgesetzt werden können.
+Während der Entwicklung mussten wir jedoch feststellen, dass diese Anbindungen in der Praxis oft nicht wie erwartet funktionieren.
+Entweder, weil Plugins unvollständig dokumentiert und implementiert sind oder, weil ein Plugin nur mit einer spezifischen Version von Nativescript oder IOS funktioniert.
+Dies zeigt, dass eine geteilte Codebasis für mehrere Plattformen Zeit bei der Entwicklung und Wartung sparen kann.
+Sie bringt aber den Nachteil, dass die Applikation komplizierter wird, weil trotzdem oft zwischen den unterstützten Betriebssystemen unterschieden werden muss.
+Weiter erschwert es die Verwendung von Betriebssystemfunktionen und Gerätehardware, da diese für alle Betriebssystem abstrahiert werden müssen.
+Schlussendlich bringt dies eine zusätzliche Schicht in die Architektur die bei Änderungen am Betriebssystem und am Framework änderungen benötigt.
+Dies erhöht den Wartungsaufwand deutlich und kann langfristig Probleme für die Kompatibilität mit dem Betriebssystem verursachen.
+
+Wir schliessen daraus, dass eine geteilte Basis vor allem bei Applikationen die keine oder nur wenig Interaktion mit dem Betriebssystem benötigen, einen Vorteil bietet.
+Sobald aber kritische Teile der Applikation mit Betriebssystemnahen Funktionen zusammenhängen, empfehlen wir mehrere native Applikationen zu entwickeln.
+Der Nachteil, dass Funktionen doppelt implementiert werden müssen wird durch bessere Zukunftssicherheit und einfachere Anbindung an das Betriebssystem aufgehoben.
+
+Eine weitere Herausforderung war das Konzept für den Cloud Service zu erstellen.
+Dieser musste ein konfigurierbares Subscription System bieten über den die Mobile Clients Benachrichtigungen versenden und empfangen können.
+Bedingung dafür war dass, individuell Regeln konfiguriert werden können die an unterschiedlichen Bedingungen prüfen, welche Benachrichtigungen für welche Clients relevant sind.
+Dabei ist es wichtig, dass das Konzept es ermöglicht in Zukunft mit geringem Aufwand weitere Regeln zu implementieren.
+Neben dem Regelwerk für Benachrichtigungen, war auch die Erweiterbarkeit und Skalierbarkeit des Cloud Services als Ganzes eine Herausforderung.
+Anfänglich sind wir davon ausgegangen, dass sich der Cloud Service als einfache Appliaktion mit einem Endpunkt für Konfiguration und einem Endpunkt für Benachrichtigungen umsetzen lässt.
+Die Entwicklungs- und Konzeptphase haben aber gezeigt, dass es auch innerhalb der Domänen eine saubere Aufteilung braucht.
+Dementsprechend musste die API aufgeteilt werden, um die Weiterentwicklung und Wartbarkeit des Projektes zu gewähren.
+Das Aufsetzten der Entwicklungs- und Betriebsstruktur mit Amazon Webservices hat ebenfalls deutlich mehr Zeit als geplant in Anspruch genommen.
+Diese Projektarbeit hat gezeigt, das AWS alle nötigen Mittel bietet, um ein cloudbasiertes Praxisrufsystem zu betreiben.
+Damit dies effizient umgesetzt werden kann ist es aber essenziell, ein Konzept zu erstellen, welches die benötigten Dienste und Konfigurationen beschreibt.
+Das Installationshandbuch im Anhang kann als Vorlage für ein solches Konzept dienen\footnote{Siehe Anhang D}.
+
+Wir haben gelernt, dass es zentral ist alle Konzepte bei Projektstart zu erstellen.
+Die Konzepte müssen dabei nicht von Anfang an ausgereift sein.
+Sie dienen aber als Startpunkt und Orientierungshilfe im Projekt.
+Dabei ist es wichtig, dass auch Betriebsinfrastruktur, Skalierbarkait und Erweiterbarkeit von Anfang an bedacht werden.
+
+Die letzte Herausforderung, die hier erwähnt werden soll, betrifft das Erarbeiten der Anforderungen.
+Die Anforderungen und Prioritäten laufend mit dem Auftraggeber zu besprechen hat für die Projektarbeit immer klare nächste Ziele gegeben.
+Da nicht alle Anforderungen bei Projektanfang vollständig definiert wurden, war es teilweise schwer den aktuellen Stand des Projektes einzuordnen.
+
+Für weitere Projekte in diesem Rahmen empfehlen wir, alle relevanten Anforderungen bei Projektstart so detailliert wie möglich zu erarbeiten.
+Diese Anforderungen können im Projektverlauf regelmässig besprochen, priorisiert und wenn nötig angepasst werden.
+Dadurch ist es einfacher den Fortschritt des Projekts zu evaluieren und trotzdem möglich schnell auf neue Erkenntnisse zu reagieren.
+
+\clearpage
