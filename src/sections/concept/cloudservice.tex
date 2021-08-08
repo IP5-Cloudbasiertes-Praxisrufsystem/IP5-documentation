@@ -201,7 +201,6 @@ Dies ermöglicht einzelne Benachrichtigungen die nicht versendet werden konnten 
 Nach dem eine Benachrichtigung als PraxisNotification persistiert wurde, wird sie an die Empfänger versendet.
 Dabei wird für jeden Empfänger ein SendNotificationProcess erstellt.
 Dieser SendNotificationProcess beinhaltet eine Referenz auf die versendete Benachrichtigung und den Status des Sendeprozesses.
-Der Status wird dabei vor und nach dem Versenden aktualisiert.
 Dies ermöglicht es, eine Benachrichtigung nur für die Empfänger zu wiederholen, für die der Versand fehlgeschlagen ist.
 
 \begin{figure}[h]
@@ -230,7 +229,7 @@ Im Folgenden werden die Abläufe für die Registrierung von Mobile Clients sowie
 
 \subsubsection*{Client Registration}
 
-Vorbedingung: Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
+Vorbedingung: Es wurde mindestens ein Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
 
 \begin{figure}[h]
     \centering
@@ -243,17 +242,20 @@ Vorbedingung: Es wurde mindestens in Client inklusive ClientConfiguration erfass
 In einem ersten Schritt muss sich der Praxismitarbeiter am Mobile Client anmelden.
 Hat er gültige Benutzerdaten angegeben, werden Informationen zu allen verfügbaren Konfigurationen vom Cloud Service geladen und der Benutzer kann die gewünschte Konfiguration auswählen.
 Dabei werden nur Name und Id der Konfigurationen geladen, damit nicht mehr Daten als nötig übertragen werden.
-Sobald eine Konfiguration ausgewählt ist, werden alle dafür Konfigurierten NotificationTypes geladen und im UI die entsprechenden Buttons erstellt.
-Sobald eine Konfiguration geladen ist, registriert sich der Mobile Client beim Messageing Service.
+Der Benutzer wählt darauf die gewünschte Konfiguration.
+Sobald die Konfiguration ausgewählt ist, werden alle dafür Konfigurierten NotificationTypes geladen und im UI die entsprechenden Buttons erstellt.
+Direkt nach dem Laden der Konfiguration registriert sich der Mobile Client beim Messageing Service.
 Als Antwort erhält er ein eindeutiges Token, welches verwendet werden kann, um an diesem Client Nachrichten zu senden.
-Der Mobile Client Registriert sich schliesslich mit dem Token vom Messaging Service und der ausgewählten Konfiguration beim Cloud Service.
-In diesem Zustand ist der Client dem Messaging Service und dem Cloud Service bekannt und ist bereit Benachrichtigungen zu empfangen.
+Anschliessend registriert sich der Mobile Client mit dem erhaltenen Token und der ausgewählten Konfiguration beim Cloud Service.
+In diesem Zustand ist der Client bei Messaging Service und Cloud Service registriert und bereit Benachrichtigungen zu empfangen.
 
 \clearpage
 
 \subsubsection*{Benachrichtigung versenden und empfangen}
 
-Vorbedingung: Client Registrierung ist für 2 Clients abgeschlossen. Es bestehen gültige Subscriber Configs. Konfiguration ist geladen.
+Vorbedingung:
+Konfiguration und Registrierung gemäss Abbildung 5.14 ist für zwei Clients ist abgeschlossen.
+Konfiguration ist einer der Clients konfiguriert, Benachrichtigungen vom anderen Client zu empfangen.
 
 \begin{figure}[h]
     \centering
@@ -263,33 +265,38 @@ Vorbedingung: Client Registrierung ist für 2 Clients abgeschlossen. Es bestehen
     \end{minipage}
 \end{figure}
 
-Der Benutzer tippt auf einen der Benachrichtigungsbuttons.
-Pro Button ist die Id des verbundenen NotificationTypes hinterlegt.
-Es wird nun eine Anfrage an den NotificationController im Cloud Service gesendet.
-Darin enthalten sind die Id des Absender Clients und die Id des NotificationTypes.
-Der NotificationController macht eine Anfrage an den ConfigurationController um alle relevanten empfänger zu finden.
-Im ConfigurationController werden alle konfigurierten ClientConfigurations nach Subscriber Regeln evaluiert.
-Der ConfigurationController gibt schliesslich eine Liste der Registrations zurück die zu einer ClientConfiguration gehören für die eine der Konfigurierten Regeln zugetroffen hat.
-Der NotificationController lädt den NotificationType aus der Send-Anfrage und benutzt diese Daten um eine Benachrichtigung an alle Empfänger für die er gerade Registrations geladen hat zu senden.
-Der NotificationController meldet zurück, ob der Versand an alle Empfänger funktioniert hat.
-Ist dies nicht der Fall wird der Retry-Process auf Client Seite gestartet.
+Nachdem der Benutzer das Versenden einer Benachrichtigung auslöst, wird eine Anfrage an den NotificationController im Cloud Service gesendet.
+Darin enthalten sind die Id des Senders sowie die Id des NotificationTypes.
+Der NotificationController macht in der Folge eine Anfrage an den ConfigurationController, um alle relevanten Empfänger zu finden.
+Im ConfigurationController werden die erfassten RuleParameters aller konfigurierten ClientConfigurations ausgewertet.
+Darauf wird eine Liste der Registrations relevanter Empfänger zurückgegeben.
+Sobald die Empfänger geladen sind, erstellt der NotificationController eine Benachrichtigung aus dem gegebenen NotificationType.
+Diese Benachrichtigung wird als PraxisNotification persistiert und anschliessned
+mit den geladenen Registrierungen an den Messaging Service gesendet, welcher die Zustellung an die entsprechenden Clients übernimmt.
+Nach dem Übermitteln an den Messaging Service wird pro Empfänger ein NotificationSendProzess erstellt der den Status für diesen Empfänger dokumentiert.
+Der NotificationController sender darauf eine Antwort zurück.
+Diese Antwort beinhaltet die technische Id der versendeten Benachrichtigung und das Resultat ob die Benachrichtigung an alle Empfänger versendet werden konnte.
+Ist dies nicht der Fall, wird der Retry-Process auf Client Seite gestartet.
+
+Auf Empfängerseite wird, sobald die Benachrichtigung verarbeitet und angezeigt sobald die Zustellung durch den Messaging Service erfolgt ist.
+Diese Zustellung erfolgt asynchron.
+Kann der Sender nur informiert werden, wenn die Zustellung an den Messaging Service fehlgeschlagen ist.
 
 \clearpage
 \subsubsection*{Benachrichtigung wiederholen}
 
-Vorbedingung: Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
-Es wurde ein zweiter Client inklusive ClientConfiguration erfasst.
-Der zweite Client wurde so konfiguriert, dass er Benachrichtigungen die vom ersten Client empfängt.
-Beide Clients laufen und haben sich bei Messaging Service sowie Cloud Service registriert.
-Der Sender Client hat eine Benachrichtung versendet.
-Das Versenden an mindestens einen Client aus dem Cloud Service ist fehlgeschlagen und der Cloud Service gibt ein negatives SendNotificationResult zurück.
+Vorbedingung:
+Konfiguration und Registrierung gemäss Abbildung 5.14 ist für zwei Clients ist abgeschlossen.
+Konfiguration ist einer der Clients konfiguriert, Benachrichtigungen vom anderen Client zu empfangen.
+Es wurde eine Benachrichtigung gemäss Abbildung 5.15 versendet.
+Dabei ist das Versenden an mindestens einen Client fehlgeschlagen und der Cloud Service hat ein negatives SendNotificationResult zurückgegeben.
 
-
-Der Client zeigt einen Dialog an in dem der Benutzer informiert wird und gefragt wird, ob er die Fehlgeschlagenen wiederholen möchte.
-Bestätigt der Benutzer wird eine Retry-Anfrage an den NotificationController gesendet.
-Parameter ist die technische id der Notification die fehlgeschlagen ist.
-NotificationController durchsucht die NotificationSendProcess tabelle nach der gegebenen id und filtert auf fehlgeschlagene.
-Anschliessend wird der send prozess anhand der tokens in dieser NotificationSendProcess Instanzen wiederholt.
+Nach dem Erhalt des negativen Resultats zeigt der Mobile Client einen Dialog an.
+Dieser Dialog informiert den Benutzer über den Fehler und fragt an, ob die fehlgeschlagenen Benachrichtigungen wiederholt werden sollen.
+Bestätigt der Benutzer wird diese Anfrage, wird eine Anfrage an den NotificationController gesendet um das Versenden zu wiederholen.
+Diese Anfrage beinhaltet die technische Id der fehlgeschlagenen Benachrichtigung.
+NotificationController durchsucht die NotificationSendProcess Tabelle nach der gegebenen id und filtert auf fehlgeschlagene.
+Anschliessend wird der SendProcess anhand der Tokens in dieser NotificationSendProcess Instanzen wiederholt.
 
 \begin{figure}[h]
     \centering
@@ -303,8 +310,6 @@ Anschliessend wird der send prozess anhand der tokens in dieser NotificationSend
 \clearpage
 
 \subsubsection{API}
-
-\subsubsection*{Verwaltung}
 
 Um die Verwaltung der Konfigurationen zu ermöglichen, bietet der Cloud Service eine REST-API an über die Konfigurationsobjekte verwaltet werden können.
 Der Cloud Service bietet Verwaltungs APIs für die Folgenden Domänenobjekte:
@@ -329,63 +334,54 @@ Der Cloud Service bietet Verwaltungs APIs für die Folgenden Domänenobjekte:
 Für jedes dieser Domänenobjekte ist ein dedizierter Endpoint definiert, der unter dem Subpfad /api/entity-name erreichbar ist.
 Jeder dieser Kontroller bietet eine API zu Verwaltung dieses Domänenobjekts, welche dem folgenden Schema folgt:
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|l|l|l|l|l|}
-        \hline
-        \textbf{Action} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
-        \hline
-            Alle Elemente lesen         & GET & /api/entity-name & - & [EntityDto] \\
-        \hline
-            Einzelnes Element lesen         & GET & /api/entity-name/id & - & EntityDto \\
-        \hline
-            Neues Element erstellen         & POST & /api/entity-name  & EntityDto & EntityDto\\
-        \hline
-            Bestehendes Element ändern          & PUT & /api/entity-name  & EntityDto & EntityDto\\
-        \hline
-            Einzelnes Element löschen          & DELETE & /api/entity-name/id  & - & -  \\
-        \hline
-            Mehrere Elemente löschen          & DELETE & /api/entity-name/ids  & - & - \\
-        \hline
-    \end{tabular}\label{tab:apimethods}
-\end{table}
+\begin{tabular}{|p{7.3cm}|l|l|l|l|}
+    \hline
+    \textbf{Action} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+    \hline
+        Alle Elemente lesen         & GET & /api/entity-name & - & [EntityDto] \\
+    \hline
+        Einzelnes Element lesen         & GET & /api/entity-name/id & - & EntityDto \\
+    \hline
+        Neues Element erstellen         & POST & /api/entity-name  & EntityDto & EntityDto\\
+    \hline
+        Bestehendes Element ändern          & PUT & /api/entity-name  & EntityDto & EntityDto\\
+    \hline
+        Einzelnes Element löschen          & DELETE & /api/entity-name/id  & - & -  \\
+    \hline
+        Mehrere Elemente löschen          & DELETE & /api/entity-name/ids  & - & - \\
+    \hline
+\end{tabular}\label{tab:apimethods}
 
-Eine Ausnahme bildet hier das Domänenobjekt Registration.
-Registrations werden von einem Mobile Client im hintergrund erstellt oder aktualisiert und beim versenden von Benachrichtigungen vom Cloud Service geladen.
-Sie werden nie manuell verwaltet und bieten dementsprechend nur eine eingeschränkte API:
+Eine Ausnahme, bildet hier das Domänenobjekt Registration.
+Hier wird wird analog zum Domänenservice für Registrations\footnote{Siehe Kapitel 5.3.2} folgende API angeboten:
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|l|l|l|l|l|}
-        \hline
-        \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
-        \hline
-        Registrierung aktualisiern         & POST & /api/registrations/ & ClientId, Messaging Token & - \\
-        \hline
-        Registrierung entfernen         & DELETE & /api/registrations/ & ClientId & - \\
-        \hline
-        Relevante Registrierung finden         & POST & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
-        \hline
-    \end{tabular}\label{tab:registrationsapimethods}
-\end{table}
+\begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+    \hline
+    Registrierung aktualisiern         & POST & /api/registrations/ & ClientId, Token & - \\
+    \hline
+    Registrierung entfernen         & DELETE & /api/registrations/ & ClientId & - \\
+    \hline
+    Relevante Registrierung finden         & POST & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
+    \hline
+\end{tabular}\label{tab:registrationsapimethods}
 
-\clearpage
 \subsubsection*{Benachrichtigungen}
 
 Zum Versenden von Benachrichtigungen bietet der Cloud Service folgende Endpunkte an:
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|l|l|l|l|l|}
-        \hline
-        \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
-        \hline
-        Notifikation versenden         & POST & /api/notifications/send & NotificationDto & NotificationSendResult \\
-        \hline
-        Notifikation wiederholen        & POST & /api/notifications/retry & Notification Id  & NotificationSendResult \\
-        \hline
-    \end{tabular}\label{tab:notificationapimethods}
-\end{table}
+\begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+    \hline
+    Registrierung aktualisiern         & POST & /api/registrations/ & ClientId, Token & - \\
+    \hline
+    Registrierung entfernen         & DELETE & /api/registrations/ & ClientId & - \\
+    \hline
+    Relevante Registrierung finden         & POST & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
+    \hline
+\end{tabular}\label{tab:registrationsapimethodss}
 
 \clearpage
 
