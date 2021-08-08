@@ -151,10 +151,10 @@ Er bietet zudem die Möglichkeit die Identifikation (Token) aller relevanten Emp
 Diese Auswertungen werden mithilfe der RulesEngine gemacht.
 Die RulesEngine bewertet die erfassten RulesParameter mithilfe der RuleEvaluators und findet alle relevanten Einträge.
 
-Die RulesEngine ermöglicht es dem Cloud Service festzustellen, welche Benachrichtigungen an welche Clients versendet werden sollen.
-Die RulesEngine selbst bietet dazu eine einzelne öffentliche Methode.
+Die RulesEngine ermöglicht es, dem Cloud Service festzustellen, welche Benachrichtigungen an welche Clients versendet werden sollen.
+Dazu bietet sie eine einzelne öffentliche Methode.
 Diese nimmt eine Liste von Regelparametern (RulesParameters) und eine Notification entgegen.
-Zurückgegeben wird ein Boolean wert, der sagt ob mindestens eine der übergebenen Regelparameter für die Benachrichtigung relevant ist.
+Zurückgegeben wird ein Boolean Wert, der sagt, ob mindestens eine der übergebenen Regelparameter für die Benachrichtigung relevant ist.
 Da jeder aktive Client eine ClientConfiguration definiert, die eine Liste an Regelparametern beinhaltet kann so mit der RulesEngine bewertet werden, ob ein bestimmter Client sich für eine Benachrichtigung interessiert.
 
 \begin{figure}[h]
@@ -166,8 +166,8 @@ Da jeder aktive Client eine ClientConfiguration definiert, die eine Liste an Reg
 \end{figure}
 
 Die Auswertung der einzelnen Regelparameter innerhalb der RulesEngine wird an einzelne RuleEvaluatoren delegiert.
-Umgesetzt wird dieses Konzept mit einem Stragegy Pattern.
-Wobei das RuleEvaluator Interface das Strategy Interface darstellt.
+Umgesetzt wird dieses Konzept mit einem Strategy Pattern.\footnote{Referece Gamma Design Patterns}
+RuleEvaluator definiert das Strategy Interface.
 Der Zugriff auf die einzelnen Strategies innerhalb der RulesEngine wird über eine RuleEvaluatorFactory gelöst.
 Diese Factory kennt alle existierenden RuleEvaluator Instanzen und bietet eine öffentliche Methode, über welche der RuleEvaluator für einen bestimmten Typ geladen werden kann.
 Über die Dependency Injection des Spring Frameworks, kann diese RuleEvaluatorFactory einfach und erweiterbar implementiert werden:
@@ -176,7 +176,7 @@ Diese Factory kennt alle existierenden RuleEvaluator Instanzen und bietet eine �
 
 Über den @Autowired Konstruktor nimmt die Factory eine Liste des Types RuleEvaluator entgegen.
 Die Spring Dependency Injection wird hier automatisch alle verfügbaren RuleEvaluator Instanzen in einer Liste sammeln und als Konstruktorparameter entgegennehmen.
-Da jeder RuleEvalutaor eine Methode bietet, über die der relevante RuleType abgefragt werden kann, kann nun aus dieser Liste eine Map gebaut werden, die RuleTypes auf die relevanten RuleEvaluator Instanzen mapped.
+Da jeder RuleEvalutor eine Methode bietet, über die der relevante RuleType abgefragt werden kann, kann nun aus dieser Liste eine Map gebaut werden, die RuleTypes auf die relevanten RuleEvaluator Instanzen mapped.
 Das Laden eines RuleEvaluators ahnand des RuleTypes kann nun über ein einfaches Lookup in der Map erfolgen.
 Werden in der Zukunft weitere RuleTypes unterstützt, reicht es die entsprechende RuleEvaluatorFactory zu implementieren.
 Der neue RuleEvaluator wird danach automatisch über dei RuleEvaluatorFactory verfügbar sein.
@@ -195,13 +195,14 @@ Anpassungen an der RulesEngine oder der RuleEvaluatorFactory sind nicht nötig.
 
 \textbf{PraxisNotification}
 Jede Notification die der CloudService erhält wird bereits vor dem Versenden persistiert.
-Dient der Nachvollziehbarkeit.
-Ermöglicht das Wiederholen von fehlgeschlagenen.
+Dies ermöglicht einzelne Benachrichtigungen die nicht versendet werden konnten zu wiederholen.
 
 \textbf{SendNotificationProcess}
-Für jeden Empfänger an den versucht wird eine Notification zu versenden, wird ein SendNotificationProcess erstellt.
-Dient der Nachvollziehbarkeit.
-Ermöglicht das Wiederholen von fehlgeschlagenen.
+Nach dem eine Benachrichtigung als PraxisNotification persistiert wurde, wird sie an die Empfänger versendet.
+Dabei wird für jeden Empfänger ein SendNotificationProcess erstellt.
+Dieser SendNotificationProcess beinhaltet eine Referenz auf die versendete Benachrichtigung und den Status des Sendeprozesses.
+Der Status wird dabei vor und nach dem Versenden aktualisiert.
+Dies ermöglicht es, eine Benachrichtigung nur für die Empfänger zu wiederholen, für die der Versand fehlgeschlagen ist.
 
 \begin{figure}[h]
     \centering
@@ -211,27 +212,33 @@ Ermöglicht das Wiederholen von fehlgeschlagenen.
     \end{minipage}
 \end{figure}
 
-Der \textbf{NotificationService} bietet Methoden um eine Notifikation zu versenden und zu wiederholen.
-Für das initiale Versenden werden die Informationen benötigt um eine Notifikation zu erstellen.
+Der \textbf{NotificationService} bietet Methoden, um eine Notifikation zu versenden und zu wiederholen.
+Für das initiale Versenden werden die Informationen benötigt, um eine Notifikation zu erstellen und die Empfänger zu identifizieren.
 Im Fall der Wiederholung werden diese Informationen nicht mehr benötigt.
-Da die Notifikation beim ersten Versuch sie zu versenden persistiert wurde.
+Da die Notifikation und der Status des Versandprozesses beim ersten Versuch sie zu versenden persistiert wurde.
 
 Der \textbf{NotificationSendProcessService} dient dazu Sendevorgänge zu erstellen und fehlgeschlagene Sendevorgänge zu finden.
 Dies ermöglicht es, eine Notifikation im Fehlerfall zu wiederholen.
 
 Der \textbf{NotificationTestService} dient zu Test und Administrationszwecken.
-Er kann verwendet werden um einem einzelnen Client eine Testnachricht zu senden oder allen Registrierten Clients eine Nachricht zu schicken.
-Die Nachricht die hier versendet wird ist im Cloud Service vorgegeben.
-Sie beinhaltet lediglich Platzhaltertexte und ist nicht konfigurierbar.
+Er kann verwendet werden, um einem einzelnen Client eine Testnachricht zu senden oder allen registrierten Clients eine Nachricht zu schicken.
+Als Benachrichtigung wird dabei immer eine vom Cloud Service definierte Benachrichtigung versendet, welche nur Platzhalterwerte beinhaltet.
 
-\clearpage
 \subsubsection{Laufzeitmodell}
 
-Im Folgenden werden die Abläufe für das Versenden und Empfangen von Benachrichtigungen im Detail definiert.
+Im Folgenden werden die Abläufe für die Registrierung von Mobile Clients sowie das Versenden und Empfangen von Benachrichtigungen im Detail definiert.
 
 \subsubsection*{Client Registration}
 
 Vorbedingung: Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.7\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Register}
+        \caption{Ablauf Registration}
+    \end{minipage}
+\end{figure}
 
 In einem ersten Schritt muss sich der Praxismitarbeiter am Mobile Client anmelden.
 Hat er gültige Benutzerdaten angegeben, werden Informationen zu allen verfügbaren Konfigurationen vom Cloud Service geladen und der Benutzer kann die gewünschte Konfiguration auswählen.
@@ -242,18 +249,19 @@ Als Antwort erhält er ein eindeutiges Token, welches verwendet werden kann, um 
 Der Mobile Client Registriert sich schliesslich mit dem Token vom Messaging Service und der ausgewählten Konfiguration beim Cloud Service.
 In diesem Zustand ist der Client dem Messaging Service und dem Cloud Service bekannt und ist bereit Benachrichtigungen zu empfangen.
 
-\begin{figure}[h]
-    \centering
-    \begin{minipage}[b]{0.9\textwidth}
-        \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Register}
-        \caption{Ablauf Registration}
-    \end{minipage}
-\end{figure}
-
+\clearpage
 
 \subsubsection*{Benachrichtigung versenden und empfangen}
 
-Pre-Condition: Client Registrierung ist für 2 Clients abgeschlossen. Es bestehen gültige Subscriber Configs. Konfiguration ist geladen.
+Vorbedingung: Client Registrierung ist für 2 Clients abgeschlossen. Es bestehen gültige Subscriber Configs. Konfiguration ist geladen.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.9\textwidth}
+        \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Send}
+        \caption{Ablauf Benachrichtigung Senden und Empfangen}
+    \end{minipage}
+\end{figure}
 
 Der Benutzer tippt auf einen der Benachrichtigungsbuttons.
 Pro Button ist die Id des verbundenen NotificationTypes hinterlegt.
@@ -266,19 +274,10 @@ Der NotificationController lädt den NotificationType aus der Send-Anfrage und b
 Der NotificationController meldet zurück, ob der Versand an alle Empfänger funktioniert hat.
 Ist dies nicht der Fall wird der Retry-Process auf Client Seite gestartet.
 
-\begin{figure}[h]
-    \centering
-    \begin{minipage}[b]{0.9\textwidth}
-        \includegraphics[width=\textwidth]{graphics/Sequence_Notification_Send}
-        \caption{Ablauf Benachrichtigung Senden und Empfangen}
-    \end{minipage}
-\end{figure}
-
-
 \clearpage
 \subsubsection*{Benachrichtigung wiederholen}
 
-\textbf{Vorbedingung:} Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
+Vorbedingung: Es wurde mindestens in Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
 Es wurde ein zweiter Client inklusive ClientConfiguration erfasst.
 Der zweite Client wurde so konfiguriert, dass er Benachrichtigungen die vom ersten Client empfängt.
 Beide Clients laufen und haben sich bei Messaging Service sowie Cloud Service registriert.
