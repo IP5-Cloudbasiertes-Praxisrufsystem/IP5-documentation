@@ -2,66 +2,54 @@
 
 Ärzte und Zahnärzte haben den Anspruch in Ihren Praxen ein Rufsystem einzusetzen.
 Dieses Rufsystem ermöglicht, dass der behandelnde Arzt über einen Knopfdruck Hilfe anfordern oder Behandlungsmaterial bestellen kann.
-Heute kommerziell erhältlichen Rufsysteme beruhen meistens auf proprietären Standards und setzen veraltete Technologie zur Signalübermittlung ein. \cite{TODO: Add Citation!}
-Die Problemstellung für dieses Projekt besteht darin, ein modernes, leicht konfigurierbares Praxisrufsystem umzusetzen.
-Das System soll zudem leicht erweiterbar sein.
+Heute kommerziell erhältlichen Rufsysteme beruhen meistens auf proprietären Standards und veralteten Technologien. \footnote{TODO: Add Citation!}
+Die Problemstellung für dieses Projekt besteht darin, ein cloudbasiertes, leicht konfigurierbares und erweiterbares Rufsystem umzusetzen.
 
-In diesem Projekt wurde ein Konzept erarbeitet, wie ein solches Rufsystem zum Versenden von Benachrichtigungen auf Knopfdruck umgesetzt werden kann.
-Das umgesetzte Praxisrufsystem wird vom Endbenutzer auf einer Mobilem Applikation benutzt.
-Vor der verwendung kann und muss das System konfiguriert werden.
-Es muss pro Endgerät definiert werden, welche Benachrichtigungen es versenden kann und welche Benachrichtigungen es empfangen soll.
-
-Nicht umgesetzt wurden die Funktion Benachrichtigungen vorzulesen (Text To Speech) und Gegensprechanlage.
+In diesem Projekt wurde ein Konzept für ein Rufsystem zum Versenden von Benachrichtigungen erarbeitet und umgesetzt.
+Das umgesetzte Praxisrufsystem wird vom Endbenutzer auf einer Mobilen Applikation benutzt.
+Das Rufsystem kann von einem Administrator über eine Web-Oberfläche konfiguriert werden.
+Dabei kann der Administrator pro Endgerät festlegen, welche Benachrichtigungen versendet und empfangen werden sollen.
+Nach der Konfiguration kann der Endbenutzer in der Praxis das Rufsystem auf einem Tablet benutzen.
+Nicht umgesetzt wurden die Funktionen Gegensprechanlage und Text To Speech für Benachrichtigungen .
 Die Kommunikation zwischen den Endgeräten funktioniert ausschliesslich über konfigurierbare Benachrichtigungen.
-
-Das Endprodukt das der Praxismitarbeiter verwenden wird ist eine Mobile Applikation.
-Diese kann für Android und für IOs verwendet werden.
-Die technische Grundlage dafür ist eine einzelne Applikation, die für die jeweilige Plattform separat gebaut wird.
 
 Für das weitere Vorgehen sehen wir die folgenden 3 Optionen:
 
 
 \textbf{1. Praxisruf einsetzten}
 
-Das in diesem Projekt umgesetzte System ist grundsätzlich einsatzbereit.
-Es kann als Praxisrufsystem eingesetzt werden, wenn nur die Funktion konfigurierbare Benachrichtigungen zu versenden benötigt wird.
-Wir würden allerdings von dieser Option abraten.
-Das Abonnieren von Benachrichtigungen kann bereits jetzt eingesetzt werden.
-In der Praxis können aber durchaus kompliziertere Regeln benötigt werden, als das System heute unterstützt.
-Weiter ist die umgesetzte Benutzeroberfläche funktional komplett.
-Im Bereich Benutzerinterface Design und Usability konnte im Rahmen dieses Projektes allerdings nur wenig Arbeit gemacht werden.
-Bevor Praxisruf als Produkt kommerzialisiert wird würden wir empfehlen das UI entsprechend zu optimieren.
-Der grösste Punkt der gegen Option 1 spricht ist allerdings der aktuelle Funktionsumfang von Praxisruf.
+Das umgesetzte Rufsystem unterstützt das konfigurieren, versenden und Empfangen von Benachrichtigungen.
+Zu diesem Zweck könnte es bereits umgesetzt werden.
+Wir raten aber von dieser Option ab.
+Bestehende Rufsysteme bieten of auch eine Funktion als Gegensprechanalge.
+Diese Funktion fehlt dem hier umgesetzten System noch.
+Weiter erlaubt die Konfiguration von Nachrichtenempfang erst sehr einfache Regeln.
+Zur besseren konfigurierbarkeit sollte dieses Regelwerk erst noch erweitert werden.
 
 \textbf{2. Praxisruf weiterentwickeln}
 
-Als zweite Option sehen wir, das System weiterzuentwickeln.
-Dies beinhaltet die Erweiterung der Konfiguration für die Abonnierung von Benachrichtigungen
-sowie das Einbauen von weiteren Funktionen wie Text To Speech und der Gegensprechanlage.
-Aber auch die Weiterentwicklung des Mobile Clients um dem Endbenutzer ein ansprechendes Benutzererlebniss zu bieten.
+Das Praxisrufsystem könnte um die Funktionen Gegensprechanlage und Text To Speech erweitert werden.
+Weiter könnten die verfügbaren Regeln zum Empfangen von Benachrichtigungen ausgebaut werden.
+Da das System bewusst konzipiert wurde, leicht erweiterbar zu sein, können diese Änderungen eingebaut werden.
+Eine Gefahr dabei ist aber die bestehende Mobile Applikation.
+Unsere Erfahrung mit der dafür gewählten Technologie zeigt, dass viele Funktionen nicht für alle Plattformen funktionieren
+oder Einschränkungen bezüglich Kompatibilität bringen.
 
-Der für dieses Projekt vorgegebene Ansatz einer geteilten Codebasis für IOS und Android brint für diese Weiterentwicklung Hindernisse mit sich.
-Design und Weiterentwicklung der Benutzeroberfläche würden mit den aktuell eingesetzten Technologien problemlos funktionieren.
-Die Erweiterung um die Funktionalität der Gegensprechanalge könnte hier aber problematisch werden.
-Grundsätzlich unterstützten die gewählten Technologien diese Funktion zum grössten Teil.
-Die Technologien sind in diesen Punkten aber noch in den Kinderschuhen und wenig ausgereift.
-Viele der Komponenten die dazu verwendet werden müssten sind noch unvollständig implementiert oder haben grosse Einschränkungen bezüglich Kompatibilität.
-
-\clearpage
 \textbf{3. Praxisruf weiterentwickeln (nativ) }
 
-Als dritte Option empfehlen wir das System wie in Option 2 beschrieben weiterzuentwickeln.
-Dabei aber den bestehenden Mobile Client neu als native Applikation zu entwickeln.
-Dies wird im ersten Moment mehr Aufwand bedeuten.
-Es bringt aber den Vorteil von besserer Komaptibilität.
-Solwohl für die bestehenden Funktionalitäten in zukünftigen Versionen der Platformen und insbesondere für die Zugriffe die für die Umsetzung einer Gegensprechanalge zu verwenden sind.
-Wir gehen davon aus, das die Wartung für zwei native Applikationen am Ende nicht grösser sein wird als die Wartung eines geteilten Clients.
+Das Praxisrufsystem könne wie in Option 2 beschrieben weiterentwickelt werden.
+Um Probleme bei der Mobile Applikation zu minimieren, sollte diese als native Applikation neu entwickelt werden.
+Nach dem initialen Aufwand der Migration würde dies die Applikation deutlich zukunftssicherer machen.
+Der Wartungsaufwand wird nach unserer Einschätzung dadurch nicht wachsen.
+Der zusätzliche Aufwand zwei Applikationen zu warten wird dadurch aufgehoben, dass die Anbdingung von Mikrophon, Lautsprecher
+und Gerätebenachrichtigungen deutlich besser unterstützt ist.
 
 \textbf{Empfehlung}
 
-Wir empfehlen für das Weitere Vorgehen die Option 3 zu wählen.
-Wie in der Aufgabenstellung erwähnt, ist die Gegensprechanalge of Teil eines Praxisrufsystem.
-Damit sich das System eine möglichst grossen Vorteil gegenüber bestehenden Systemen bietet würden wir unbedingt empfehlen das System zuerst weiterzuentwickelnd und um die Gegensprechfunktion zu erweitern.
-Für bessere Kompatibilität und Zukunftssicherheit emfpehlen wir, bei dieser Weiterentwicklung den Mobile Client neu als native Applikation zu entwickeln.
+Wir empfehlen deshalb mit der dritten Option fortzufahren.
+Der Mobile Client sollte neu als native Applikation umgesetzt werden um bessere Kompatibilität zu gewähren.
+Das Praxisrufsystem sollte zudem um die fehlenden Funktionen erweitert und weitere Konfigurationsoptionen erweitert werden.
+Sobald das Praxisrufsystem auch diese Funktion unterstützt bietet es denselben Funktionsumfang wie bestehende Lösungen.
+Dabei ist es allerdings leicht konfigurierbar und skalierbar und kann auf die individuellen Bedürfnisse eines Kunden zugeschnitten werden.
 
 \clearpage
