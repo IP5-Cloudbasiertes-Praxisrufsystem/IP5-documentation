@@ -1,7 +1,7 @@
 \subsubsection{Mobile Client}\label{subsec:mobile-client-realisation}
 
 Dieses Kapitel zeigt die umgesetzten Ansichten des Mobile Clients.
-Eine detaillierte Beschreibung, wie der Mobile Client bedient werden kann, befindet sich im Anhang der Projektdokumentation.
+Weitere Informationen zur Bedienung des Mobile Clients sind dem Benutzerhandbuch zu entnehmen\footnote{Siehe Anhang C}.
 
 \subsubsection*{Anmeldung und Konfiguration}
 
@@ -31,14 +31,15 @@ Nachdem die Auswahl erfolgt ist, wird der Benutzer zur Home Seite weitergeleitet
 
 \subsubsection*{Benachrichtigungen versenden}
 
-Im Tab Home der Startseite werden Buttons angezeigt um Benachrichtigungen zu versenden.
-Die Buttons werden hier dynamisch aus der geladenen Konfiguration angezeigt.
-Diese Konfiguration beinhaltet den Text der auf dem Button angezeigt wird sowie den Inhalt der Benachrichtigung versendet wird.
+Im Tab Home der Startseite werden Buttons angezeigt, um Benachrichtigungen zu versenden.
+Die Buttons werden dynamisch aus der geladenen Konfiguration generiert.
+Dabei gibt die Konfiguration den Text vor, der auf dem Button angezeigt wird.
+Der Inhalt der Benachrichtigung, die der Button auslöst, ist in der Konfiguration im Cloud Service hinterlegt.
 
-Klickt der Benutzer auf einen der Buttons wird die entsprechende Benachrichtigung versendet.
-Die Vermittlung, wem diese Benachrichtigung zugestellt wird, liegt bei dem Cloud Service.
-Dieser entscheidet Anhand der registrierten Clients und den vorhanden Konfigurationen, welche Clients Empfänger für diese Benachrichtigung sind.
-Schlägt des Versenden der Benachrichtigung an mindestens einen Empfägner fehl, wird dies dem Benutzer angezeigt.
+Klickt der Benutzer auf einen der Buttons, wird die entsprechende Benachrichtigung versendet.
+Die Vermittlung, an die relevanten Empfänger übernimmt der Cloud Service.
+Dieser entscheidet anhand der vorhandenen Konfiguration, welchen Clients die Benachrichtigung zugestellt wird.
+Schlägt des Versenden der Benachrichtigung an mindestens einen Empfänger fehl, wird dies dem Benutzer angezeigt.
 Er hat dann die Möglichkeit, das Versenden an diese Empfänger wiederholen.
 
 \begin{figure}[h]
@@ -60,13 +61,12 @@ Er hat dann die Möglichkeit, das Versenden an diese Empfänger wiederholen.
 \subsubsection*{Benachrichtigungen empfangen}
 
 Wurde eine Benachrichtigung empfangen, ertönt ein Audio Signal und die Benachrichtigung ist im Tab Inbox auf der Startseite ersichtlich.
-Durch Klick auf einen der Einträge in der Liste, kann der Benutzer die empfangene Benachrichtigung Quittieren.
-Wenn die Inbox Benachrichtigungen enthält die nicht Quittiert wurden, wiederholt der Client im Abstand von X Sekunden das Audiosignal.
+Durch Klick auf einen der Einträge in der Liste, kann der Benutzer die empfangene Benachrichtigung quittieren.
+Wenn die Inbox Benachrichtigungen enthält, die nicht quittiert wurden, wiederholt der Client im Abstand von X Sekunden das Audiosignal.
 Diese Quittierung erfolgt dabei nur lokal auf dem Gerät.
 Der Versender wird nicht über die Quittierung benachrichtigt.
 
-Wurde eine Benachrichtigung im Hintergrund empfangen, wird diese als Push Benachrichtigung auf dem Gerät angezeigt.
-Siehe Abbildung xx.
+Wurde eine Benachrichtigung im Hintergrund empfangen, wird diese als Push-Benachrichtigung auf dem Gerät angezeigt.
 Auch wenn die Benachrichtigung im Hintergrund empfangen wurde, wird diese in der Inbox angezeigt.
 
 \begin{figure}[h]
