@@ -56,19 +56,39 @@
 
 \subsection{Messaging Service}\label{subsec:messaging-eval}
 
-Idee mit Message Broker -> Geht nicht wegen Background Activity Block
-Best Practice: Firebase Messaging -> Das Funktioniert.
+Für das Praxisrufsystem wird ein Dienst benötigt mit dem Benachrichtigungen an eine Mobile Applikation gesendet werden können.
+Als Reaktion auf eine empfangene Benachrichtigung muss es möglich sein, Push-Benachrichtigungen auf dem Gerät anzuzeigen.
+Die Technologie die dazu verwendet wird, muss dabei mit der für den Mobile Client gewählten Technologie kompatibel sein.
+Für den Mobile Client wurde das Native Script Framework ausgewählt.
+Damit sind Push-Benachrichtigungen auf iOS und Android möglich.
+Push-Benachrichtigungen auf iOS sind dabei nur über die Anbindung von Firebase Messaging (FCM) möglich.\cite{nativescript-push}
+
+Um Mobile CLients über Benachrichtigungen zu informieren ist es möglich mit EventSources\cite{event-source} Anfragen von der Serverseite an einen Client zu senden.
+Dies hat allerdings den Nachteil, dass eine Konstante HTTP Verbindung zwischen Client und Server bestehen muss.
+Auf Mobilen Plattformen kann nicht garantiert werden, dass diese Verbindung unbeschränkt lange offen bleibt wenn die Applikation im Hintergrund läuft.
+
+Weiter besteht die Möglichkeit, über einen Messaging Broker Benachrichtigungen an den Mobile Client zu senden.
+Hier besteht allerdings dasselbe Problem.
+Damit Benachrichtigungen auf der Client Seite Empfangen werden können, muss eine Verbindung zum Messaging Broker bestehen.
+Auf Mobilen Plattformen kann nicht garantiert werden, dass diese Verbindung unbeschränkt lange offen bleibt wenn die Applikation im Hintergrund läuft.
+
+Sowohl die Option "EventSources" als auch die Option "Message Broker" haben zudem die Einschränkung, dass sie es nicht ermöglichen Push-Benachrichtigungen anzuzeigen.
+Um dies auf iOS mit Nativescript zu ermöglichen müsste zusätzlich ein Firebase Messaging Service angebunden werden.
+
+FCM ermöglicht es dabei selbst von einem Server Umfeld Benachrichtigungen an Endgeräte zu versenden.\cite{fcm-java}
+Firebase Messaging unterstützt damit die Anforderungen, von einem Cloud Server Benachrichtigungen an einen Mobile Client zu senden und Push-Benachrichtigungen auf dem Gerät anzuzeigen.
+In der Folge wird für das Praxisrufsystem auschliessliche Firebase Messaging als Messaging Service verwendet.
 
 \subsection{Cloud Service}\label{subsec:cloud-service2}
 
-Für die persistente Verwaltung der Konfiguration und Vermittlung zwischen
+Cloud Services die für das Praxisrufsystem nötig sind, werden mit Java und Spring Boot umgesetzt.
+Spring Boot vereinfacht Grundlagenarbeit die zum Aufsetzen eines Backendservices nötig sind und bietet
+gleichzeitig die Werkzeuge die nötig sind um sichere, skalierbare Microservices zu implementieren.\cite{why-spring}
+Spring und Java sind zudem Technologien, mit welchen alle Projektteilnehmer bereits Erfahrung gesammelt haben.
+Diese für die Umsetzung in diesem Projekt zu verwenden, ermöglicht es die nötigen Services noch effizienter umzusetzen
+und den Fokus auf das Technische Konzept sowie die Anforderungsanalyse zu legen.
 
-\url{https://aws.amazon.com/}
+In der Anforderung T04\footnote{Siehe Kapitel 3} ist vorgegeben, dass der Betrieb aller Cloud- und Web-Applikationen mit Amazon Webservices erfolgen muss.
+Mit Elastic Beanstalk von AWS ist die der Betrieb von Java Applikationen auf AWS möglich.\cite{aws-spring-java}
 
-    \url{https://spring.io/projects/spring-boot}
 
-    postgres
-
-\subsection{Betrieb und Platform}\label{subsec:betrieb-und-platform}
-
-In der Anforderung T04 ist vorgegeben, dass der Betrieb aller Cloud- und Web-Applikationen mit Amazon Webservices erfolgen muss.
