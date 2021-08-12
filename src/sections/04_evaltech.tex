@@ -65,12 +65,10 @@ Push-Benachrichtigungen auf iOS sind dabei nur über die Anbindung von Firebase 
 
 Um Mobile CLients über Benachrichtigungen zu informieren ist es möglich mit EventSources\cite{event-source} Anfragen von der Serverseite an einen Client zu senden.
 Dies hat allerdings den Nachteil, dass eine Konstante HTTP Verbindung zwischen Client und Server bestehen muss.
-Auf Mobilen Plattformen kann nicht garantiert werden, dass diese Verbindung unbeschränkt lange offen bleibt wenn die Applikation im Hintergrund läuft.
 
 Weiter besteht die Möglichkeit, über einen Messaging Broker Benachrichtigungen an den Mobile Client zu senden.
 Hier besteht allerdings dasselbe Problem.
-Damit Benachrichtigungen auf der Client Seite Empfangen werden können, muss eine Verbindung zum Messaging Broker bestehen.
-Auf Mobilen Plattformen kann nicht garantiert werden, dass diese Verbindung unbeschränkt lange offen bleibt wenn die Applikation im Hintergrund läuft.
+Damit Benachrichtigungen auf der Client Seite Empfangen werden können, muss eine Verbindung zum Messaging Broker bestehen. //TODO @Kevin: Any Idea how to cite this? I know it's true, but citable source would be nice.
 
 Sowohl die Option "EventSources" als auch die Option "Message Broker" haben zudem die Einschränkung, dass sie es nicht ermöglichen Push-Benachrichtigungen anzuzeigen.
 Um dies auf iOS mit Nativescript zu ermöglichen müsste zusätzlich ein Firebase Messaging Service angebunden werden.
