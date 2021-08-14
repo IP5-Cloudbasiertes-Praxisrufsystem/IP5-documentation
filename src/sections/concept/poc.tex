@@ -62,10 +62,11 @@ Die Kommunikation mit Messaging Service muss funktionieren.
 
 Im Wesentlichen muss der Proof Of Concept beweisen, dass es möglich ist mit den gewählten Technologien Benachrichtigungen zu Versenden und zu Empfangen.
 
-Der Benutzer muss den Mobile Client auf dem IPad öffnen können. Aus dem Mobile Client muss der Benutzer über einen Butten eine Benachrichtigung versenden können.
-Das Versenden dieser Benachrichtigung erfolgt an den Cloud Service.
-Im Rahmen des Proof Of Concept wird eine Benachrichtigung immer an den Sender zurückgesendet. Dabei ist aber wichtig, dass die Benachrichtigung nicht direkt als
-Antwort auf die Versenden-Anfrage geschickt wird. Stattdessen muss das Versenden der Benachrichtigung aus dem Cloud Service über den Message Service erfolgen. .
+Der Benutzer muss den Mobile Client auf dem IPad öffnen können.
+Aus dem Mobile Client muss der Benutzer über einen Button eine Benachrichtigung versenden können.
+Diese Benachrichtigung muss an den Cloud Service übermittelt werden.
+Der Cloud Service muss diese Benachrichtigung über den Messaging Service an einen Empfänger übermitteln.
+Im Rahmen des Proof Of Concept wird eine Benachrichtigung immer an den Sender zurückgesendet.
 
 \begin{figure}[h]
     \centering
@@ -77,10 +78,9 @@ Antwort auf die Versenden-Anfrage geschickt wird. Stattdessen muss das Versenden
 
 \clearpage
 
-
 Wurde eine Benachrichtigung über den Message Service an den Mobile Client versendet, muss diese vom Mobile Client empfangen werden.
-Als Reaktion auf den Empfang der Benachrichtigung, muss der Inhalt der Benachrichtigung im Mobile Client angezeigt werden. Zudem
-muss eine Push Benachrichtigung auf dem Host Gerät erfolgen.
+Als Reaktion auf den Empfang der Benachrichtigung muss der Inhalt der Benachrichtigung im Mobile Client angezeigt werden.
+Zudem muss eine Push-Benachrichtigung auf dem Host Gerät erfolgen.
 
 \begin{figure}[h]
     \centering
