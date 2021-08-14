@@ -2,7 +2,7 @@
 
 \subsection{Mobile Client Evaluation}\label{subsec:mobile-client-eval}
 
-//TODO: @Kevin
+%//TODO: @Kevin
 
 Fliesstext style evaulation. Etwa wie bei messaging service.
 
@@ -90,14 +90,19 @@ Für den Mobile Client wurde das Native Script Framework ausgewählt.
 Damit sind Push-Benachrichtigungen auf iOS und Android möglich.
 Push-Benachrichtigungen auf iOS sind dabei nur über die Anbindung von Firebase Messaging (FCM) möglich.\cite{nativescript-push}
 
-Um Mobile CLients über Benachrichtigungen zu informieren ist es möglich mit EventSources\cite{event-source} Anfragen von der Serverseite an einen Client zu senden.
+Um Mobile Clients über Benachrichtigungen zu informieren ist es möglich mit Event-Sources\cite{event-source} Anfragen von der Serverseite an einen Client zu senden.
 Dies hat allerdings den Nachteil, dass eine Konstante HTTP Verbindung zwischen Client und Server bestehen muss.
 
 Weiter besteht die Möglichkeit, über einen Messaging Broker Benachrichtigungen an den Mobile Client zu senden.
 Hier besteht allerdings dasselbe Problem.
-Damit Benachrichtigungen auf der Client Seite Empfangen werden können, muss eine Verbindung zum Messaging Broker bestehen. //TODO @Kevin: Any Idea how to cite this? I know it's true, but citable source would be nice.
+Damit Benachrichtigungen auf der Client Seite Empfangen werden können, muss eine Verbindung zum Messaging Broker bestehen.
+%//TODO @Kevin: Any Idea how to cite this? I know it's true, but citable source would be nice.
+% According to this Paper: https://www.matse.itc.rwth-aachen.de/dienste/public/show_document.php?id=18763 I would not say it is correct
+% that you need to have an active connection urgently. But using a Messagebroker would be pretty useless since it ist anyways that the
+% Messages has to be sent via FCM. As described by you in the Section below.
+% But dont now how to rephrase right now. Maybe we can talk about it?
 
-Sowohl die Option "EventSources" als auch die Option "Message Broker" haben zudem die Einschränkung, dass sie es nicht ermöglichen Push-Benachrichtigungen anzuzeigen.
+Sowohl die Option ``EventSources'' als auch die Option ``Message Broker'' haben zudem die Einschränkung, dass sie es nicht ermöglichen Push-Benachrichtigungen anzuzeigen.
 Um dies auf iOS mit Nativescript zu ermöglichen müsste zusätzlich ein Firebase Messaging Service angebunden werden.
 
 FCM ermöglicht es dabei selbst von einem Server Umfeld Benachrichtigungen an Endgeräte zu versenden.\cite{fcm-java}
