@@ -1,12 +1,18 @@
 \section{Anforderungen}\label{sec:anforderungen}
 
-Die im Rahmen des Projektes umzusetzenden Anforderungen wurden während des Projektes iterativ zusammen mit dem Kunden erarbeitet.
+Die umzusetzenden Anforderungen wurden während des Projektes iterativ zusammen mit dem Kunden erarbeitet.
 Dieses Kapitel zeigt den Stand der erarbeiteten Anforderungen bei Projektabschluss.
-Alle Anforderungen wurden zuerst aus Fachlicher sicht mit User Stories festgehalten, die ein konkretes Bedürfnis der Benutzer beschreiben.
-Weiter werden User Stories aus Sicht des Kunden festhalten, welche Rahmenbedingungen und Bedürfnisse des Auftraggebers festhalten.
+Alle Anforderungen wurden zuerst aus fachlicher Sicht mit User Stories festgehalten.
+Jede User Story beschreibt ein konkretes Bedürfnis der Benutzer.
+Die erfassten User Stories werden in drei Bereiche unterteilt.
+Im ersten Bereich werden Bedürfnisse von Praxismitarbeitenden festgehalten.
+Praxismitarbeitende verwendet die mobile Applikation von Praxisruf, um Benachrichtigungen zu versenden und empfangen.
+Im zweiten Bereich werden die Bedürfnisse von Praxisveranwotrlichen beschrieben.
+Diese Benutzergruppe ist dafür verantwortlich Praxisruf für Praxismitarbeitende zu konfigurieren.
+In einem dritten Bereich werden User Stories aus Sicht des Kunden festhalten, welche Rahmenbedingungen und Bedürfnisse des Auftraggebers festhalten.
 Aufgrund der User Stories werden Features definiert, welche konkrete testbare Szenarien und die erwarteten Ergebnisse definieren.\footnote{Siehe Anhang E - Features und Testszenarien}
 
-\subsubsection*{Praxismitarbeiter}
+\subsubsection*{Praxismitarbeitende}
 
 \begin{table}[h]
     \centering
@@ -14,34 +20,34 @@ Aufgrund der User Stories werden Features definiert, welche konkrete testbare Sz
         \hline
         \textbf{Id} & \textbf{Anforderung}                                                                                                                                                                                         & \textbf{Feature} \\
         \hline
-        U01         & Als Praxismitarbeiter möchte ich Benachrichtigungen versenden können, damit ich andere Mitarbeiter über Probleme und Anfragen informieren kann. & F01 \\
+        U01         & Als Praxismitarbeiter/-in möchte ich Benachrichtigungen versenden können, damit ich andere Mitarbeitende über Probleme und Anfragen informieren kann. & F01 \\
         \hline
-        U02         & Als Praxismitarbeiter möchte ich Benachrichtigungen empfangen können, damit ich auf Probleme und Anfragen anderer Mitarbeiter reagieren kann. & F02 \\
+        U02         & Als Praxismitarbeiter/-in möchte ich Benachrichtigungen empfangen können, damit ich auf Probleme und Anfragen anderer Mitarbeitenden reagieren kann. & F02 \\
         \hline
-        U03         & Als Praxismitarbeiter möchte ich nur Benachrichtigungen sehen, die für mich relevant sind, damit ich meine Arbeit effizient gestalten kann. & F02 \\
+        U03         & Als Praxismitarbeiter/-in möchte ich nur Benachrichtigungen sehen, die für mich relevant sind, damit ich meine Arbeit effizient gestalten kann. & F02 \\
         \hline
-        U04         & Als Praxismitarbeiter möchte ich über empfangene Benachrichtigungen aufmerksam gemacht werden, damit ich keine Benachrichtigungen verpasse. & F04 \\
+        U04         & Als Praxismitarbeiter/-in möchte ich über empfangene Benachrichtigungen aufmerksam gemacht werden, damit ich keine Benachrichtigungen verpasse. & F04 \\
         \hline
-        U05         & Als Praxismitarbeiter möchte ich sehen welche Benachrichtigungen ich verpasst habe, damit ich auf verpasste Benachrichtigungen reagieren kann. & F04 \\
+        U05         & Als Praxismitarbeiter/-in möchte ich sehen welche Benachrichtigungen ich verpasst habe, damit ich auf verpasste Benachrichtigungen reagieren kann. & F04 \\
         \hline
-        U06         & Als Praxismitarbeiter möchte ich eine Rückmeldung erhalten, wenn eine Benachrichtigung nicht versendet werden kann, damit Benachrichtigungen nicht verloren gehen. & F03 \\
+        U06         & Als Praxismitarbeiter/-in möchte ich eine Rückmeldung erhalten, wenn eine Benachrichtigung nicht versendet werden kann, damit Benachrichtigungen nicht verloren gehen. & F03 \\
         \hline
-        U07         & Als Praxismitarbeiter möchte ich auswählen können an welchem Gerät ich das Praxisrufsystem verwende und die dafür erstellte Konfiguration erhalten, damit das Praxisrufsystem optimal verwendet werden kann. & F05 \\
+        U07         & Als Praxismitarbeiter/-in möchte ich auswählen können an welchem Gerät ich das Praxisrufsystem verwende und die dafür erstellte Konfiguration erhalten, damit das Praxisrufsystem optimal verwendet werden kann. & F05 \\
         \hline
-        U08          & Als Praxismitarbeiter möchte ich einen physischen Knopf am Behandlungsstuhl haben damit ich notifikationen darüber versenden kann. & F07 \\
+        U08          & Als Praxismitarbeiter/-in möchte ich einen physischen Knopf am Behandlungsstuhl haben damit ich notifikationen darüber versenden kann. & F07 \\
         \hline
-        U09          & Als Praxismitarbeiter möchte ich, dass mir Benachrichtigungen vorgelesen werden, damit ich informiert werde, ohne meine Arbeit unterbrechen zu müssen. & F08 \\
+        U09          & Als Praxismitarbeiter/-in möchte ich, dass mir Benachrichtigungen vorgelesen werden, damit ich informiert werde, ohne meine Arbeit unterbrechen zu müssen. & F08 \\
         \hline
-        U10         & Als Praxismitarbeiter möchte ich einen anderen Client Unterhaltungen führen können damit Fragen direkt geklärt werden können. & F09 \\
+        U10         & Als Praxismitarbeiter/-in möchte ich einen anderen Client Unterhaltungen führen können damit Fragen direkt geklärt werden können. & F09 \\
         \hline
-        U11         & Als Praxismitarbeiter möchte ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können damit komplexe Fragen direkt geklärt werden können. & F10 \\
+        U11         & Als Praxismitarbeiter/-in möchte ich Unterhaltungen mit mehreren anderen Clients gleichzeitig führen können damit komplexe Fragen direkt geklärt werden können. & F10 \\
         \hline
     \end{tabular}\label{tab:userstories1}
 \end{table}
 
 \clearpage
 
-\subsubsection*{Praxisverantwortlicher}
+\subsubsection*{Praxisverantwortliche}
 
 \begin{table}[h]
     \centering
@@ -49,15 +55,15 @@ Aufgrund der User Stories werden Features definiert, welche konkrete testbare Sz
         \hline
         \textbf{Id} & \textbf{Anforderung}                                                                                                                                                                               & \textbf{Features} \\
         \hline
-        U12         & Als Praxisverantwortlicher möchte ich mehrere Geräte verwalten können, damit das Praxisrufsystem in mehreren Zimmern gleichzeitig genutzt werden kann. & F06 \\
+        U12         & Als Praxisverantwortliche/-r möchte ich mehrere Geräte verwalten können, damit das Praxisrufsystem in mehreren Zimmern gleichzeitig genutzt werden kann. & F06 \\
         \hline
-        U13         & Als Praxisverantwortlicher möchte ich definieren können welches Gerät, welche Anfragen versenden kann, damit jedes Gerät Verwendungsort optimiert ist. & F06 \\
+        U13         & Als Praxisverantwortliche/-r möchte ich definieren können, welches Gerät welche Anfragen versenden kann, damit jedes Gerät Verwendungsort optimiert ist. & F06 \\
         \hline
-        U14         & Als Praxisverantwortlicher möchte ich die Konfiguration des Praxisrufsystems zentral verwalten können, damit das Praxisrufsystem für die Anwender optimiert werden kann. & F06 \\
+        U14         & Als Praxisverantwortliche/-r möchte ich die Konfiguration des Praxisrufsystems zentral verwalten können, damit das Praxisrufsystem für die Anwender optimiert werden kann. & F06 \\
         \hline
-        U15         & Als Praxisverantwortlicher möchte ich definieren können, welche Geräte mit welchen anderen Geräten telefonieren können damit meinen Mitarbeitern das Arbeiten erleichtere. & F06 \\
+        U15         & Als Praxisverantwortliche/-r möchte ich definieren können, welche Geräte mit welchen anderen Geräten telefonieren können damit alle Mitarbeitenden die Gegensprechanlage nutzen können. & F06 \\
         \hline
-        U16         & Als Praxisverantwortlicher möchte ich definieren können, welche Benachrichtigung über einen physischen Knopf am Behandlungsstuhl versendet wird damit der Knopf für den Mitarbeiter optimiert ist. & F06 \\
+        U16         & Als Praxisverantwortliche/-r möchte ich definieren können, welche Benachrichtigung über einen physischen Knopf am Behandlungsstuhl versendet wird damit der Knopf für die Mitarbeitenden optimiert ist. & F06 \\
         \hline
     \end{tabular}\label{tab:userstories2}
 \end{table}
