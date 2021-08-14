@@ -14,7 +14,7 @@ Im Folgenden wird beschrieben wie die Admin UI Applikation mit AWS betrieben wer
     \item AWS Amplify Service aufsetzen:
     \begin{enumerate}
         \item Amazon Webservice unterstützt die Anbdingun von Github, Gitlab, BitBucket und AWS CodeCommit. Stellen Sie sicher, dass der Quellcode der Admin UI Applikation in einem Git Repository zur Verfügung steht.
-        \item Folgen Sie den Schritten in der offiziellen Anleitung\footnote{https://docs.aws.amazon.com/amplify/latest/userguide/getting-started.html} um den nötigen AWS Amplify Service zu installieren.
+        \item Folgen Sie den Schritten in der \href{https://docs.aws.amazon.com/amplify/latest/userguide/getting-started.html}{\textit{offiziellen Anleitung}}.\cite{aws-amplify}
     \end{enumerate}
     \item Verbindung zum Cloud Service konfigurieren:
     \begin{enumerate}
@@ -24,7 +24,7 @@ Im Folgenden wird beschrieben wie die Admin UI Applikation mit AWS betrieben wer
     \end{enumerate}
     \item Konfigurieren Sie eine Domain für die Admin UI Applikation.
     \begin{enumerate}
-        \item Folgen Sie dazu den Schritten in der offiziellen Anleitung \footnote{https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html} folgen.
+        \item Folgen Sie dazu den Schritten in der \href{https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html}{\textit{offiziellen Anleitung}}.\cite{aws-amplify-domain} folgen.
     \end{enumerate}
 \end{enumerate}
 
@@ -36,21 +36,21 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
     \item Stellen Sie sicher, dass der Quellcode der Cloud Service Applikation in einem Git Repository bei einem der Anbieter Github, Gitlab, BitBucket oder AWS CodeCommit zur Verfügung steht.
     \item Erstellen Sie einen mit AWS ein Elastic Beanstalk Environment.
     \begin{enumerate}
-        \item Folgen Sie dazu der offiziellen Anleitung.\footnote{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.CreateApp.html}
+        \item Folgen Sie dazu der \href{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.CreateApp.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic}
         \item Wählen Sie unter Plattform "Java" und die dazugehörigen Standardeinstellungen.
         \item Wählen Sie unter Application Code "Sample Application".
     \end{enumerate}
     \item Erstellen sie mit AWS RDS eine Datenbank für die Cloud Service Applikation
     \begin{enumerate}
         \item In Beanstalk Console
-        \item Folgen Sie der offiziellen Anleitung\footnote{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.db.html} um eine Relationale Datenbank an das Beanstalk Environment anzubinden.
+        \item Folgen Sie der \href{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.db.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic-rds} um eine Relationale Datenbank an das Beanstalk Environment anzubinden.
         \item Wählen Sie als Datenbank Engine "postgres" in der Version 13.3.
         \item Wenn sie oben genannter Anleitung folgen, ist keine weitere Konfiguration für die Datenbankanbindung im Cloud Service nötig.
         Sollten Sie wählen, die Datenbank auf eine andere Art zu Betreiben müssen in Schritt 4 die Umgebungsvariablen RDS\_HOSTNAME, RDS\_PORT, RDS\_DB\_NAME, RDS\_USERNAME und RDS\_PASSWORD mit den entsprechenden Werten konfiguriert werden.
     \end{enumerate}
     \item Definieren Sie die nötigen Umgebungsvariablen für die Cloud Service Applikation:
     \begin{enumerate}
-        \item Folgen Sie der offiziellen Anleitung \footnote{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-softwaresettings.html} um die nötigen Umgebungsvariablen zu setzen:
+        \item Folgen Sie der \href{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-softwaresettings.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic-env} um die nötigen Umgebungsvariablen zu setzen:
         \item Name: FCM\_CREDENTIALS, Wert: Firebase Credentials mit Base 64 Encoded\footnote{Siehe Installationsanleitung Firebase Messaging}
         \item Name: SPRING\_PROFILES\_ACTIVE, Wert: aws.
     \end{enumerate}
@@ -75,12 +75,12 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
     \end{enumerate}
     \item Stellen Sie sicher, dass die installierete Cloud Service Applikation über HTTPS erreichbar ist. Dies ist für die Kommunication mit Mobile Client Instanzen zwingend notwendig.
     \begin{enumerate}
-        \item Folgen Sie dazu der offiziellen Anleitung\footnote{https://aws.amazon.com/premiumsupport/knowledge-center/elastic-beanstalk-https-configuration/}.
+        \item Folgen Sie dazu der offiziellen Anleitung\href{https://aws.amazon.com/premiumsupport/knowledge-center/elastic-beanstalk-https-configuration/}{\textit{offiziellen Anleitung}}\cite{aws-elastic-https}.
         \item Am Cloud Service sind dabei keine Änderungen nötig. 
     \end{enumerate}
     \item Erstellen Sie einen Adminstrator Account für das Admin UI.
     \begin{enumerate}
-        \item Richten Sie den Datenbankzugriff auf die in Schritt 3 erstellte Datenbank mit den Datenbanktool ihrer Wahl ein.\footnote{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html}
+        \item Richten Sie den Datenbankzugriff auf die in Schritt 3 erstellte Datenbank gemäss der \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic-rds-access}. ein.
         \item Passen Sie die Parameter in folgenden Script an und führen es auf der Datenbank aus:
         \lstinputlisting[caption=createadmin.sql,language=sql,label={lst:CreateAdmin.java}]{listings/createadmin.sql}
 
