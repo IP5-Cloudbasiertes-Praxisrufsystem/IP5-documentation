@@ -4,9 +4,9 @@
 \subsubsection*{Firebase Messaging}
 \begin{enumerate}
     \item Öffnen Sie die \href{https://console.firebase.google.com/}{\textit{Firebase Console}} und erstellen Sie ein neues Projekt.
-    \item Navigieren Sie das Menü "Project Settings".
-    \item Navigieren Sie zum Tab "Service Accounts".
-    \item Klicken Sie den Button "Generate new private Key" und bestätigen Sie die Eingabe.
+    \item Navigieren Sie das Menü ``Project Settings'.
+    \item Navigieren Sie zum Tab ``Service Accounts''.
+    \item Klicken Sie den Button ``Generate new private Key'' und bestätigen Sie die Eingabe.
     \item Speichern Sie die generierte Datei an einem Ort Ihrer Wahl.
     \item Kopieren Sie den Dateiinhalt und Benutzen Sie ein Werkzeug Ihrer Wahl\footnote{z.B. \url{https://www.base64decode.org/}} um den Inhalt mit Base64 zu kodieren.
     \item Speichern Sie den Base64 kodierten Dateiinhalt an einem Ort Ihrer Wahl. Sie werden diesen Wert für die Konfiguration des Cloud Services benötigen.
@@ -28,13 +28,13 @@ Im Folgenden wird beschrieben wie die Admin UI Applikation mit AWS betrieben wer
 \begin{enumerate}
     \item AWS Amplify Service aufsetzen:
     \begin{enumerate}
-        \item Amazon Webservice unterstützt die Anbdingun von Github, Gitlab, BitBucket und AWS CodeCommit. Stellen Sie sicher, dass der Quellcode der Admin UI Applikation in einem Git Repository zur Verfügung steht.
+        \item Amazon Webservice unterstützt die Anbindung von Github, Gitlab, BitBucket und AWS CodeCommit. Stellen Sie sicher, dass der Quellcode der Admin UI Applikation in einem Git Repository zur Verfügung steht.
         \item Folgen Sie den Schritten in der \href{https://docs.aws.amazon.com/amplify/latest/userguide/getting-started.html}{\textit{offiziellen Anleitung}}.\cite{aws-amplify}
     \end{enumerate}
     \item Verbindung zum Cloud Service konfigurieren:
     \begin{enumerate}
         \item Öffnen sie die AWS Amplify Konsole für die in Schritt 1 erstellte Applikation.
-        \item Wählen Sie den Menüpunkt "Environment Variables"
+        \item Wählen Sie den Menüpunkt ``Environment Variables''
         \item Erstellen Sie eine neue Variable mit dem Namen REACT\_APP\_BACKEND\_BASE\_URI. Setzten Sie als Wert dafür die Domain, unter welcher der Cloud Service erreichbar ist.
     \end{enumerate}
     \item Konfigurieren Sie eine Domain für die Admin UI Applikation.
@@ -52,14 +52,14 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
     \item Erstellen Sie einen mit AWS ein Elastic Beanstalk Environment.
     \begin{enumerate}
         \item Folgen Sie dazu der \href{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/GettingStarted.CreateApp.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic}
-        \item Wählen Sie unter Plattform "Java" und die dazugehörigen Standardeinstellungen.
-        \item Wählen Sie unter Application Code "Sample Application".
+        \item Wählen Sie unter Plattform ``Java'' und die dazugehörigen Standardeinstellungen.
+        \item Wählen Sie unter Application Code ``Sample Application''.
     \end{enumerate}
     \item Erstellen sie mit AWS RDS eine Datenbank für die Cloud Service Applikation
     \begin{enumerate}
         \item In Beanstalk Console
         \item Folgen Sie der \href{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.db.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic-rds} um eine Relationale Datenbank an das Beanstalk Environment anzubinden.
-        \item Wählen Sie als Datenbank Engine "postgres" in der Version 13.3.
+        \item Wählen Sie als Datenbank Engine ``postgres'' in der Version 13.3.
         \item Wenn sie oben genannter Anleitung folgen, ist keine weitere Konfiguration für die Datenbankanbindung im Cloud Service nötig.
         Sollten Sie wählen, die Datenbank auf eine andere Art zu Betreiben müssen in Schritt 4 die Umgebungsvariablen RDS\_HOSTNAME, RDS\_PORT, RDS\_DB\_NAME, RDS\_USERNAME und RDS\_PASSWORD mit den entsprechenden Werten konfiguriert werden.
     \end{enumerate}
@@ -71,29 +71,29 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
     \end{enumerate}
     \item Konfigurieren Sie AWS CodeBuild um die Cloud Service Applikation mit AWS bauen zu können.
     \begin{enumerate}
-        \item Öffnen Sie die AWS Console und wählen Sie unter Services "Code Pipeline" aus.
-        \item Wählen Sie die Option "Create build project".
+        \item Öffnen Sie die AWS Console und wählen Sie unter Services ``Code Pipeline'' aus.
+        \item Wählen Sie die Option ``Create build project''.
         \item Geben Sie unter Project Configuration einen passenden Namen ein.
         \item Wählen Sie unter Source den gewünschten Anbieter und geben Sie die Repository URl sowie die gewünschte Version (Branch Name) ein.
-        \item Wählen Sie unter Buildspec "Use a buildspec file". Die projektspezifische Build Konfiguration ist in der Cloud Service Applikation bereits enthalten.
+        \item Wählen Sie unter Buildspec ``Use a buildspec file''. Die projektspezifische Build Konfiguration ist in der Cloud Service Applikation bereits enthalten.
         \item Bestätigen Sie die Eingaben.
     \end{enumerate}
     \item Konfigurieren Sie AWS CodePipeline um die Cloud Service Applikation zu installieren:
     \begin{enumerate}
-        \item Öffnen Sie die AWS Console und wählen Sie unter Services "Code Pipeline" aus.
-        \item Wählen Sie die Option "Create New Pipeline".
-        \item Geben Sie in Schritt 1 einen Namen für die Pipeline an und wählen Sie "Next".
+        \item Öffnen Sie die AWS Console und wählen Sie unter Services ``Code Pipeline'' aus.
+        \item Wählen Sie die Option ``Create New Pipeline''.
+        \item Geben Sie in Schritt 1 einen Namen für die Pipeline an und wählen Sie ``Next''.
         \item Wählen Sie in Schritt 2 gewünschten Anbieter und folgen sie dem Wizard um das Git Repository des Cloud Services anzubinden.
         \item Wählen Sie in Schritt 3 AWS CodeBuild und das CodeBuild Projekt welches Sie in Schritt 3 erstellt haben.
         \item Wählen Sie in Schritt 4 AWS Elastic Beanstalk und die in Schritt 2 definierten Instanzen.
-        \item Bestätigen Sie die Eingabem.
+        \item Bestätigen Sie die Eingaben.
     \end{enumerate}
-    \item Stellen Sie sicher, dass die installierete Cloud Service Applikation über HTTPS erreichbar ist. Dies ist für die Kommunication mit Mobile Client Instanzen zwingend notwendig.
+    \item Stellen Sie sicher, dass die installierte Cloud Service Applikation über HTTPS erreichbar ist. Dies ist für die Kommunikation mit Mobile Client Instanzen zwingend notwendig.
     \begin{enumerate}
         \item Folgen Sie dazu der offiziellen Anleitung\href{https://aws.amazon.com/premiumsupport/knowledge-center/elastic-beanstalk-https-configuration/}{\textit{offiziellen Anleitung}}\cite{aws-elastic-https}.
         \item Am Cloud Service sind dabei keine Änderungen nötig. 
     \end{enumerate}
-    \item Erstellen Sie einen Adminstrator Account für das Admin UI.
+    \item Erstellen Sie einen Administrator Account für das Admin UI.
     \begin{enumerate}
         \item Richten Sie den Datenbankzugriff auf die in Schritt 3 erstellte Datenbank gemäss der \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic-rds-access}. ein.
         \item Passen Sie die Parameter in folgenden Script an und führen es auf der Datenbank aus:
