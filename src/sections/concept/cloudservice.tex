@@ -176,15 +176,14 @@ Anpassungen an der RulesEngine oder der RuleEvaluatorFactory sind nicht nötig.
     \end{minipage}
 \end{figure}
 
-\textbf{PraxisNotification}
+In der Domäne Notification werden zwei Entitäten definiert.
+Die Entität PraxisNotification stellt eine Benachrichtigung dar, die über den Cloud Service versendet wird.
 Jede Notification die der CloudService erhält wird bereits vor dem Versenden persistiert.
-Dies ermöglicht einzelne Benachrichtigungen die nicht versendet werden konnten zu wiederholen.
-
-\textbf{SendNotificationProcess}
 Nach dem eine Benachrichtigung als PraxisNotification persistiert wurde, wird sie an die Empfänger versendet.
 Dabei wird für jeden Empfänger ein SendNotificationProcess erstellt.
 Dieser SendNotificationProcess beinhaltet eine Referenz auf die versendete Benachrichtigung und den Status des Sendeprozesses.
-Dies ermöglicht es, eine Benachrichtigung nur für die Empfänger zu wiederholen, für die der Versand fehlgeschlagen ist.
+Dies dient zum einen der Nachvollziehbarkeit.
+Zum anderen ermöglicht es, fehlgeschlagene Benachrichtigungen nur für die Empfänger zu wiederholen, für die der Versand fehlgeschlagen ist.
 
 \begin{figure}[h]
     \centering
@@ -194,16 +193,14 @@ Dies ermöglicht es, eine Benachrichtigung nur für die Empfänger zu wiederhole
     \end{minipage}
 \end{figure}
 
-Der \textbf{NotificationService} bietet Methoden, um eine Notifikation zu versenden und zu wiederholen.
+In der Notification Domäne werden drei Domain Services definiert.
+Der NotificationService bietet Methoden, um eine Notifikation zu versenden und zu wiederholen.
 Für das initiale Versenden werden die Informationen benötigt, um eine Notifikation zu erstellen und die Empfänger zu identifizieren.
 Im Fall der Wiederholung werden diese Informationen nicht mehr benötigt.
 Da die Notifikation und der Status des Versandprozesses beim ersten Versuch sie zu versenden persistiert wurde.
-
-Der \textbf{NotificationSendProcessService} dient dazu Sendevorgänge zu erstellen und fehlgeschlagene Sendevorgänge zu finden.
-Dies ermöglicht es, eine Notifikation im Fehlerfall zu wiederholen.
-
-Der \textbf{NotificationTestService} dient zu Test und Administrationszwecken.
-Er kann verwendet werden, um einem einzelnen Client eine Testnachricht zu senden oder allen registrierten Clients eine Nachricht zu schicken.
+Als zweiter Service definiert der NotificationSendProcessService dazu Sendevorgänge zu erstellen und fehlgeschlagene Sendevorgänge zu finden.
+Der dritte Service in der Notification Domäne dient nur zu Test- und Administrationszwecken.
+Der NotificationTestService kann verwendet werden, um einem einzelnen Client eine Testnachricht zu senden oder allen registrierten Clients eine Nachricht zu schicken.
 Als Benachrichtigung wird dabei immer eine vom Cloud Service definierte Benachrichtigung versendet, welche nur Platzhalterwerte beinhaltet.
 
 \subsubsection{Laufzeitmodell}
@@ -212,7 +209,9 @@ Im Folgenden werden die Abläufe für die Registrierung von Mobile Clients sowie
 
 \subsubsection*{Client Registration}
 
-Vorbedingung: Es wurde mindestens ein Client inklusive ClientConfiguration erfasst und dem Praxismitarbeiter zugewiesen.
+Damit ein Client Benachrichtigungen empfangen und versenden kann, muss er sich bei Messaging Service und Cloud Service registrieren.
+Hier wird dieser Ablauf spezifiziert.
+Als Vorbedingung wird dabei angenommen, dass mindestens ein Client inklusive ClientConfiguration erfasst und dem Praxismitarbeitenden zugewiesen wurde.
 
 \begin{figure}[h]
     \centering
@@ -222,15 +221,15 @@ Vorbedingung: Es wurde mindestens ein Client inklusive ClientConfiguration erfas
     \end{minipage}
 \end{figure}
 
-In einem ersten Schritt muss sich der Praxismitarbeiter am Mobile Client anmelden.
+In einem ersten Schritt muss sich der Praxismitarbeiter im Mobile Client anmelden.
+Diee Anmeldung wird im Cloud Service ausgewertet.
 Hat er gültige Benutzerdaten angegeben, werden Informationen zu allen verfügbaren Konfigurationen vom Cloud Service geladen und der Benutzer kann die gewünschte Konfiguration auswählen.
 Dabei werden nur Name und Id der Konfigurationen geladen, damit nicht mehr Daten als nötig übertragen werden.
-Der Benutzer wählt darauf die gewünschte Konfiguration.
-Sobald die Konfiguration ausgewählt ist, werden alle dafür Konfigurierten NotificationTypes geladen und im UI die entsprechenden Buttons erstellt.
+Wählt Benutzer die gewünschte Konfiguration, werden alle dafür Konfigurierten NotificationTypes geladen und im UI die entsprechenden Buttons erstellt.
 Direkt nach dem Laden der Konfiguration registriert sich der Mobile Client beim Messageing Service.
 Als Antwort erhält er ein eindeutiges Token, welches verwendet werden kann, um an diesem Client Nachrichten zu senden.
-Anschliessend registriert sich der Mobile Client mit dem erhaltenen Token und der ausgewählten Konfiguration beim Cloud Service.
-In diesem Zustand ist der Client bei Messaging Service und Cloud Service registriert und bereit Benachrichtigungen zu empfangen.
+Der Mobile Client registriert sich darauf mit dem erhaltenen Token und der ausgewählten Konfiguration beim Cloud Service.
+Nach diesem Ablauf ist der Client bei Messaging Service und Cloud Service registriert und bereit Benachrichtigungen zu empfangen.
 
 \clearpage
 
