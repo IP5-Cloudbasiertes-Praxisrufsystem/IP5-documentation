@@ -2,13 +2,26 @@
 
 \subsection{Mobile Client Evaluation}\label{subsec:mobile-client-eval}
 
+//TODO: @Kevin
 
+Fliesstext style evaulation. Etwa wie bei messaging service.
+
+Keep it short.
+1 Page should be enough I think.
+Definitely not more than 2.
+
+Mobile Eval muss zuerst sein, weil sich Messaging Service darauf beruht.
+
+Eine Option ist X. Es ermöglicht Y und das ist gut. Es hat aber Problem Z.
+Pro Option muss erwähnt sein wie Push Benachrichtigungen integriert werden können.
+Pro Option muss erwähnt werden wie Serverseitige Benachrichtigungen integriert werden können.
+Wir meistens sein, dass es mit FCM geht.
+Citations notwendig für
 
 \url{https://kotlinlang.org/lp/mobile/}
-	
-
-    +Jet Brains Infrastructure 
-    +We like Kotlin 
+    + Jet Brains Infrastructure
+    + We like Kotlin
+    + Large names apparantly use it
 
     -IoS Env. Needed to develop for Apple 
     -Still has to develop separate API und UI Modules for Platforms 
@@ -16,33 +29,44 @@
 \url{https://web.dev/progressive-web-apps/ }
 	
     +No need of Native Codebase
-    +Perfect for Android 
+    +Perfect for Android
+    + Can push for android
+    - Cannot push for ios
+    - Cannot fcm for ios cause pwa only works with safari and safari doesn't like fcm
     -Eventually drawbacks because no entire API Access 
     -PWAs on IOS suck
 
 \url{https://cordova.apache.org/} 
-	
 
-    + Popular Framework 
-    + Tons of plugins to access apis 
+    + Popular Framework
+    + Tons of plugins to access apis
 
     -Still need to have a Mac for IoS development  
     -Not a truly native app -> API Issues
  
 
 \url{https://nativescript.org/ }
+    + Popular Framework
+    + Tons of plugins to access apis
+    + Some deployments on ios possible without apple infra
+    +Claims to be truly Native
 
-    +Provides a Workaround for nasty X-tools 
-    +Claims to be truly Native 
-    -Do we really trust it? (sorta new and passion project of a few people) 
+    -Still need to have a Mac for IoS development
+    -Not a truly native app -> API Issues
+    -Do we really trust it? (sorta new and passion project of a few people)
+    - Lots of plugins are one man shows
 
  
  \url{https://flutter.dev}
+    + Popular
+    + Shared Code Base
+    - Not based on things we know (cite docs or smth)
+    - Difficult setup (if you find a source, else ignore)
+    - Not native in the end (i think, pls double check)
+    - IOS infra
 
-    -Why do you hate me?
 
-
-"Simply Write Everything twice"
+Go Native
 
     +Would definitely work
 
@@ -53,6 +77,9 @@
 \url{https://stackshare.io/stackups/apache-cordova-vs-nativescript}
 
 \url{https://nativescript.org/blog/build-nativescript-apps-remotely-from-windows-or-linux/ }
+
+// TODO: Remove clear page if not needed
+\clearpage
 
 \subsection{Messaging Service}\label{subsec:messaging-eval}
 
