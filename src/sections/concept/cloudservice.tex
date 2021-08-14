@@ -231,8 +231,6 @@ Als Antwort erhält er ein eindeutiges Token, welches verwendet werden kann, um 
 Der Mobile Client registriert sich darauf mit dem erhaltenen Token und der ausgewählten Konfiguration beim Cloud Service.
 Nach diesem Ablauf ist der Client bei Messaging Service und Cloud Service registriert und bereit Benachrichtigungen zu empfangen.
 
-\clearpage
-
 \subsubsection*{Benachrichtigung versenden und empfangen}
 
 Die zentrale Funktion des Praxisrufsystems ist das Versenden und Empfangen von Benachrichtigungen.
@@ -267,18 +265,20 @@ Dementsprechend kann der Sender nur informiert werden, wenn die Zustellung an de
 \clearpage
 \subsubsection*{Benachrichtigung wiederholen}
 
-Vorbedingung:
-Konfiguration und Registrierung gemäss Abbildung 5.14 ist für zwei Clients ist abgeschlossen.
-Konfiguration ist einer der Clients konfiguriert, Benachrichtigungen vom anderen Client zu empfangen.
-Es wurde eine Benachrichtigung gemäss Abbildung 5.15 versendet.
-Dabei ist das Versenden an mindestens einen Client fehlgeschlagen und der Cloud Service hat ein negatives SendNotificationResult zurückgegeben.
+Die zentrale Funktion des Praxisrufsystems ist das Versenden und Empfangen von Benachrichtigungen.
+Hier wird dieser Ablauf im Erfolgsfall beschrieben.
+Als Vorbedingung wird angenommen, dass Konfiguration und Registrierung gemäss Abbildung 5.14 ist für zwei Clients abgeschlossen ist.
+Dabei ist einer der Clients konfiguriert, Benachrichtigungen vom anderen Client zu empfangen.
+Es wurde eine Benachrichtigung gemäss Abbildung 5.15 versendet, das Versenden an mindestens einen Client fehlgeschlagen
+und der Cloud Service hat ein negatives SendNotificationResult zurückgegeben.
 
 Nach dem Erhalt des negativen Resultats zeigt der Mobile Client einen Dialog an.
 Dieser Dialog informiert den Benutzer über den Fehler und fragt an, ob die fehlgeschlagenen Benachrichtigungen wiederholt werden sollen.
 Bestätigt der Benutzer wird diese Anfrage, wird eine Anfrage an den NotificationController gesendet um das Versenden zu wiederholen.
 Diese Anfrage beinhaltet die technische Id der fehlgeschlagenen Benachrichtigung.
-NotificationController durchsucht die NotificationSendProcess Tabelle nach der gegebenen id und filtert auf fehlgeschlagene.
-Anschliessend wird der SendProcess anhand der Tokens in dieser NotificationSendProcess Instanzen wiederholt.
+NotificationController findet alle negativen Einträge für diese Benachrichtigung in der NotificationSendProcess Tabelle.
+Anschliessend wird jeder gefundene SendProcess anhand der Tokens in dieser NotificationSendProcess Instanzen wiederholt.
+Das Versenden, Empfangen und die Rückmeldung an den Mobile Client erfolgen analog zum Ablauf "Benachrichtigung versenden und empfangen".
 
 \begin{figure}[h]
     \centering
