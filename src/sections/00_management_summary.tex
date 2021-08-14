@@ -5,51 +5,51 @@ Dieses Rufsystem ermöglicht, dass der behandelnde Arzt über einen Knopfdruck H
 Heute kommerziell erhältlichen Rufsysteme beruhen meistens auf proprietären Standards und veralteten Technologien. \cite{aufgabenstellung}
 Die Problemstellung für dieses Projekt besteht darin, ein cloudbasiertes, leicht konfigurierbares und erweiterbares Rufsystem umzusetzen.
 
-In diesem Projekt wurde ein Konzept für ein Rufsystem zum Versenden von Benachrichtigungen erarbeitet und umgesetzt.
-Das umgesetzte Praxisrufsystem wird vom Endbenutzer auf einer Mobilen Applikation benutzt.
-Das Rufsystem kann von einem Administrator über eine Web-Oberfläche konfiguriert werden.
-Dabei kann der Administrator pro Endgerät festlegen, welche Benachrichtigungen versendet und empfangen werden sollen.
-Nach der Konfiguration kann der Endbenutzer in der Praxis das Rufsystem auf einem Tablet benutzen.
-Nicht umgesetzt wurden die Funktionen Gegensprechanlage und Text To Speech für Benachrichtigungen .
-Die Kommunikation zwischen den Endgeräten funktioniert ausschliesslich über konfigurierbare Benachrichtigungen.
+In diesem Projekt wurde ein Konzept für das Praxisrufsystem "Praxisruf" erarbeitet und umgesetzt.
+Praxisruf ist ein Rufsystem, welches für das Versenden von Benachrichtigungen in einer Praxis verwendet werden kann.
+Das umgesetzte System wird von den Endbenutzern mit einer App auf einem Android Tablet oder IPad benutzt.
+Die dazu entwickelte Anwendung erlaubt es den Benutzern vorkonfigurierte Benachrichtigungen zu versenden und empfangen.
+Welche Benachrichtigungen versendet und empfangen werden, kann von Administratoren über eine Web-Oberfläche konfiguriert werden.
+Der Funktionsumfang des umgesetzten Rufsystems beschränkt sich auch das Versenden und Empfangen von Benachrichtigungen.
+Die Funktionen Gegensprechanlage und Text To Speech für Benachrichtigung wurden im Rahmen dieses Projekts nicht behandelt.
 
-Für das weitere Vorgehen sehen wir die folgenden 3 Optionen:
+Nach Projektabschluss sehen wir nun drei Optionen für das weitere Vorgehen:
 
 
 \textbf{1. Praxisruf einsetzten}
 
-Das umgesetzte Rufsystem unterstützt das konfigurieren, versenden und Empfangen von Benachrichtigungen.
-Zu diesem Zweck könnte es bereits umgesetzt werden.
-Wir raten aber von dieser Option ab.
-Bestehende Rufsysteme bieten of auch eine Funktion als Gegensprechanlage.
-Diese Funktion fehlt dem hier umgesetzten System noch.
+Praxisruf könnte bereits heute als produktives Benachrichtigungssystem eingesetzt werden.
+Im Gegensatz zu vielen bestehenden kann Praxisruf allerdings noch nicht als Gegensprechanlage verwendet werden.
 Weiter erlaubt die Konfiguration von Nachrichtenempfang erst sehr einfache Regeln.
-Zur besseren konfigurierbarkeit sollte dieses Regelwerk erst noch erweitert werden.
+Zur einfacheren Konfigurierbarkeit sollte dieses Regelwerk erst noch erweitert werden.
+Aufgrund dieser Einschränkungen raten wir davon ab, Praxisruf in einem produktiven Umfeld einzusetzen.
 
 \textbf{2. Praxisruf weiterentwickeln}
 
-Das Praxisrufsystem könnte um die Funktionen Gegensprechanlage und Text To Speech erweitert werden.
+Praxisruf könnte um die Funktionen Gegensprechanlage und Text To Speech erweitert werden.
 Weiter könnten die verfügbaren Regeln zum Empfangen von Benachrichtigungen ausgebaut werden.
-Da das System bewusst konzipiert wurde, leicht erweiterbar zu sein, können diese Änderungen eingebaut werden.
-Eine Gefahr dabei ist aber die bestehende Mobile Applikation.
+Praxisruf wurde konzipiert, um leicht erweiterbar zu sein.
+Dementsprechend können diese Änderungen mit verhältnissmässig geringem Aufwand eingebaut werden.
+Eine mögliche Gefahr für die Weiterentwicklung ist dabei die bestehende Mobile Applikation.
 Unsere Erfahrung mit der dafür gewählten Technologie zeigt, dass viele Funktionen nicht für alle Plattformen funktionieren
 oder Einschränkungen bezüglich Kompatibilität bringen.
+Wir raten deshalb Praxsiruf weiterzuentwickeln, aber die dazugehörige App nicht in der aktuellen Form weiterzuverwenden.
 
 \textbf{3. Praxisruf weiterentwickeln (nativ) }
 
-Das Praxisrufsystem könne wie in Option 2 beschrieben weiterentwickelt werden.
-Um Probleme bei der Mobile Applikation zu minimieren, sollte diese als native Applikation neu entwickelt werden.
+Praxisruf könnte wie in Option 2 beschrieben weiterentwickelt werden.
+Um Probleme bei der Appentwicklung zu minimieren, sollte dieses als native Applikation neu entwickelt werden.
 Nach dem initialen Aufwand der Migration würde dies die Applikation deutlich zukunftssicherer machen.
 Der Wartungsaufwand wird nach unserer Einschätzung dadurch nicht wachsen.
-Der zusätzliche Aufwand zwei Applikationen zu warten wird dadurch aufgehoben, dass die Anbdingung von Mikrophon, Lautsprecher
-und Gerätebenachrichtigungen deutlich besser unterstützt ist.
+Der zusätzliche Aufwand zwei Applikationen zu warten wird dadurch aufgehoben, dass die Anbindung von Gerätehardware
+und betriebssystemnahen Funktionen deutlich besser unterstützt ist.
 
 \textbf{Empfehlung}
 
-Wir empfehlen deshalb mit der dritten Option fortzufahren.
-Der Mobile Client sollte neu als native Applikation umgesetzt werden, um bessere Kompatibilität zu gewähren.
-Das Praxisrufsystem sollte zudem um die fehlenden Funktionen erweitert und weitere Konfigurationsoptionen erweitert werden.
-Sobald das Praxisrufsystem auch diese Funktion unterstützt bietet es denselben Funktionsumfang wie bestehende Lösungen.
-Dabei ist es allerdings leicht konfigurierbar und skalierbar und kann auf die individuellen Bedürfnisse eines Kunden zugeschnitten werden.
+Wir empfehlen mit der Option 3 "Praxisruf weiterentwickeln (nativ)" fortzufahren.
+Die mobile App sollte neu als native Applikation umgesetzt werden, um bessere Kompatibilität zu gewähren.
+Das Praxisrufsystem sollte zudem um zusätzliche Konfigurationsoptionen und die Funktionen Gegensprechanlage erweitert werden.
+Sobald Praxisruf auch diese Funktion unterstützt bietet es einen grösseren Funktionsumfang als bestehende Lösungen.
+Dabei ist es aber leicht konfigurierbar und kann somit für die konkreten Bedürfnisse jedes Kunden individualisiert werden.
 
 \clearpage
