@@ -9,13 +9,13 @@ und die Domäne Configuration für die Verwaltung und Auswertung der Konfigurati
 Zwischen den beiden Domänen besteht eine gerichtete Abhängigkeit.
 Die Domäne Notification benötigt zum Versenden von Benachrichtigungen Informationen aus der Configuration Domäne.
 Das Identifizieren der relevanten Empfänger geschieht in der Configuration Domäne.
-Dementsprechend benötigt die Notification Domäne beim Versenden und die Information an welche Empfänger die Benachrichtigung versendet werden soll.
+Dementsprechend benötigt die Notification Domäne beim Versenden und die Information, an welche Empfänger die Benachrichtigung versendet werden soll.
 Als Identifikation ist hier der technische Identifikator des Clients beim Messaging Service ausreichend.
 
 Durch die klare Trennung der Verantwortungsbereiche der beiden Domains, wäre es möglich diese in einzelne Microservices aufzuteilen.
 Dies würde das Skalieren der Applikationen vereinfachen.
-Die Aufteilung auf mehrere Microservices macht das System als ganzes aber direkt komplizierter.
-Insbesondere Betrieb und Entwicklung wird aufwändiger, da diese Arbeiten nun über mehrere Applikationen verteilt sind.
+Die Aufteilung auf mehrere Microservices macht das System als ganzes aber komplexer.
+Insbesondere Betrieb und Entwicklung wird aufwändiger, da diese Aufwände nun für mehrere Applikationen anfallen.
 Für den Umfang dieser Arbeit wird deshalb darauf verzichtet, den Cloud Service als echtes Micro Service System umzusetzen.
 Der Cloud Service wird als eine einzelne Spring Boot Applikation umgesetzt.
 Innerhalb dieser Applikation sollen die Domänen Configuration und Notification allerdings, wo immer mit vertretbarem Aufwand möglich, getrennt bleiben.
@@ -23,72 +23,61 @@ Abhängigkeiten zwischen den beiden Domänen sind zu vermeiden.
 An den Stellen wo Informationen aus der anderen Domäne nötig sind, sollen diese über ein Rest Interface abgefragt werden.
 So kann die Applikation in Zukunft einfach und auf die tatsächlichen Bedürfnisse zugeschnitten in mehrere Microservices aufgeteilt werden.
 
-Um einfache Erweiterbarkeit zu gewährleisten, wird der Cloud Service wird nach dem Prinzip von Onion Architecture aufgebaut.
+Um einfache Erweiterbarkeit zu gewährleisten, wird der Cloud Service nach dem Prinzip von Onion Architecture aufgebaut.
 
 \begin{figure}[h]
     \centering
     \begin{minipage}[b]{0.5\textwidth}
         \includegraphics[width=\textwidth]{graphics/clean-architecture}
-        \caption{Clean Architecture}
+        \caption{Onion Architecture}
     \end{minipage}
 \end{figure}
 
-In Onion Architecture wird die Applikation in Layern von der Domäne im Zentrum bis hin zur Infrastruktur an den äusseren Enden definiert.
-Im Wesentlichen gibt es die folgenden Layers\cite{medium-onion}.
-
-\textbf{Domain Model}
+In Onion Architecture wird die Applikation in Layer aufgeteilt.\cite{medium-onion}
 Im Zentrum des Modells steht die Domain selbst.
+Sie wird durch den Domain Layer abgebildet.
 Der Domain Layer darf nur Dependencies auf sich selbst haben.
-Abhängigkeiten aus anderen Layers sind um jeden Preis zu vermeiden.
-Abhängigkeiten aus äusseren Layer auf den Domain Layer sind hingegen immer erlaubt.
+Umgekehrt dürfen aber alle anderen Layers Abhängigkeiten auf den Domain Layer haben.
+Die nächste Schicht im Modell ist der Domain Service Layer.
+Dieser bietet die fachliche Logik und definiert die Verhaltensweise des Domain Layers.
+Der Layer Application Services bildet schlieslich die Brücke zwischen externer Infrastruktur und Domain Services.
+Dies beinhaltet Repository Services für die Schnittstelle zu persistentem Speicher und Rest Controllers für Schnittstellen zu anderen Applikationen.
+In der äussersten Schicht steht der Infrastructure Layer.
+Dieser beinhaltet externe Systeme, welche von der Applikation benötigt werden, wie Datenbanken, Messaging Services und Applikationen die auf Web APIs welche der Applikation zugreifen.
 
-\textbf{Domain Services}
-Bieten die fachliche Logik und Verhaltensweise des Domain Model Layers an.
-
-\textbf{Application Services}
-Bildet die Brücke zwischen externer Infrastruktur und den DomainServices.
-Dies beinhaltet Repository Services und Rest Controllers.
-
-\textbf{Infrastructure}
-Veranschaulicht die Infrastruktur ausserhalb des Systems.
-Dies beinhaltet unter anderem Datenbanken, Messaging Services und Applikationen die auf Web APIs welche der Applikation zugreifen.
-
-Da auf die Aufteilung in Microservices für den Rahmen dieses Projektes verzichtet wird, muss sich diese Architektur innerhalb des Services wiederspiegeln.
-Dies soll durch die Aufteilung der Package Struktur geschehen.
+Um zu garantieren, dass keine ungewollten Abhängigkeiten zwischen Layern bestehen, können die Layers in eigene Module verpackt werden.
+Dies erhöht jedoch die interne Komplexität der Applikation.
+Das Onion Modell wird innerhalb des Cloud Services deshalb nicht durch Module, sondern durch eine vorgegebene Packagestruktur umgesetzt.
 
 \begin{figure}[h]
     \centering
     \begin{minipage}[b]{0.9\textwidth}
 
         \dirtree{%
-        .1 ch.fhnw.ip5.praxiscloudservice.
-        .2 api.
-        .2 config.
-        .2 domain.
-        .2 persistence.
-        .2 service.
-        .2 web.
-    }
-    \caption{Package Struktur Cloud Service}\label{fig:packagescloudservice}
+            .1 ch.fhnw.ip5.praxiscloudservice.
+            .2 api.
+            .2 config.
+            .2 domain.
+            .2 persistence.
+            .2 service.
+            .2 web.
+        }
+        \caption{Package Struktur Cloud Service}\label{fig:packagescloudservice}
     \end{minipage}
 \end{figure}
 
-Im Zentrum steht das Package \textbf{domain}.
-Es beinhaltet alle Domänenobjekte und stellt damit alleine den Domain Layer dar.
-
-Das Package \textbf{api} definiert Interfaces für sämtliche Domain Services.
-Es beinhaltet zudem Data Transition Objects (DTO), welche verwendet werden, um Daten nach aussen abzubilden.
-sowie Exceptions welche für den Cloud Service definiert werden.
-
-Das Package \textbf{persistence} definiert Services welche für Interaktion mit der Datenbank verwendet werden und gehört zum Application Services Layer.
-
-Das Package \textbf{service} implementiert die Services, welche im api Package vorgegeben sind und entspricht dem Domain Service Layer.
-
-Das Package \textbf{web} definiert die REST Endpunkte, welche die Applikation nach aussen anbietet,
-sowie Clients die verwendet werden, um andere Systeme anzusprechen.
-Es gehört zum Application Services Layer.
-
-Das Package \textbf{config} beinhaltet technische Konfiguration der Applikation.
+Im Zentrum steht das Package domain.
+Es beinhaltet alle Domänenobjekte und stellt alleine den Domain Layer dar.
+Der Domain Service Layer wird durch das Package Service abgebildet.
+Hier werden sämtliche Domain Services implementiert.
+Die Packages persistence und web beinhalten schliesslich den Application Service Layer.
+Dabei definiert das Package persistence Services welche für Interaktion mit der Datenbank verwendet werden.
+Das Package web definiert die REST-Endpunkte und Clients, welche für die Kommunikation zwischen den Domänen und anderen Services benötigt werden.
+Die Objekte, welche darüber ausgetauscht werden, sind im Package api definiert.
+So werden direkte Abhängigkeiten zwischen den Domänen Notification und Configuration vermieden.
+Das Package api beinhaltet zudem Interfaces für Domain Services und Exceptions.
+Diese werden im Package services implementiert und im package Web verwendet.
+Letztlich beinhaltet das config die technische Konfiguration der Applikation.
 
 \clearpage
 
