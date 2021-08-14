@@ -7,11 +7,11 @@ Weitere Informationen zur Bedienung des Mobile Clients sind dem Benutzerhandbuch
 
 Wird die Mobile Client Applikation zu ersten Mal geöffnet, muss die korrekte Konfiguration geladen werden.
 So können Buttons für die benötigten Benachrichtigungen angezeigt und relevante Benachrichtigungen empfangen werden.
-In einem ersten Schritt wird dem Benutzer deshalb eine einfache Login Maske angezeigt.
+In einem ersten Schritt wird dem Benutzer deshalb eine einfache Login-Maske angezeigt.
 Darin kann sich der Benutzer mit Benutzername und Passwort anmelden.
-War die Anmeldung erfolgreich werden alle Konfigurationen geladen, die dem Benutzer zur Verfügung stehen.
+War die Anmeldung erfolgreich, werden alle Konfigurationen geladen, die dem Benutzer zur Verfügung stehen.
 Die verfügbaren Konfigurationen werden dem Benutzer in einer Liste angezeigt und er wird aufgefordert, die gewünschte Konfiguration auszuwählen.
-Nachdem die Auswahl erfolgt ist, wird der Benutzer zur Home Seite weitergeleitet.
+Nachdem die Auswahl erfolgt ist, wird der Benutzer zur Startseite weitergeleitet.
 
 \begin{figure}[h]
     \centering
@@ -36,11 +36,11 @@ Die Buttons werden dynamisch aus der geladenen Konfiguration generiert.
 Dabei gibt die Konfiguration den Text vor, der auf dem Button angezeigt wird.
 Der Inhalt der Benachrichtigung, die der Button auslöst, ist in der Konfiguration im Cloud Service hinterlegt.
 
-Klickt der Benutzer auf einen der Buttons, wird die entsprechende Benachrichtigung versendet.
-Die Vermittlung, an die relevanten Empfänger übernimmt der Cloud Service.
+Tippt der Benutzer auf einen der Buttons, wird die entsprechende Benachrichtigung versendet.
+Die Vermittlung, an die relevanten Empfänger übernimmt dabei der Cloud Service.
 Dieser entscheidet anhand der vorhandenen Konfiguration, welchen Clients die Benachrichtigung zugestellt wird.
-Schlägt des Versenden der Benachrichtigung an mindestens einen Empfänger fehl, wird dies dem Benutzer angezeigt.
-Er hat dann die Möglichkeit, das Versenden an diese Empfänger wiederholen.
+Schlägt das Versenden der Benachrichtigung an mindestens einen Empfänger fehl, wird dies dem Benutzer angezeigt.
+Der Benutzer hat dann die Möglichkeit, das Versenden an diese Empfänger wiederholen.
 
 \begin{figure}[h]
     \centering
@@ -62,8 +62,8 @@ Er hat dann die Möglichkeit, das Versenden an diese Empfänger wiederholen.
 
 Wurde eine Benachrichtigung empfangen, ertönt ein Audio Signal und die Benachrichtigung ist im Tab Inbox auf der Startseite ersichtlich.
 Durch Klick auf einen der Einträge in der Liste, kann der Benutzer die empfangene Benachrichtigung quittieren.
-Wenn die Inbox Benachrichtigungen enthält, die nicht quittiert wurden, wiederholt der Client im Abstand von X Sekunden das Audiosignal.
-Diese Quittierung erfolgt dabei nur lokal auf dem Gerät.
+Wenn die Inbox Benachrichtigungen enthält, die nicht quittiert wurden, wiederholt der Client im Abstand von 60 //TODO: Kevin. Stimmt der Wert? Sekunden das Audiosignal.
+Die Quittierung von Benachrichtigungen erfolgt nur lokal auf dem Gerät.
 Der Versender wird nicht über die Quittierung benachrichtigt.
 
 Wurde eine Benachrichtigung im Hintergrund empfangen, wird diese als Push-Benachrichtigung auf dem Gerät angezeigt.
@@ -82,6 +82,8 @@ Auch wenn die Benachrichtigung im Hintergrund empfangen wurde, wird diese in der
     \end{minipage}
     \label{fig:MobileClient-Screens3}
 \end{figure}
+
+//TODO: Please add Screenshot with push notification beeing displayed
 
 \clearpage
 
