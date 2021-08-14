@@ -1,8 +1,8 @@
 \subsection{Admin UI}\label{subsec:admin-ui}
-Für die übergeordnete Administrations-Oberfläche wurde auf Vorschlag des Kunden ein React-Admin Projekt erstellt.
 
 \subsubsection{Framework Grundlagen}
-React Admin ist ein Framework, spezialisiert für CRUD oberflächen.
+Auf Wunsch des Kunden, wird das Admin UI als Web-Applikation auf Basis des React Admin Frameworks entwickelt.
+Bei React-Admin baut auf dem React-Framework auf und vereinfacht das Erstellen, Lesen, Bearbeiten und Löschen von Datensätzen.\cite{react-admin}
 Es setzt auf den folgenden Technologien auf:
 \begin{itemize}
     \item React
@@ -17,8 +17,7 @@ Das Framework abstrahiert eine grosse Bandbreite an Funktionalität welche häuf
 Die Voraussetzung hierfür ist eine konsistente API welche für alle Routen dieselben Endpunkte anbieten~\cite{react-admin}.
 
 \subsubsection{Anwendung}
-Die konfigurierbaren Elemente werden jeweils in einem eigenen Component verwaltet.
-React Admin unterstützt bereits Relationen zwischen diesen Komponenten.
+Die konfigurierbaren Elemente werden jeweils in einer eigenen Komponente verwaltet.
 
 \begin{figure}[h]
     \centering
@@ -26,7 +25,7 @@ React Admin unterstützt bereits Relationen zwischen diesen Komponenten.
     \includegraphics[width=.5\linewidth]{graphics/Admin-Ui-export}
     \caption[Admin-Ui Package Diagramm]{Admin-Ui Package Diagramm}
 \end{figure}
-Die Requests werden von jeweils vom Data-Provider durchgeführt der an die API des Cloudservices angepasst wird.
+Die Anfragen werden von jeweils von einem Data-Provider durchgeführt, der an die API des Cloudservices angepasst wird.
 Vor jedem Request wird der Auth-Provider aufgerufen um zu verifizieren, dass der aktuelle Benutzer auch berechtigt ist, die gewünschte Aktion durchzuführen.
 
 \clearpage
