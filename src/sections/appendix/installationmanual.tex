@@ -80,7 +80,8 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
     \end{enumerate}
     \item Erstellen Sie einen Adminstrator Account für das Admin UI.
     \begin{enumerate}
-        \item Richten Sie den Datenbankzugriff auf die in Schritt 3 erstellte Datenbank mit den Datenbanktool ihrer Wahl ein.\footnote{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html}
+        \item Richten Sie den Datenbankzugriff auf die in Schritt 3 erstellte Datenbank mit dem Datenbanktool ihrer Wahl ein.
+        \footnote{\url{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html}}
         \item Passen Sie die Parameter in folgenden Script an und führen es auf der Datenbank aus:
         \lstinputlisting[caption=createadmin.sql,language=sql,label={lst:CreateAdmin.java}]{listings/createadmin.sql}
 
