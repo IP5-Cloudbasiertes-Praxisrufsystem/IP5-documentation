@@ -91,37 +91,31 @@ Letztlich beinhaltet das config die technische Konfiguration der Applikation.
     \end{minipage}
 \end{figure}
 
-\textbf{PraxisUser}
-Ein Benutzer für das Praxisrufsystem.
+Das Herzstück der Connfiguration Domain ist die ClientConfiguration.
+Die ClientConiguration beinhaltet die Informationen, welche Benachrichtigung ein Endgerät versenden kann und welche Benachrichtigungen es empfangen soll.
+Ein Endgerät wird dabei durch die Entität Client dargestellt.
+Client und ClientConfiguration sind getrennt, damit Clients auch ohne Configuration erfasst werden können.
+So kann ein Administrator bereits Geräte im System erfassen, ohne Sie vollständig zu konfigurieren.
+Die konkrete Konfiguration von Benachrichtigungen erfolgt über die Entitäten NotificationType und RuleParameters.
+Ein NotificationType ist die Grundlage für eine Benachrichtigung.
+Er definiert den Inhalt der mit einer Benachrichtigung versendet wird.
+Die Liste von NotificationTypes auf einer ClientConfiguration definiert, welche Benachrichtigungen der zugehörige Client versenden kann.
+Welche Benachrichtigungen ein Client empfängt wird über die Liste von RuleParameters auf der ClientConfiguration definiert.
+Die konfigurierten RuleParameters werden von der RulesEngine ausgewertet, um relevante Empfänger für eine Benachrichtigung zu finden.
+Dabei kann die Entität RuleParameters für alle Regeln wiederverwendet werden.
+Die RuleEngine kann anhand des RuleType bestimmen, wie RuleParameters ausgewertet werden.
+
+Zur Verwaltung von Konfigurationen wird weiter die Entität PraxisUser definiert.
+Sie stellt einen Benutzer des Praxisrufsystems dar.
 Jeder Benutzer kann die Rollen Admin oder User haben.
 Ein Benutzer mit der Rolle Admin hat Recht die Konfiguration über das Admin UI zu verwalten.
 Ein Benutzer mit der Rolle User ist berechtigt, den Mobile Client zu verwenden.
 
-\textbf{Client}
-Clients repräsentieren ein Endgeräte, auf welchen die Mobile Client Applikation läuft.
-
-\textbf{Registration}
+Für die Anbindung an den Messaging Service ist zudem die Entität Registration notwendig.
 Die Registrierung eines Clients beinhaltet die technische Identifikation, mit der ein Client sich beim Messaging Service registriert hat.
 Ein Client kann immer nur genau eine Registration haben.
 
-\textbf{ClientConfiguration}
-Stellt die Konfiguration eines Clients dar.
-Die ClientConiguration beinhaltet die Informationen, welche Benachrichtigung ein Client versenden kann und welche Benachrichtigungen er empfangen soll.
-Client und ClientConfiguration sind getrennt, damit Clients auch ohne Configuration erfasst werden können.
-So kann der Administrator bereits Geräte im System erfassen ohne Sie vollständig zu konfigurieren.
-
-\textbf{NotificationType}
-Der NotificationType ist die Grundlage für Notifications die versendet werden.
-Der NotificationType definiert Informationen für den Inhalt von Benachrichtigungen die versendet werden.
-Er beinhaltet weiter Schlüssel für Texte die in einem Client angezeigt werden können.
-
-\textbf{RuleParameters}
-RuleParameters werden pro ClientConfiguration erfasst.
-Die konfigurierten RuleParameters werden von der RulesEngine ausgewertet, um relevante Empfänger für eine Benachrichtigung zu finden.
-
-\textbf{RuleType}
-Der RuleType bestimmt wie die Parameter für eine Regel ausgewertet werden.
-Für jeden Eintrag in der Tabelle RuleType muss es eine Implementierung des Interfaces RuleEvaluator geben, welche die RulesParameter Werte für den Regeltyp auswerten kann.
+\clearpage
 
 \begin{figure}[h]
     \centering
