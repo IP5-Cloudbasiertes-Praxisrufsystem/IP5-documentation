@@ -1,7 +1,7 @@
 \subsection{Mobile Client}\label{subsec:mobile-client}
 
 \subsubsection{Framework Grundlagen}
-NativeScript bietet eine Abstraktion zu den nativen Plattformen Android und IOS.
+NativeScript bietet eine Abstraktion zu den nativen Plattformen Android und iOS.
 Die jeweilige NativeScript Runtime erlaubt es in Javascript (oder einem entsprechenden Application Framework) Code zu schreiben,
 welcher direkt für die entsprechende native Umgebung kompiliert wird~\cite{ns-core-overview}.
 \begin{figure}[h]
@@ -12,7 +12,7 @@ welcher direkt für die entsprechende native Umgebung kompiliert wird~\cite{ns-c
 
 
 Die Runtime agiert als Proxy zwischen Javascript und dem jeweiligen Ökosystem.
-Im Falle von IOS bedeutet dies u.A. das für alle Objective-C types ein JavaScript Prototype angeboten wird.
+Im Falle von iOS bedeutet dies u.A. das für alle Objective-C types ein JavaScript Prototype angeboten wird.
 Dies ermöglicht es direkt mit nativen Objekten zu interagieren.
 Im Umkehrschluss findet eine Typenkonversion via Marshalling Service statt\cite{ns-ios-runtime}.
 
@@ -40,7 +40,7 @@ Der Mobile-Client wird so nach einem Objekt-orientierten Paradigma aufgebaut.
     \caption[Mobile-Client Flow Chart]{Mobile-Client Flow Chart}
 \end{figure}
 
-Das eigentliche \emph{\nameref{fig:MobileClient-Mocks}} besteht aus dem Homescreen,
+Das eigentliche~\emph{\nameref{fig:MobileClient-Mocks}} besteht aus dem Homescreen,
 der es dem Benutzer erlaubt Nachrichten zu versenden, und der Inbox welche eingegangene Nachrichten anzeigt.
 Diese Ansicht ist erst nach erfolgreicher Authentifizierung erreichbar.
 Hat sich der Benutzer erfolgreich angemeldet, erhält er eine Auswahl der ihm zur verfügungstehenden Konfigurationen.
