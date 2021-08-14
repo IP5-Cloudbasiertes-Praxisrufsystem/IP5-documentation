@@ -293,8 +293,8 @@ Das Versenden, Empfangen und die Rückmeldung an den Mobile Client erfolgen anal
 
 \subsubsection{API}
 
-Um die Verwaltung der Konfigurationen zu ermöglichen, bietet der Cloud Service eine REST-API an über die Konfigurationsobjekte verwaltet werden können.
-Der Cloud Service bietet Verwaltungs APIs für die Folgenden Domänenobjekte:
+Um die Verwaltung der Konfigurationen zu ermöglichen, bietet der Cloud Service eine REST-API an.
+Der Cloud Service bietet Verwaltungs-APIs für die Folgenden Domänenobjekte:
 
 \begin{table}[h]
     \centering
@@ -302,18 +302,18 @@ Der Cloud Service bietet Verwaltungs APIs für die Folgenden Domänenobjekte:
         \hline
         \textbf{Domänenobjekt} & \textbf{Entity Name} \\
         \hline
-        Client         & /api/clients \\
+        Client         & clients \\
         \hline
-        Client Configuration         & /api/client-configurations \\
+        Client Configuration         & client-configurations \\
         \hline
-        Notification Types         & /api/notification-types \\
+        Notification Types         & notification-types \\
         \hline
-        Users         & /api/users \\
+        Users         & users \\
         \hline
     \end{tabular}\label{tab:adminapimethods}
 \end{table}
 
-Für jedes dieser Domänenobjekte ist ein dedizierter Endpoint definiert, der unter dem Subpfad /api/entity-name erreichbar ist.
+Für jedes dieser Domänenobjekte ist ein dedizierter Endpoint definiert, der unter dem Pfad /api/entity-name erreichbar ist.
 Jeder dieser Kontroller bietet eine API zu Verwaltung dieses Domänenobjekts, welche dem folgenden Schema folgt:
 
 \begin{tabular}{|p{7.3cm}|l|l|l|l|}
@@ -335,7 +335,7 @@ Jeder dieser Kontroller bietet eine API zu Verwaltung dieses Domänenobjekts, we
 \end{tabular}\label{tab:apimethods}
 
 Eine Ausnahme, bildet hier das Domänenobjekt Registration.
-Hier wird wird analog zum Domänenservice für Registrations\footnote{Siehe Kapitel 5.3.2} folgende API angeboten:
+Hier wird analog zum Domänenservice für Registrations\footnote{Siehe Kapitel 5.3.2} folgende API angeboten:
 
 \begin{tabular}{|l|l|l|l|l|}
     \hline
