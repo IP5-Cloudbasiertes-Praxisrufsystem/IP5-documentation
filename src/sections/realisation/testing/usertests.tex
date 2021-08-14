@@ -2,9 +2,9 @@
 
 \subsubsection*{Testablauf}
 
-Am 21. Juli 2021 wurden zusammen mit dem Auftraggeber Benutzertests durchgeführt.
+Am 21. Juli 2021 Benutzertests wurden zusammen mit dem Auftraggeber durchgeführt.
 Dazu wurde der Mobile Client auf in physisches Ipad installiert.
-Zusätzlich wurde eine Mobile Client Instanz auf einem Emulator gestartet.
+Zusätzlich wurde eine zweite Mobile Client Instanz auf einem Emulator gestartet.
 Der Cloud Service sowie das Admin UI wurden mit Amazon Webservices deployed.
 Ein Firebase Messaging Service wurde angebunden.
 
@@ -24,14 +24,17 @@ Ein Firebase Messaging Service wurde angebunden.
 \end{enumerate}
 
 Ale Ergebnis wird erwartet, dass die Benachrichtigung auf dem physischen Ipad ankommt und angezeigt wird.
-Schritte x bis y werden mit minimiertem Mobile Client wiederholt.
-Dabei wird erwartet dass eine Push Benachrichtigung angezeigt wird.
+Der Test wurde zweimal durchgeführt.
+Bei der ersten Durchführung war die Mobile Client Applikation auf dem Empfänger Gerät im Vordergrund geöffnet.
+Bei der zweiten Durchführung wurde die Mobile Cliemt Applikation auf dem Empfänger Gerät minimiert.
+In beiden Fällen wurde erwartet, dass die Benachrichtigung in der Inbox des Empfängers angezeigt wird.
+Im zweiten Fall wurde zusätzlich erwartet, dass eine Push-Benachrichtigung angezeigt wird.
 
-Mehr oder frühere Benutzertests konnten aufgrund der COVID Situation leider nicht durchgeführt werden.
+Mehr oder frühere Benutzertests konnten aufgrund der pandemischen Situation leider durchgeführt werden.
 
 \subsubsection*{Feedback vom Benutzer}
 
-Als Feedback vom Kunden haben wir zwei weitere Funktionswünsche erhalten:
+Aus den Tests mit dem Benutzer sind folgende zusätzliche Anforderungen hervorgegangen:
 
 \begin{itemize}
     \item Wenn Benachrichtigungen eingehen sollte ein Audiosignal ertönen.
@@ -41,7 +44,7 @@ Als Feedback vom Kunden haben wir zwei weitere Funktionswünsche erhalten:
 
 Um diesen Wünschen Gerecht zu werden, wurden die Szenarien S07 und S09 hinzugefügt.
 Diese Anforderungen konnten auch noch umgesetzt werden.
-Der dritte Wunsch des Kunden, die Quittierung von Benachrichtungen an den Sender weitergeleitet wird konnte aus zeitlichen Gründen nicht mehr umgesetzt werden.
+Der dritte Wunsch des Kunden, die Quittierung von Benachrichtigungen an den Sender weitergeleitet wird konnte aus zeitlichen Gründen nicht mehr umgesetzt werden.
 
 \clearpage
 
