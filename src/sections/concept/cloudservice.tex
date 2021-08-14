@@ -235,9 +235,10 @@ Nach diesem Ablauf ist der Client bei Messaging Service und Cloud Service regist
 
 \subsubsection*{Benachrichtigung versenden und empfangen}
 
-Vorbedingung:
-Konfiguration und Registrierung gemäss Abbildung 5.14 ist für zwei Clients ist abgeschlossen.
-Konfiguration ist einer der Clients konfiguriert, Benachrichtigungen vom anderen Client zu empfangen.
+Die zentrale Funktion des Praxisrufsystems ist das Versenden und Empfangen von Benachrichtigungen.
+Hier wird dieser Ablauf im Erfolgsfall beschrieben.
+Als Vorbedingung wird angenommen, dass Konfiguration und Registrierung gemäss Abbildung 5.14 ist für zwei Clients abgeschlossen ist.
+Dabei ist einer der Clients konfiguriert, Benachrichtigungen vom anderen Client zu empfangen.
 
 \begin{figure}[h]
     \centering
@@ -251,18 +252,17 @@ Nachdem der Benutzer das Versenden einer Benachrichtigung auslöst, wird eine An
 Darin enthalten sind die Id des Senders sowie die Id des NotificationTypes.
 Der NotificationController macht in der Folge eine Anfrage an den ConfigurationController, um alle relevanten Empfänger zu finden.
 Im ConfigurationController werden die erfassten RuleParameters aller konfigurierten ClientConfigurations ausgewertet.
-Darauf wird eine Liste der Registrations relevanter Empfänger zurückgegeben.
+Darauf wird eine Liste der Registrierungen aller relevanten Empfänger zurückgegeben.
 Sobald die Empfänger geladen sind, erstellt der NotificationController eine Benachrichtigung aus dem gegebenen NotificationType.
-Diese Benachrichtigung wird als PraxisNotification persistiert und anschliessned
-mit den geladenen Registrierungen an den Messaging Service gesendet, welcher die Zustellung an die entsprechenden Clients übernimmt.
-Nach dem Übermitteln an den Messaging Service wird pro Empfänger ein NotificationSendProzess erstellt der den Status für diesen Empfänger dokumentiert.
-Der NotificationController sender darauf eine Antwort zurück.
-Diese Antwort beinhaltet die technische Id der versendeten Benachrichtigung und das Resultat ob die Benachrichtigung an alle Empfänger versendet werden konnte.
+Diese Benachrichtigung wird als PraxisNotification persistiert und an den MessagingService übergeben.
+Der Messaging Service stellt die Zustellung anhand der mitgegebenen Registrierung sicher.
+Nach der Übermittlung an den Messaging Service wird im CloudService pro Empfänger ein NotificationSendProzess erstellt der den Status für diesen Empfänger dokumentiert.
+Der NotificationController sender darauf eine Bestätigung an den Mobile Client.
+Diese Antwort beinhaltet die technische Id der versendeten Benachrichtigung und das Resultat, ob die Benachrichtigung an alle Empfänger versendet werden konnte.
 Ist dies nicht der Fall, wird der Retry-Process auf Client Seite gestartet.
-
-Auf Empfängerseite wird, sobald die Benachrichtigung verarbeitet und angezeigt sobald die Zustellung durch den Messaging Service erfolgt ist.
+Auf Empfängerseite wird die Benachrichtigung verarbeitet und angezeigt, sobald die Zustellung durch den Messaging Service erfolgt ist.
 Diese Zustellung erfolgt asynchron.
-Kann der Sender nur informiert werden, wenn die Zustellung an den Messaging Service fehlgeschlagen ist.
+Dementsprechend kann der Sender nur informiert werden, wenn die Zustellung an den Messaging Service fehlgeschlagen ist.
 
 \clearpage
 \subsubsection*{Benachrichtigung wiederholen}
