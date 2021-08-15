@@ -10,14 +10,12 @@ Dabei waren folgende Anforderungen das Hauptkriterium:
     \item Priorisiert ist die iOS Unterstützung.
 \end{itemize}
 
-Allgemein wurde während der Evaluation festgestellt, dass es unmöglich ist eine native Applikation für iOS zu entwickeln ohne das ein MacOs Gerät mit Xcode zur Verfügung steht.
-Ebenfalls ist ein kostenpflichtiger Apple Developer Account zwingend notwendig um die Apps entsprechend installieren zu können.
-
 \subsubsection{Kotlin Multiplatform}
 Kotlin ist eine auf Java basierende Sprache, welche von JetBrains entwickelt wurde.
 Kotlin Multiplatform Mobile ist ein Framework, dass es erlaubt allgemeine Business-Logik in purem Kotlin zu schreiben und auf iOS sowie Android zu verwenden.
 Jedoch sind für native Funktionen separate API's zu verwenden. Die Anforderungen an den Mobile-Client sind jedoch beinahe ausschliesslich native Funktionen.
 Ein grosser Anteil an Business-Logik ist nicht zu erwarten was dazu führt, dass der grösste Teil des Mobile-Clients zweimal entwickelt werden müsste.\cite{kotlin-platform-specific-APIs}
+
 \subsubsection{Progressive Web App}
 Eine PWA wird grundsätzlich wie eine reguläre Webapplikation entwickelt.
 Daher ist garantiert nur eine Codebase für alle Plattformen notwendig.
@@ -40,86 +38,23 @@ Als Projekt der OpenJS Foundation hat NativeScript eine sehr breite Community di
 Besonders beliebt ist, dass Nativescript mit den gängigsten Frameworks VueJS, Angular und React verwendet werden kann.\cite{ns-core-overview,cordova-vs-nativescript}
 
 \subsubsection{Flutter}
+Flutter ist ein Toolkit von Google um native Cross-Platform Apps zu entwickeln.
+Die Implementierung erfolgt in der ebenfalls von Google supporteten Sprache Dart.\cite{flutter-docs}
+Der Ursprung von Google führt dazu, dass Flutter primär für Android konzipiert ist.
+Die UI-Komponenten werden nicht vom Betriebssystem verwendet, sondern selber designt.
+Als Konsequenz daraus, falls ein natives ``look and feel'' gewünscht ist, müssten diese Komponenten separat entwickelt werden.\cite{why-flutter-isnt-good}
 
+\subsubsection{Ergebnis}
+Die oben aufgeführten Varianten wurden alle in einem kurzen Testprojekt ausprobiert.
+Allgemein wurde während der Evaluation festgestellt, dass es unmöglich ist eine native Applikation für iOS zu entwickeln ohne das ein MacOs Gerät mit Xcode zur Verfügung steht.
+Ebenfalls ist ein kostenpflichtiger Apple Developer Account zwingend notwendig um die Apps entsprechend installieren zu können.
 
-%//TODO: @Kevin
+Aufgrund der technischen Einschränkungen ist eine PWA früh ausgeschieden.
+Kotlin und Flutter sind beide eher für Android optimiert und benötigen Plattformspezifische Entwicklungen was der Grundidee einer gemeinsamen Codebasis entgegenläuft.
+Cordova und Nativescript haben sich technisch am vielversprechendsten gezeigt.
+Ebenfalls erlauben diese die den Projektteilnehmern bereits eher bekannten technologien HTML, CSS und Javascript zu verwenden.
 
-Fliesstext style evaulation. Etwa wie bei messaging service.
-
-Keep it short.
-1 Page should be enough I think.
-Definitely not more than 2.
-
-Mobile Eval muss zuerst sein, weil sich Messaging Service darauf beruht.
-
-Eine Option ist X. Es ermöglicht Y und das ist gut. Es hat aber Problem Z.
-Pro Option muss erwähnt sein wie Push Benachrichtigungen integriert werden können.
-Pro Option muss erwähnt werden wie Serverseitige Benachrichtigungen integriert werden können.
-Wird meistens sein, dass es mit FCM geht.
-Citations notwendig!
-
-\url{https://kotlinlang.org/lp/mobile/}
-    + Jet Brains Infrastructure
-    + We like Kotlin
-    + Large names apparantly use it
-
-    -IoS Env. Needed to develop for Apple 
-    -Still has to develop separate API und UI Modules for Platforms 
-
-\url{https://web.dev/progressive-web-apps/ }
-	
-    +No need of Native Codebase
-    +Perfect for Android
-    + Can push for android
-    - Cannot push for ios
-    - Cannot fcm for ios cause pwa only works with safari and safari doesn't like fcm
-    -Eventually drawbacks because no entire API Access 
-    -PWAs on iOS suck
-
-\url{https://cordova.apache.org/} 
-
-    + Popular Framework
-    + Tons of plugins to access apis
-
-    -Still need to have a Mac for IoS development  
-    -Not a truly native app -> API Issues
- 
-
-\url{https://nativescript.org/ }
-    + Popular Framework
-    + Tons of plugins to access apis
-    + Some deployments on ios possible without apple infra
-    +Claims to be truly Native
-
-    -Still need to have a Mac for IoS development
-    -Not a truly native app -> API Issues
-    -Do we really trust it? (sorta new and passion project of a few people)
-    - Lots of plugins are one man shows
-
- 
- \url{https://flutter.dev}
-    + Popular
-    + Shared Code Base
-    - Not based on things we know (cite docs or smth)
-    - Difficult setup (if you find a source, else ignore)
-    - Not native in the end (i think, pls double check)
-    - iOS infra
-
-
-Go Native
-
-    +Would definitely work
-
-    -Do most things twice
-    -We don't have time for that
-    -Kunde wünscht ausdrücklich nur eine Codebasis für beide Clients.
-
-\url{https://stackshare.io/stackups/apache-cordova-vs-nativescript}
-
-\url{https://nativescript.org/blog/build-nativescript-apps-remotely-from-windows-or-linux/ }
-
-// TODO: Remove clear page if not needed
-\clearpage
+Wir haben uns schlussendlich entschieden den Mobile-Client in NativeScript zu entwickeln, da dies die tatsächlich Nativen APIs abstrahiert und so am besten geeignet für unsere Anforderungen scheint.
 
 \subsection{Messaging Service}\label{subsec:messaging-eval}
 
