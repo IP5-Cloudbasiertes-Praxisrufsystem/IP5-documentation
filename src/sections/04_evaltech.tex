@@ -2,6 +2,46 @@
 
 \subsection{Mobile Client Evaluation}\label{subsec:mobile-client-eval}
 
+Da keiner der Projektteilnehmer Erfahrungen im Bereich der nativen App-Entwicklung mitbringt, wurde zuerst eine Evaluation der verfügbaren Frameworks durchgeführt.
+Dabei waren folgende Anforderungen das Hauptkriterium:
+\begin{itemize}
+    \item Gemeinsame Codebasis für iOS und Android Geräte.
+    \item Zugang zu Gerätehardware, insbesondere Mikrofon und Lautsprecher.
+    \item Priorisiert ist die iOS Unterstützung.
+\end{itemize}
+
+Allgemein wurde während der Evaluation festgestellt, dass es unmöglich ist eine native Applikation für iOS zu entwickeln ohne das ein MacOs Gerät mit Xcode zur Verfügung steht.
+Ebenfalls ist ein kostenpflichtiger Apple Developer Account zwingend notwendig um die Apps entsprechend installieren zu können.
+
+\subsubsection{Kotlin Multiplatform}
+Kotlin ist eine auf Java basierende Sprache, welche von JetBrains entwickelt wurde.
+Kotlin Multiplatform Mobile ist ein Framework, dass es erlaubt allgemeine Business-Logik in purem Kotlin zu schreiben und auf iOS sowie Android zu verwenden.
+Jedoch sind für native Funktionen separate API's zu verwenden. Die Anforderungen an den Mobile-Client sind jedoch beinahe ausschliesslich native Funktionen.
+Ein grosser Anteil an Business-Logik ist nicht zu erwarten was dazu führt, dass der grösste Teil des Mobile-Clients zweimal entwickelt werden müsste.\cite{kotlin-platform-specific-APIs}
+\subsubsection{Progressive Web App}
+Eine PWA wird grundsätzlich wie eine reguläre Webapplikation entwickelt.
+Daher ist garantiert nur eine Codebase für alle Plattformen notwendig.
+Ziel einer PWA ist es so nahe wie möglich an eine Native App heranzukommen hinsichtlich Usability, User-Experience und Performance.\cite{what-are-PWAS}
+Ein kleines Testprojekt hat gezeigt, dass Push-Benachrichtigungen auf Android Geräten problemlos funktionieren.
+Unter iOS jedoch kann eine PWA nur mittels Safari installiert werden. Und Safari erlaubt per Design keine Push-Meldungen.\cite{canIUsePush,iOSSupportPush}
+
+\subsubsection{Cordova}
+Cordova ist ein Framework von Apache mit dem Cross-Platform Apps auf der Basis von standard Web-Technologien erstellt werden können.
+Der Zugriff auf die Device-Apis wird mittels Plugins gelöst.
+Die Entwicklung für mehrere Plattformen benötigt zwar weiterhin unterschiedliche SDK's (Android Studio / Xcode) jedoch bleibt die Codebasis dieselbe.
+Ebenfalls bietet Cordova einen Plattformübergreifenden CLI-Workflow, sodass es für den Entwickler keine Umstellung im Prozess gibt.\cite{cordova-overview}
+Dadurch das Cordova auf einen Wrapper setzt und die Plugins für die Device-Apis abgesetzt werden, ist die App als gesamtes aber nicht rein nativ und erreicht daher auch nicht die volle native Performance.\cite{cordova-vs-nativescript}
+
+\subsubsection{Native Script}
+Nativescript baut ähnlich wie Cordova auf standard Web-Technologien auf.
+Der Hauptunterschied liegt darin, dass Nativescript die Plattformspezifischen API's direkt abstrahiert.
+So wird eine entwickelte Applikation plattformübergreifend zu einer rein nativen App kompiliert.
+Als Projekt der OpenJS Foundation hat NativeScript eine sehr breite Community die fortlaufend neue Features entwickelt.
+Besonders beliebt ist, dass Nativescript mit den gängigsten Frameworks VueJS, Angular und React verwendet werden kann.\cite{ns-core-overview,cordova-vs-nativescript}
+
+\subsubsection{Flutter}
+
+
 %//TODO: @Kevin
 
 Fliesstext style evaulation. Etwa wie bei messaging service.
