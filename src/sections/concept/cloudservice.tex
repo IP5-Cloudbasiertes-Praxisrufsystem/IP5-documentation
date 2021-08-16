@@ -1,4 +1,3 @@
-
 \subsection{Cloud Service}\label{subsec:cloud-service}
 
 \subsubsection{Architektur}
@@ -28,7 +27,7 @@ Um einfache Erweiterbarkeit zu gewährleisten, wird der Cloud Service nach dem P
 \begin{figure}[h]
     \centering
     \begin{minipage}[b]{0.5\textwidth}
-        \includegraphics[width=\textwidth]{graphics/clean-architecture}
+        \includegraphics[width=\textwidth]{graphics/thinktocode-onion}
         \caption{Onion Architecture}
     \end{minipage}
 \end{figure}
@@ -40,7 +39,7 @@ Der Domain Layer darf nur Dependencies auf sich selbst haben.
 Umgekehrt dürfen aber alle anderen Layers Abhängigkeiten auf den Domain Layer haben.
 Die nächste Schicht im Modell ist der Domain Service Layer.
 Dieser bietet die fachliche Logik und definiert die Verhaltensweise des Domain Layers.
-Der Layer Application Services bildet schlieslich die Brücke zwischen externer Infrastruktur und Domain Services.
+Der Layer Application Services bildet schliesslich die Brücke zwischen externer Infrastruktur und Domain Services.
 Dies beinhaltet Repository Services für die Schnittstelle zu persistentem Speicher und Rest Controllers für Schnittstellen zu anderen Applikationen.
 In der äussersten Schicht steht der Infrastructure Layer.
 Dieser beinhaltet externe Systeme, welche von der Applikation benötigt werden, wie Datenbanken, Messaging Services und Applikationen die auf Web APIs welche der Applikation zugreifen.
@@ -91,14 +90,14 @@ Letztlich beinhaltet das config die technische Konfiguration der Applikation.
     \end{minipage}
 \end{figure}
 
-Das Herzstück der Connfiguration Domain ist die ClientConfiguration.
+Das Herzstück der Configuration Domain ist die ClientConfiguration.
 Die ClientConiguration beinhaltet die Informationen, welche Benachrichtigung ein Endgerät versenden kann und welche Benachrichtigungen es empfangen soll.
 Ein Endgerät wird dabei durch die Entität Client dargestellt.
 Client und ClientConfiguration sind getrennt, damit Clients auch ohne Configuration erfasst werden können.
 So kann ein Administrator bereits Geräte im System erfassen, ohne Sie vollständig zu konfigurieren.
 Die konkrete Konfiguration von Benachrichtigungen erfolgt über die Entitäten NotificationType und RuleParameters.
 Ein NotificationType ist die Grundlage für eine Benachrichtigung.
-Er definiert den Inhalt der mit einer Benachrichtigung versendet wird.
+Er definiert den Inhalt, der mit einer Benachrichtigung versendet wird.
 Die Liste von NotificationTypes auf einer ClientConfiguration definiert, welche Benachrichtigungen der zugehörige Client versenden kann.
 Welche Benachrichtigungen ein Client empfängt wird über die Liste von RuleParameters auf der ClientConfiguration definiert.
 Die konfigurierten RuleParameters werden von der RulesEngine ausgewertet, um relevante Empfänger für eine Benachrichtigung zu finden.
@@ -149,7 +148,7 @@ Da jeder aktive Client eine ClientConfiguration definiert, die eine Liste an Reg
 \end{figure}
 
 Die Auswertung der einzelnen Regelparameter innerhalb der RulesEngine wird an einzelne RuleEvaluatoren delegiert.
-Umgesetzt wird dieses Konzept mit einem Strategy Pattern.\footnote{Referece Gamma Design Patterns}
+Umgesetzt wird dieses Konzept mit einem Strategy Pattern.\footnote{Reference Gamma Design Patterns}
 RuleEvaluator definiert das Strategy Interface.
 Der Zugriff auf die einzelnen Strategies innerhalb der RulesEngine wird über eine RuleEvaluatorFactory gelöst.
 Diese Factory kennt alle existierenden RuleEvaluator Instanzen und bietet eine öffentliche Methode, über welche der RuleEvaluator für einen bestimmten Typ geladen werden kann.
@@ -159,13 +158,14 @@ Diese Factory kennt alle existierenden RuleEvaluator Instanzen und bietet eine �
 
 Über den @Autowired Konstruktor nimmt die Factory eine Liste des Types RuleEvaluator entgegen.
 Die Spring Dependency Injection wird hier automatisch alle verfügbaren RuleEvaluator Instanzen in einer Liste sammeln und als Konstruktorparameter entgegennehmen.
-Da jeder RuleEvalutor eine Methode bietet, über die der relevante RuleType abgefragt werden kann, kann nun aus dieser Liste eine Map gebaut werden, die RuleTypes auf die relevanten RuleEvaluator Instanzen mapped.
-Das Laden eines RuleEvaluators ahnand des RuleTypes kann nun über ein einfaches Lookup in der Map erfolgen.
-Werden in der Zukunft weitere RuleTypes unterstützt, reicht es die entsprechende RuleEvaluatorFactory zu implementieren.
+Da jeder RuleEvaluator eine Methode bietet, über die der relevante RuleType abgefragt werden kann, kann nun aus dieser Liste eine Map gebaut werden, die RuleTypes auf die relevanten RuleEvaluator Instanzen mapped.
+Das Laden eines RuleEvaluators anhand des RuleTypes kann nun über ein einfaches Lookup in der Map erfolgen.
+Werden in der Zukunft weitere RuleTypes unterstützt, reicht es den entsprechenden RuleEvaluator zu implementieren.
 Der neue RuleEvaluator wird danach automatisch über dei RuleEvaluatorFactory verfügbar sein.
 Anpassungen an der RulesEngine oder der RuleEvaluatorFactory sind nicht nötig.
 
 \clearpage
+
 \subsubsection{Domäne Notification}
 
 \begin{figure}[h]
@@ -222,11 +222,11 @@ Als Vorbedingung wird dabei angenommen, dass mindestens ein Client inklusive Cli
 \end{figure}
 
 In einem ersten Schritt muss sich der Praxismitarbeiter im Mobile Client anmelden.
-Diee Anmeldung wird im Cloud Service ausgewertet.
+Die Anmeldung wird im Cloud Service ausgewertet.
 Hat er gültige Benutzerdaten angegeben, werden Informationen zu allen verfügbaren Konfigurationen vom Cloud Service geladen und der Benutzer kann die gewünschte Konfiguration auswählen.
 Dabei werden nur Name und Id der Konfigurationen geladen, damit nicht mehr Daten als nötig übertragen werden.
 Wählt Benutzer die gewünschte Konfiguration, werden alle dafür Konfigurierten NotificationTypes geladen und im UI die entsprechenden Buttons erstellt.
-Direkt nach dem Laden der Konfiguration registriert sich der Mobile Client beim Messageing Service.
+Direkt nach dem Laden der Konfiguration registriert sich der Mobile Client beim Messaging Service.
 Als Antwort erhält er ein eindeutiges Token, welches verwendet werden kann, um an diesem Client Nachrichten zu senden.
 Der Mobile Client registriert sich darauf mit dem erhaltenen Token und der ausgewählten Konfiguration beim Cloud Service.
 Nach diesem Ablauf ist der Client bei Messaging Service und Cloud Service registriert und bereit Benachrichtigungen zu empfangen.
@@ -235,7 +235,7 @@ Nach diesem Ablauf ist der Client bei Messaging Service und Cloud Service regist
 
 Die zentrale Funktion des Praxisrufsystems ist das Versenden und Empfangen von Benachrichtigungen.
 Hier wird dieser Ablauf im Erfolgsfall beschrieben.
-Als Vorbedingung wird angenommen, dass Konfiguration und Registrierung gemäss Abbildung 5.14 ist für zwei Clients abgeschlossen ist.
+Als Vorbedingung wird angenommen, dass Konfiguration und Registrierung gemäss Abbildung 5.14 für zwei Clients abgeschlossen ist.
 Dabei ist einer der Clients konfiguriert, Benachrichtigungen vom anderen Client zu empfangen.
 
 \begin{figure}[h]
@@ -267,7 +267,7 @@ Dementsprechend kann der Sender nur informiert werden, wenn die Zustellung an de
 
 Die zentrale Funktion des Praxisrufsystems ist das Versenden und Empfangen von Benachrichtigungen.
 Hier wird dieser Ablauf im Erfolgsfall beschrieben.
-Als Vorbedingung wird angenommen, dass Konfiguration und Registrierung gemäss Abbildung 5.14 ist für zwei Clients abgeschlossen ist.
+Als Vorbedingung wird angenommen, dass Konfiguration und Registrierung gemäss Abbildung 5.14 für zwei Clients abgeschlossen ist.
 Dabei ist einer der Clients konfiguriert, Benachrichtigungen vom anderen Client zu empfangen.
 Es wurde eine Benachrichtigung gemäss Abbildung 5.15 versendet, das Versenden an mindestens einen Client fehlgeschlagen
 und der Cloud Service hat ein negatives SendNotificationResult zurückgegeben.
@@ -296,81 +296,75 @@ Das Versenden, Empfangen und die Rückmeldung an den Mobile Client erfolgen anal
 Um die Verwaltung der Konfigurationen zu ermöglichen, bietet der Cloud Service eine REST-API an.
 Der Cloud Service bietet Verwaltungs-APIs für die Folgenden Domänenobjekte:
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|l|p{13cm}|}
-        \hline
-        \textbf{Domänenobjekt} & \textbf{Entity Name} \\
-        \hline
-        Client         & clients \\
-        \hline
-        Client Configuration         & client-configurations \\
-        \hline
-        Notification Types         & notification-types \\
-        \hline
-        Users         & users \\
-        \hline
-    \end{tabular}\label{tab:adminapimethods}
-\end{table}
+\begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \textbf{Domänenobjekt} & \textbf{Entity Name}  \\
+    \hline
+    Client                 & clients               \\
+    \hline
+    Client Configuration   & client-configurations \\
+    \hline
+    Notification Types     & notification-types    \\
+    \hline
+    Users                  & users                 \\
+    \hline
+\end{tabularx}\label{tab:adminapimethods}
 
 Für jedes dieser Domänenobjekte ist ein dedizierter Endpoint definiert, der unter dem Pfad /api/entity-name erreichbar ist.
 Jeder dieser Kontroller bietet eine API zu Verwaltung dieses Domänenobjekts, welche dem folgenden Schema folgt:
 
-\begin{tabular}{|p{7.3cm}|l|l|l|l|}
+\begin{tabularx}{\textwidth}{|p{5cm}|l|l|l|X|}
     \hline
-    \textbf{Action} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+    \textbf{Action}            & \textbf{HTTP} & \textbf{Pfad}        & \textbf{Body} & \textbf{Response} \\
     \hline
-        Alle Elemente lesen         & GET & /api/entity-name & - & [EntityDto] \\
+    Alle Elemente lesen        & GET           & /api/entity-name     & -             & [EntityDto]       \\
     \hline
-        Einzelnes Element lesen         & GET & /api/entity-name/id & - & EntityDto \\
+    Einzelnes Element lesen    & GET           & /api/entity-name/id  & -             & EntityDto         \\
     \hline
-        Neues Element erstellen         & POST & /api/entity-name  & EntityDto & EntityDto\\
+    Neues Element erstellen    & POST          & /api/entity-name     & EntityDto     & EntityDto         \\
     \hline
-        Bestehendes Element ändern          & PUT & /api/entity-name  & EntityDto & EntityDto\\
+    Bestehendes Element ändern & PUT           & /api/entity-name     & EntityDto     & EntityDto         \\
     \hline
-        Einzelnes Element löschen          & DELETE & /api/entity-name/id  & - & -  \\
+    Einzelnes Element löschen  & DELETE        & /api/entity-name/id  & -             & -                 \\
     \hline
-        Mehrere Elemente löschen          & DELETE & /api/entity-name/ids  & - & - \\
+    Mehrere Elemente löschen   & DELETE        & /api/entity-name/ids & -             & -                 \\
     \hline
-\end{tabular}\label{tab:apimethods}
+\end{tabularx}\label{tab:apimethods}
 
 Eine Ausnahme, bildet hier das Domänenobjekt Registration.
 Hier wird analog zum Domänenservice für Registrations\footnote{Siehe Kapitel 5.3.2} folgende API angeboten:
 
-\begin{tabular}{|l|l|l|l|l|}
+\begin{tabularx}{\textwidth}{|p{5cm}|l|l|X|X|}
     \hline
-    \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+    \textbf{Aktion}                & \textbf{HTTP} & \textbf{Pfad}             & \textbf{Body}   & \textbf{Response} \\
     \hline
-    Registrierung aktualisiern         & POST & /api/registrations/ & ClientId, Token & - \\
+    Registrierung aktualisieren    & POST          & /api/registrations       & ClientId, Token & -                 \\
     \hline
-    Registrierung entfernen         & DELETE & /api/registrations/ & ClientId & - \\
+    Registrierung entfernen        & DELETE        & /api/registrations       & ClientId        & -                 \\
     \hline
-    Relevante Registrierung finden         & POST & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
+    Relevante Registrierung finden & POST          & /api/registrations/tokens & Notification-Dto & [Registration-Dto] \\
     \hline
-\end{tabular}\label{tab:registrationsapimethods}
+\end{tabularx}\label{tab:registrationsapimethods}
 
 \subsubsection*{Benachrichtigungen}
 
 Zum Versenden von Benachrichtigungen bietet der Cloud Service folgende Endpunkte an:
 
-\begin{tabular}{|l|l|l|l|l|}
+\begin{tabularx}{\textwidth}{|p{5cm}|l|l|l|X|}
     \hline
-    \textbf{Aktion} & \textbf{HTTP} & \textbf{Pfad} & \textbf{Body} & \textbf{Response} \\
+    \textbf{Aktion}                  & \textbf{HTTP} & \textbf{Pfad}            & \textbf{Body}   & \textbf{Response}       \\
     \hline
-    Registrierung aktualisiern         & POST & /api/registrations/ & ClientId, Token & - \\
+    Nachricht versenden              & POST          & /api/notifications/send & NotificationDto & Notification-Response-Dto \\
     \hline
-    Registrierung entfernen         & DELETE & /api/registrations/ & ClientId & - \\
+    Fehlgeschlagene erneut versenden & POST          & /api/notifications/retry & NotificationId  & Notification-Response-Dto \\
     \hline
-    Relevante Registrierung finden         & POST & /api/registrations/tokens & NotificationDto & [RegistrationDto] \\
-    \hline
-\end{tabular}\label{tab:registrationsapimethodss}
+\end{tabularx}\label{tab:registrationsapimethodss}
 
 \clearpage
 
 \subsubsection*{Authentifizierung}
 \begin{figure}[h]
     \centering
-    \label{fig:authSequence}
     \includegraphics[width=0.5\textwidth]{graphics/Authentication-export}\caption[Authentifizierung-Sequenz]{Authentifizierung-Sequenz}
 \end{figure}
 

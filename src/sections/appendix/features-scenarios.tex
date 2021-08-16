@@ -9,7 +9,7 @@
     And: \>    \> \> Mindestens ein Empfänger ist konfiguriert\\
     When:   \> \> \> Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
     Then:   \> \> \> Benachrichtigung wird an den zentralen Cloud Service gesendet\\
-    And: \>    \> \> Benachrichtitung wird an alle Mobile Clients versendet\\
+    And: \>    \> \> Benachrichtigung wird an alle Mobile Clients versendet\\
     \> \>  \> die sich für diese Benachrichtigung subscribed haben weitergeleitet\\
     And:   \> \> \> Praxismitarbeiter erhält optische Rückmeldung, dass Benachrichtigung versendet wurde\\
 
@@ -19,7 +19,7 @@
     And:  \> \>   \> Kein Empfänger ist konfiguriert\\
     When:  \> \>  \> Praxismitarbeiter tippt auf einen Benachrichtigungs-Button\\
     Then:  \> \>  \> Benachrichtigung wird an den zentralen Cloud Service gesendet\\
-    And:  \> \>   \> Benachrichtitung wird nicht weitergeleitet\\
+    And:  \> \>   \> Benachrichtigung wird nicht weitergeleitet\\
 
 \end{tabbing}
 
@@ -44,18 +44,18 @@
     Scenario S04: \> \> \>  Fehler Rückmeldung\\ \\
     Given: \> \> \>   Eine Benachrichtigung wurde von Mobile Client versendet\\
     When: \> \> \>    Weiterleitung von Cloud Service Notification an Empfänger schlägt auf Service Seite fehl\\
-    Then: \> \> \>    Der Praxismitarbeiter wird über den Fehler Informiert\\
-    And: \> \> \>     Der Praxismitarbeiter hat die Möglichkeit die Fehlgeschlagenen Benachrichtigungen zu wiederholen\\
+    Then: \> \> \>    Der Praxismitarbeiter wird über den Fehler informiert\\
+    And: \> \> \>     Der Praxismitarbeiter hat die Möglichkeit die fehlgeschlagenen Benachrichtigungen zu wiederholen\\
     \\
     Scenario S05: \> \> \>  Confirm Retry\\ \\
     Given: \> \> \>   Benachrichtigung ist fehlgeschlagen\\
-    And: \> \> \>     Dialog zum wiederholen wird angezeigt\\
+    And: \> \> \>     Dialog zum Wiederholen wird angezeigt\\
     When: \> \> \>    Praxismitarbeiter bestätigt, dass wiederholt werden soll\\
     Then: \> \> \>    Der Cloudservice versucht erneut, die fehlgeschlagenen zuzustellen\\
     \\
     Scenario S06: \> \> \>  Cancel Retry\\ \\
     Given: \> \> \>   Benachrichtigung ist fehlgeschlagen\\
-    And: \> \> \>     Dialog zum wiederholen wird angezeigt\\
+    And: \> \> \>     Dialog zum Wiederholen wird angezeigt\\
     When: \> \> \>    Praxismitarbeiter klick, dass nicht wiederholt werden soll\\
     Then: \> \> \>    Werden die fehlgeschlagenen nicht wiederholt\\
     And: \> \> \>     Zurück zur Notificationsansicht\\
@@ -67,7 +67,7 @@
     Left \= Middle \= Right \= Right  \kill
     Scenario S07: \> \> \>  Foreground\\ \\
     Given: \> \> \>   Mobile Client ist geöffnet\\
-    When: \> \> \>    Eine Benachrichtigung wird vom Mobile Client emfpangen\\
+    When: \> \> \>    Eine Benachrichtigung wird vom Mobile Client empfangen\\
     Then: \> \> \>    Ein Audio Signal erklingt\\
     \\
     Scenario S08: \> \> \>  Background\\ \\
@@ -89,12 +89,12 @@
 \subsubsection*{F05 - Login Mobile Client}
 \begin{tabbing}
     Left \= Middle \= Right \= Right  \kill
-    Scenario S10: \> \> \>  Startbildschirm wenn nicht angemeldet\\ \\
+    Scenario S10: \> \> \>  Startbildschirm, wenn nicht angemeldet\\ \\
     Given: \> \> \>   Mobile Client is geöffnet\\
     When: \> \> \>  Benutzer ist nicht angemeldet\\
     Then: \> \> \>  Benutzer wird zum Login aufgefordert\\
     \\
-    Scenario S11: \> \> \>  Startbildschirm wenn angemeldet\\ \\
+    Scenario S11: \> \> \>  Startbildschirm, wenn angemeldet\\ \\
     Given: \> \> \>   Mobile Client is geöffnet\\
     When: \> \> \>  Benutzer ist angemeldet\\
     Then: \> \> \>  Konfiguration die der Benutzer zuletzt gewählt hat wird angezeigt\\
