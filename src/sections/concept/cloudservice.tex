@@ -362,13 +362,39 @@ Zum Versenden von Benachrichtigungen bietet der Cloud Service folgende Endpunkte
 
 \clearpage
 
-\subsubsection*{Authentifizierung}
+\subsubsection{Authentifizierung}
+Die Authentifizierung der User am System wird mittels Spring-Security gelöst.
+Der Einfachheit halber werden die User in einer eigenen Datenbanktabelle verwaltet.
+Mit einem vertretbaren Mehraufwand könnte diese Verantwortlichkeit jedoch auch noch an einen externen Provider wie z.B. Keycloack delegiert werden.
+
+Der User authentifiziert sich mit seinem Username und Passwort (BasicAuth) erstmalig über den login Endpoint.
+Der Cloudservice stellt mit dem DefaultUserService eine eigene Implementation für die von Spring-Security verwendeten Komponenten UserDetailsService und AuthenticationProvider bereit (siehe Abbildung 5.18).
+Hier werden die übergebenen Credentials überprüft und bei erfolgreicher Anmeldung ein Authentication Objekt mit den entsprechenden Benutzerrollen im Security-Context abgelegt.\cite{basicAuth}
+
+Aus diesem Objekt wird ein JWT-Token generiert, welches 24h lang gültig ist und dem Client zurückgegeben.
+Für alle weiteren Request während der laufenden Session authentifiziert sich der Client mit diesem JWT-Token (BarearToken Auth).
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{graphics/Authentication-export}\caption[Authentifizierung-Sequenz]{Authentifizierung-Sequenz}
 \end{figure}
 
-%// TODO: Kevin - At most 1 A4 page. Basic Concept and citations to documentation should be fine.
+Der Vorteil an JWT ist dabei, dass zum einen keine SessionId als Cookie im Browser gespeichert wird.\cite{tokenVsSessionId}
+Und zum Anderen das innerhalb des JWT Tokens zusätzliche Metadaten gespeichert werden können.\cite{jwtIntro}
+Wir verwenden dies um die Rolle sowie die UserId bei den Requests mitliefern zu können.
+
+\clearpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{graphics/SecuirtyContextClassDiagram-export}\caption[SecurityContext-Klassendiagram]{SecurityContext-Klassendiagram}
+\end{figure}\label{fig:securityclassdiagram}
+
+\subsubsection{Autorisierung}
+Aktuell werden die Rollen User und Administrator verwendet.
+Das Rollensystem lässt sich ohne grösseren Aufwand beliebig im entsprechenden Enum erweitern.
+Die Abfrage der Berechtigung wird für das gesamte System zentral in der SecurityConfig (Siehe Abbildung 5.18) geprüft.
+Dabei werden die entsprechenden Rollen für den jeweiligen HTTP-Request abgefragt.
+
 
 \clearpage
 
