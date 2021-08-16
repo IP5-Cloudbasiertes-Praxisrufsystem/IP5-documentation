@@ -4,22 +4,40 @@
 \subsubsection*{Firebase Messaging}
 \begin{enumerate}
     \item Öffnen Sie die \href{https://console.firebase.google.com/}{\textit{Firebase Console}} und erstellen Sie ein neues Projekt.
-    \item Navigieren Sie das Menü ``Project Settings'.
+    \item Navigieren Sie in das Menü ``Project Settings''.
     \item Navigieren Sie zum Tab ``Service Accounts''.
     \item Klicken Sie den Button ``Generate new private Key'' und bestätigen Sie die Eingabe.
     \item Speichern Sie die generierte Datei an einem Ort Ihrer Wahl.
     \item Kopieren Sie den Dateiinhalt und Benutzen Sie ein Werkzeug Ihrer Wahl\footnote{z.B. \url{https://www.base64decode.org/}} um den Inhalt mit Base64 zu kodieren.
     \item Speichern Sie den Base64 kodierten Dateiinhalt an einem Ort Ihrer Wahl. Sie werden diesen Wert für die Konfiguration des Cloud Services benötigen.
-    \item // TODO: Kevin - Add whatever steps are needed for the mobile side auth stuff.
+    \item Navigieren Sie in das Menü ``Project Settings''.
+    \item Erstellen Sie für die gewünschte Plattform (iOS, Android oder Web app) eine Anwendung via ``Add App''.
+    \item Verwenden Sie für den Android package name bzw. die iOS bundle ID den package\_name des Mobile Clients. (ch.fhnw.ip5.praxisintercom.client)
+    \item Vergeben Sie einen beliebigen App-Nickname.
+    \item Laden Sie nach dem Registrieren die Konfigurationsdatei GoogleService-Info.plist (iOS) oder google-services.json (Android) herunter.
+    \item Legen Sie die Konfigurationsdatei im MobileClient Projekt unter ./App\_Resources/\textless Plattform\textgreater ab.
 \end{enumerate}
 
 Mehr Informationen zu Firebase und der Integration von Firebase Projekten finden Sie in der \href{https://firebase.google.com/docs/projects/learn-more#setting_up_a_firebase_project_and_registering_apps}{offiziellen Dokumentation.}\cite{understand-firebase}
 
 
 \subsubsection*{Mobile Client}
-\textbf{TODO} \\
-?? Cloud Service url configuration \\
-?? FCM Integration configuration \\
+\textit{Installation des Bestehenden Images}
+
+Um den Aktuellen Stand des Mobile-Clients direkt auf einem IPad zu installieren folgen Sie folgenden Schritten:
+\begin{enumerate}
+    \item Stellen Sie sicher, dass Sie Zugang zu einem MacOS Gerät mit Installiertem Xcode haben.
+    \item Verbinden Sie das gewünschte IPad per USB mit ihrem Gerät.
+    \item Öffnen Sie die Deviceliste innerhalb von Xcode. (cmd + shift + 2)
+    \item Installieren Sie das unter \textless PathToMobileClientRepo\textgreater /ReleaseBuild abgelegte .ipa File via Drag and Drop auf dem IPad.
+\end{enumerate}
+
+\textit{Installation Entwicklungsumgebung}
+\begin{enumerate}
+    \item Stellen Sie sicher, dass Sie Node und NPM auf Ihrem System installiert haben.
+    \item Folgen Sie dem \href{https://docs.nativescript.org/environment-setup.html}{\textit{Setup Guide}} von NativeScript für Ihre Systemkonfiguration \cite{ns-envSetup}
+    \item Folgen Sie ihrem Bedarf entsprechend dem \href{https://docs.nativescript.org/development-workflow.html}{\textit{CLI-Workflow}}\cite{ns-cli}
+\end{enumerate}
 
 \subsubsection*{Admin UI}
 
