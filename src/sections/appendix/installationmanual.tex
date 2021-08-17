@@ -114,6 +114,8 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
     \item Erstellen Sie einen Administrator Account für das Admin UI.
     \begin{enumerate}
         \item Richten Sie den Datenbankzugriff auf die in Schritt 3 erstellte Datenbank gemäss der \href{https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic-rds-access}. ein.
+        \item Wählen Sie ein Passwort
+        \item Erstellen Sie ein Hash des gewählten Passwort mit dem "bcrypt"-Algorithmus.\footnote{\url{https://bcrypt-generator.com/}}
         \item Passen Sie die Parameter in folgenden Script an und führen es auf der Datenbank aus:
         \lstinputlisting[caption=createadmin.sql,language=sql,label={lst:CreateAdmin.java}]{listings/createadmin.sql}
 
