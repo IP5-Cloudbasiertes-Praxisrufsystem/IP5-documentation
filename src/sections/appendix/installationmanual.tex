@@ -86,6 +86,8 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
         \item Folgen Sie der \href{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-softwaresettings.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic-env} um die nötigen Umgebungsvariablen zu setzen:
         \item Name: FCM\_CREDENTIALS, Wert: Firebase Credentials mit Base 64 Encoded\footnote{Siehe Installationsanleitung Firebase Messaging}
         \item Name: SPRING\_PROFILES\_ACTIVE, Wert: aws.
+        \item Name: ADMIN_ORIGIN, Wert: Admin UI Domain
+        \item Name: JWT_SECRET_KEY, Wert: Zufälliger 64 Bit String\footnote{https://www.grc.com/passwords.htm}
     \end{enumerate}
     \item Konfigurieren Sie AWS CodeBuild um die Cloud Service Applikation mit AWS bauen zu können.
     \begin{enumerate}
