@@ -71,14 +71,6 @@ Dies hat allerdings den Nachteil, dass eine Konstante HTTP Verbindung zwischen C
 Weiter besteht die Möglichkeit, über einen Messaging Broker Benachrichtigungen an den Mobile Client zu senden.
 Hier besteht allerdings dasselbe Problem.
 Damit Benachrichtigungen auf der Client Seite Empfangen werden können, muss eine Verbindung zum Messaging Broker bestehen.
-%//TODO @Kevin: Any Idea how to cite this? I know it's true, but citable source would be nice.
-% According to this Paper: https://www.matse.itc.rwth-aachen.de/dienste/public/show_document.php?id=18763 I would not say it is correct
-% that you need to have an active connection urgently. But using a Messagebroker would be pretty useless since it ist anyways that the
-% Messages has to be sent via FCM. As described by you in the Section below.
-% But dont now how to rephrase right now. Maybe we can talk about it?
-% Bring argument that it is somewhat critical to have a steady consumer in Background on mobile devices.
-
-%TODO: search if biblatex is able to fullprint authors.
 
 Sowohl die Option ``EventSources'' als auch die Option ``Message Broker'' haben zudem die Einschränkung, dass sie es nicht ermöglichen Push-Benachrichtigungen anzuzeigen.
 Um dies auf iOS mit Nativescript zu ermöglichen müsste zusätzlich ein Firebase Messaging Service angebunden werden.
