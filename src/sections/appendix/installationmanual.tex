@@ -39,6 +39,18 @@ Um den Aktuellen Stand des Mobile-Clients direkt auf einem IPad zu installieren 
     \item Folgen Sie ihrem Bedarf entsprechend dem \href{https://docs.nativescript.org/development-workflow.html}{\textit{CLI-Workflow}}\cite{ns-cli}
 \end{enumerate}
 
+\textit{Release Build Bauen}
+
+Um vom mobile Client ein .ipa File zu generieren, welches Sie direkt auf auf ein IPad installieren können, führen Sie im
+Mobile-Client Projekt folgenden befehl aus: \textit{ns build ios --release --forDevice}
+
+Das gebaute Projekt wird unter  \textless PathToMobileClientRepo\textgreater /platforms/ios/build/Release-iphoneos/IP5praxismobileclient.ipa erstellt.
+\begin{enumerate}
+    \item Stellen Sie sicher, dass Sie Node und NPM auf Ihrem System installiert haben.
+    \item Folgen Sie dem \href{https://docs.nativescript.org/environment-setup.html}{\textit{Setup Guide}} von NativeScript für Ihre Systemkonfiguration \cite{ns-envSetup}
+    \item Folgen Sie ihrem Bedarf entsprechend dem \href{https://docs.nativescript.org/development-workflow.html}{\textit{CLI-Workflow}}\cite{ns-cli}
+\end{enumerate}
+
 \subsubsection*{Admin UI}
 
 Im Folgenden wird beschrieben wie die Admin UI Applikation mit AWS betrieben werden kann.
@@ -86,8 +98,8 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
         \item Folgen Sie der \href{https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-softwaresettings.html}{\textit{offiziellen Anleitung}}\cite{aws-elastic-env} um die nötigen Umgebungsvariablen zu setzen:
         \item Name: FCM\_CREDENTIALS, Wert: Firebase Credentials mit Base 64 Encoded\footnote{Siehe Installationsanleitung Firebase Messaging}
         \item Name: SPRING\_PROFILES\_ACTIVE, Wert: aws.
-        \item Name: ADMIN_ORIGIN, Wert: Admin UI Domain
-        \item Name: JWT_SECRET_KEY, Wert: Zufälliger 64 Bit String\footnote{https://www.grc.com/passwords.htm}
+        \item Name: ADMIN\_ORIGIN, Wert: Admin UI Domain
+        \item Name: JWT\_SECRET\_KEY, Wert: Zufälliger 64 Bit String\footnote{https://www.grc.com/passwords.htm}
     \end{enumerate}
     \item Konfigurieren Sie AWS CodeBuild um die Cloud Service Applikation mit AWS bauen zu können.
     \begin{enumerate}
