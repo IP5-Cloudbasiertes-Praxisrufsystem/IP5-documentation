@@ -39,6 +39,17 @@ Um den Aktuellen Stand des Mobile-Clients direkt auf einem IPad zu installieren 
     \item Folgen Sie ihrem Bedarf entsprechend dem \href{https://docs.nativescript.org/development-workflow.html}{\textit{CLI-Workflow}}\cite{ns-cli}
 \end{enumerate}
 
+\textit{Release Build Bauen}
+Um vom mobile Client ein .ipa File zu generieren, welches Sie direkt auf auf ein IPad installieren können, führen Sie im
+Mobile-Client Projekt folgenden befehl aus: \textit{ns build ios --release --forDevice}
+
+Das gebaute Projekt wird unter  \textless PathToMobileClientRepo\textgreater /platforms/ios/build/Release-iphoneos/IP5praxismobileclient.ipa erstellt.
+\begin{enumerate}
+    \item Stellen Sie sicher, dass Sie Node und NPM auf Ihrem System installiert haben.
+    \item Folgen Sie dem \href{https://docs.nativescript.org/environment-setup.html}{\textit{Setup Guide}} von NativeScript für Ihre Systemkonfiguration \cite{ns-envSetup}
+    \item Folgen Sie ihrem Bedarf entsprechend dem \href{https://docs.nativescript.org/development-workflow.html}{\textit{CLI-Workflow}}\cite{ns-cli}
+\end{enumerate}
+
 \subsubsection*{Admin UI}
 
 Im Folgenden wird beschrieben wie die Admin UI Applikation mit AWS betrieben werden kann.
