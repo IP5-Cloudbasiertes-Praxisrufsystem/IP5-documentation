@@ -74,14 +74,14 @@
     Given: \> \> \>   Mobile Client läuft im Hintergrund\\
     When: \> \> \>    Eine Benachrichtigung wird vom Mobile Client empfangen\\
     Then: \> \> \>    Ein Audio Signal erklingt\\
-    And: \> \> \>     Eine Push Benachrichtigung wird angezeigt\\
+    And: \> \> \>     Eine Push-Benachrichtigung wird angezeigt\\
     \\
     Scenario S09: \> \> \>  Nicht Quittiert\\ \\
     Given: \> \> \>   Mobile Client ist geöffnet\\
     And: \> \> \>     Eine Benachrichtigung wurde empfangen\\
     When: \> \> \>    Benachrichtigung wird nicht quittiert\\
     Then: \> \> \>    Ein Audio Signal erklingt\\
-    And: \> \> \>     Das Audio Signal wiederholt sich alle 30 Sekunden, bis die Benachrichtigung Quittiert wurde.\\
+    And: \> \> \>     Das Audio Signal wiederholt sich alle 30 Sekunden, bis die Benachrichtigung quittiert wurde.\\
 \end{tabbing}
 
 \clearpage
@@ -97,8 +97,8 @@
     Scenario S11: \> \> \>  Startbildschirm, wenn angemeldet\\ \\
     Given: \> \> \>   Mobile Client is geöffnet\\
     When: \> \> \>  Benutzer ist angemeldet\\
-    Then: \> \> \>  Konfiguration die der Benutzer zuletzt gewählt hat wird angezeigt\\
-    And: \> \> \>    Benachrichtigungs Buttons gemäss Konfiguration werden angezeigt.\\
+    Then: \> \> \>  Konfiguration, die der Benutzer zuletzt gewählt hat, wird angezeigt\\
+    And: \> \> \>    Benachrichtigungs-Buttons gemäss Konfiguration werden angezeigt.\\
     \\
     Scenario S12: \> \> \>  Anmelden korrekt\\ \\
     Given: \> \> \>  Benutzer ist nicht angemeldet\\

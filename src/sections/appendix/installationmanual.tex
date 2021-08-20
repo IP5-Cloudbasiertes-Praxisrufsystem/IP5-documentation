@@ -10,21 +10,37 @@
     \item Speichern Sie die generierte Datei an einem Ort Ihrer Wahl.
     \item Kopieren Sie den Dateiinhalt und Benutzen Sie ein Werkzeug Ihrer Wahl\footnote{z.B. \url{https://www.base64decode.org/}} um den Inhalt mit Base64 zu kodieren.
     \item Speichern Sie den Base64 kodierten Dateiinhalt an einem Ort Ihrer Wahl. Sie werden diesen Wert für die Konfiguration des Cloud Services benötigen.
+    \item Öffnen Sie erneut die \href{https://console.firebase.google.com/}{\textit{Firebase Console}}
     \item Navigieren Sie in das Menü ``Project Settings''.
     \item Erstellen Sie für die gewünschte Plattform (iOS, Android oder Web app) eine Anwendung via ``Add App''.
     \item Verwenden Sie für den Android package name bzw. die iOS bundle ID den package\_name des Mobile Clients. (ch.fhnw.ip5.praxisintercom.client)
     \item Vergeben Sie einen beliebigen App-Nickname.
     \item Laden Sie nach dem Registrieren die Konfigurationsdatei GoogleService-Info.plist (iOS) oder google-services.json (Android) herunter.
-    \item Legen Sie die Konfigurationsdatei im MobileClient Projekt unter ./App\_Resources/\textless Plattform\textgreater ab.
+    \item Legen Sie die Konfigurationsdatei in einem Verzeichnis Ihrer Wahl ab.
 \end{enumerate}
 
 Mehr Informationen zu Firebase und der Integration von Firebase Projekten finden Sie in der \href{https://firebase.google.com/docs/projects/learn-more#setting_up_a_firebase_project_and_registering_apps}{offiziellen Dokumentation.}\cite{understand-firebase}
 
-
 \subsubsection*{Mobile Client}
-\textit{Installation des Bestehenden Images}
 
-Um den Aktuellen Stand des Mobile-Clients direkt auf einem IPad zu installieren folgen Sie folgenden Schritten:
+\textit{Mobile Client Image bauen}
+
+Die Integration von Firebase Cloud Messaging in den Mobile Client muss zur Buildzeit passieren.
+Dies bedeutet, dass die Applikation neu gebaut werden muss.
+Um vom mobile Client eine installierbare Datei zu generieren,
+
+\begin{enumerate}
+    \item Stellen Sie sicher, dass Sie die Entwicklungsumgebung gemässe ``Installation Entwicklungsumgebung'' aufgesetzt haben.
+    \item Kopieren Sie die Konfigurationsdatei aus Schritt 13 der Firebase Cloud Messaging Installationsanleitung im MobileClient Projekt unter ./App\_Resources/\textless Plattform\textgreater ab.
+    \item Führen Sie im Mobile-Client Projekt folgenden befehl aus: \textit{ns build ios --release --forDevice}
+\end{enumerate}
+
+Das erstellte Image finden Sie anschliessend unter dem Pfad /platforms/ios/build/Release-iphoneos/IP5praxismobileclient.ipa erstellt im Projektverzeichniss.
+
+\textit{Installation eines bestehenden Images}
+
+Um ein bestehendes Image direkt auf einem IPad zu installieren folgen Sie folgender Anleitung:
+
 \begin{enumerate}
     \item Stellen Sie sicher, dass Sie Zugang zu einem MacOS Gerät mit Installiertem Xcode haben.
     \item Verbinden Sie das gewünschte IPad per USB mit ihrem Gerät.
@@ -39,17 +55,6 @@ Um den Aktuellen Stand des Mobile-Clients direkt auf einem IPad zu installieren 
     \item Folgen Sie ihrem Bedarf entsprechend dem \href{https://docs.nativescript.org/development-workflow.html}{\textit{CLI-Workflow}}\cite{ns-cli}
 \end{enumerate}
 
-\textit{Release Build Bauen}
-
-Um vom mobile Client ein .ipa File zu generieren, welches Sie direkt auf auf ein IPad installieren können, führen Sie im
-Mobile-Client Projekt folgenden befehl aus: \textit{ns build ios --release --forDevice}
-
-Das gebaute Projekt wird unter  \textless PathToMobileClientRepo\textgreater /platforms/ios/build/Release-iphoneos/IP5praxismobileclient.ipa erstellt.
-\begin{enumerate}
-    \item Stellen Sie sicher, dass Sie Node und NPM auf Ihrem System installiert haben.
-    \item Folgen Sie dem \href{https://docs.nativescript.org/environment-setup.html}{\textit{Setup Guide}} von NativeScript für Ihre Systemkonfiguration \cite{ns-envSetup}
-    \item Folgen Sie ihrem Bedarf entsprechend dem \href{https://docs.nativescript.org/development-workflow.html}{\textit{CLI-Workflow}}\cite{ns-cli}
-\end{enumerate}
 
 \subsubsection*{Admin UI}
 
@@ -99,7 +104,7 @@ Im Folgenden wird beschrieben wie die Cloud Service Applikation mit AWS betriebe
         \item Name: FCM\_CREDENTIALS, Wert: Firebase Credentials mit Base 64 Encoded\footnote{Siehe Installationsanleitung Firebase Messaging}
         \item Name: SPRING\_PROFILES\_ACTIVE, Wert: aws.
         \item Name: ADMIN\_ORIGIN, Wert: Admin UI Domain
-        \item Name: JWT\_SECRET\_KEY, Wert: Zufälliger 64 Bit String\footnote{https://www.grc.com/passwords.htm}
+        \item Name: JWT\_SECRET\_KEY, Wert: Zufälliger 64 Bit String\footnote{\url{https://www.grc.com/passwords.htm}}
     \end{enumerate}
     \item Konfigurieren Sie AWS CodeBuild um die Cloud Service Applikation mit AWS bauen zu können.
     \begin{enumerate}
