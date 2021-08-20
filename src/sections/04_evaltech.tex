@@ -2,40 +2,45 @@
 
 \subsection{Mobile Client Evaluation}\label{subsec:mobile-client-eval}
 
-Da keiner der Projektteilnehmer Erfahrungen im Bereich der nativen App-Entwicklung mitbringt, wurde zuerst eine Evaluation der verfügbaren Frameworks durchgeführt.
+Da keiner der Projektteilnehmer Erfahrungen im Bereich der mobilen App-Entwicklung mitbringt, wurde zuerst eine Evaluation der verfügbaren Frameworks durchgeführt.
 Dabei waren folgende Anforderungen das Hauptkriterium:
 \begin{itemize}
-    \item Gemeinsame Codebasis für iOS und Android Geräte.
-    \item Zugang zu Gerätehardware, insbesondere Mikrofon und Lautsprecher.
-    \item Priorisiert ist die iOS Unterstützung.
+    \item Es muss eine geteilte Codebasis für iOS und Android geben.
+    \item Zugang zu Gerätehardware, insbesondere Mikrofon und Lautsprecher muss möglich sein.
+    \item Unterstützung für iOS muss gegeben sein.
 \end{itemize}
 
 \subsubsection*{Kotlin Multiplatform}
-Kotlin ist eine auf Java basierende Sprache, welche von JetBrains entwickelt wurde.
+Kotlin ist eine auf der Java Virtual Machine basierende Sprache, welche von JetBrains entwickelt wurde.
 Kotlin Multiplatform Mobile ist ein Framework, dass es erlaubt allgemeine Business-Logik in purem Kotlin zu schreiben und auf iOS sowie Android zu verwenden.
-Jedoch sind für native Funktionen separate API's zu verwenden. Die Anforderungen an den Mobile-Client sind jedoch beinahe ausschliesslich native Funktionen.
-Ein grosser Anteil an Business-Logik ist nicht zu erwarten was dazu führt, dass der grösste Teil des Mobile-Clients zweimal entwickelt werden müsste.\cite{kotlin-platform-specific-APIs}
+Native Funktionen des Betriebssystems müssen dabei über separate APIs verwendet werden.\cite{kotlin-platform-specific-APIs}
+Viele Anforderungen an den Mobile-Client benötigen native Funktionen.
+Der Anteil an Business-Logik ist dabei eher gering.
+Dies führt dazu, dass ein grosser Teil des Mobile-Clients zweimal entwickelt werden müsste.
 
 \subsubsection*{Progressive Web App}
-Eine PWA wird grundsätzlich wie eine reguläre Webapplikation entwickelt.
+Eine Progressive Web App (PWA) wird grundsätzlich wie eine reguläre Webapplikation entwickelt.
 Daher ist garantiert nur eine Codebase für alle Plattformen notwendig.
 Ziel einer PWA ist es so nahe wie möglich an eine Native App heranzukommen hinsichtlich Usability, User-Experience und Performance.\cite{what-are-PWAS}
-Ein kleines Testprojekt hat gezeigt, dass Push-Benachrichtigungen auf Android Geräten problemlos funktionieren.
-Unter iOS jedoch kann eine PWA nur mittels Safari installiert werden. Und Safari erlaubt per Design keine Push-Meldungen.\cite{canIUsePush,iOSSupportPush}
+Ein Testprojekt im Rahmen der Evaluation hat gezeigt, dass Push-Benachrichtigungen auf Android Geräten problemlos funktionieren.
+Unter iOS jedoch kann eine PWA nur mittels Safari installiert werden.
+Safari erlaubt es allerdings nicht Push-Meldungen zu empfangen.\cite{canIUsePush,iOSSupportPush}
 
 \subsubsection*{Cordova}
 Cordova ist ein Framework von Apache mit dem Cross-Platform Apps auf der Basis von standard Web-Technologien erstellt werden können.
-Der Zugriff auf die Device-Apis wird mittels Plugins gelöst.
-Die Entwicklung für mehrere Plattformen benötigt zwar weiterhin unterschiedliche SDK's (Android Studio / Xcode) jedoch bleibt die Codebasis dieselbe.
-Ebenfalls bietet Cordova einen Plattformübergreifenden CLI-Workflow, sodass es für den Entwickler keine Umstellung im Prozess gibt.\cite{cordova-overview}
-Dadurch das Cordova auf einen Wrapper setzt und die Plugins für die Device-Apis abgesetzt werden, ist die App als gesamtes aber nicht rein nativ und erreicht daher auch nicht die volle native Performance.\cite{cordova-vs-nativescript}
+Der Zugriff auf native Funktionen des Betriebssystems wird mittels Plugins gelöst.
+Die Entwicklung für mehrere Plattformen benötigt weiterhin unterschiedliche Entwicklungsumgebungen (Android Studio / Xcode).
+Die Codebasis für alle Plattformen ist dabei aber dieselbe.
+Weiter bietet Cordova einen Plattformübergreifenden CLI-Workflow, sodass es für den Entwickler keine Umstellung im Prozess gibt.\cite{cordova-overview}
+Dadurch das Cordova auf einen Wrapper setzt und die Plugins für die Device-Apis abgesetzt werden, ist die App als Gesamtes aber nicht rein nativ und erreicht daher auch nicht die volle native Performance.\cite{cordova-vs-nativescript}
 
 \subsubsection*{Native Script}
-Nativescript baut ähnlich wie Cordova auf standard Web-Technologien auf.
-Der Hauptunterschied liegt darin, dass Nativescript die Plattformspezifischen API's direkt abstrahiert.
+Nativescript baut ähnlich wie Cordova und PWAs auf standard Web-Technologien auf.
+Der Hauptunterschied liegt darin, dass Nativescript die Plattformspezifischen APIs direkt abstrahiert.
 So wird eine entwickelte Applikation plattformübergreifend zu einer rein nativen App kompiliert.
 Als Projekt der OpenJS Foundation hat NativeScript eine sehr breite Community die fortlaufend neue Features entwickelt.
-Besonders beliebt ist, dass Nativescript mit den gängigsten Frameworks VueJS, Angular und React verwendet werden kann.\cite{ns-core-overview,cordova-vs-nativescript}
+Besonders beliebt ist, dass Nativescript mit den gängigsten Frameworks VueJS, Angular und React verwendet werden kann.
+Ähnlich wie bei Cordova können alle benötigten Betriebssystemfunktionen über Plugins integriert werden.\cite{ns-core-overview,cordova-vs-nativescript}
 
 \subsubsection*{Flutter}
 Flutter ist ein Toolkit von Google um native Cross-Platform Apps zu entwickeln.
@@ -45,48 +50,45 @@ Die UI-Komponenten werden nicht vom Betriebssystem verwendet, sondern selber des
 Als Konsequenz daraus, falls ein natives ``look and feel'' gewünscht ist, müssten diese Komponenten separat entwickelt werden.\cite{michaelLong}
 
 \subsubsection*{Ergebnis}
-Die oben aufgeführten Varianten wurden alle in einem kurzen Testprojekt ausprobiert.
-Allgemein wurde während der Evaluation festgestellt, dass es unmöglich ist eine native Applikation für iOS zu entwickeln ohne das ein MacOs Gerät mit Xcode zur Verfügung steht.
-Ebenfalls ist ein kostenpflichtiger Apple Developer Account zwingend notwendig um die Apps entsprechend installieren zu können.
 
-Aufgrund der technischen Einschränkungen ist eine PWA früh ausgeschieden.
-Kotlin und Flutter sind beide eher für Android optimiert und benötigen Plattformspezifische Entwicklungen was der Grundidee einer gemeinsamen Codebasis entgegenläuft.
-Cordova und Nativescript haben sich technisch am vielversprechendsten gezeigt.
-Ebenfalls erlauben diese die den Projektteilnehmern bereits eher bekannten technologien HTML, CSS und Javascript zu verwenden.
-
+Die Evaluation der Mobile Technologien hat gezeigt, dass eine PWA grundsätzlich nicht geeignet ist ein Praxisrufsystem umzusetzen.
+Serverseitige Push-Benachrichtigungen sind für das Praxisrufsystem zwingend notwendig, auf iOS und Safari aber nicht möglich.
+Kotlin und Flutter benötigen trotz einer geteilten Codebasis viel plattformspezifische Entwicklungen und bauen gleichzeitig auf Technologien auf, mit denen wir nur wenig Erfahrung haben.
+Cordova und Nativescript bauen auf uns bereits bekannten Web-Technologien auf.
+Nativescript hat dabei den Vorteil, dass es die tatsächlich nativen APIs abstrahiert und am Ende native Applikationen für die jeweiligen Plattformen generieren kann.
 Wir haben uns schlussendlich entschieden den Mobile-Client in NativeScript zu entwickeln, da dies die tatsächlich Nativen APIs abstrahiert und so am besten geeignet für unsere Anforderungen scheint.
+
+Die Evaluation hat weiter gezeigt, dass die Entwicklung des Mobile Clients zwingend MacOS Hardware mit einer XCode Entwicklungsumgebung benötigt,
+da dies zwingend Notwendig ist, um eine Applikation während der Entwicklung auf iOS zu installieren.\cite{ns-envSetup}
+Zudem können die notwendigen nativen Funktionen von iOS nur zusammen mit einem kostenpflichtigen Apple Developer Account verwendet werden.\cite{apple-apn}
 
 \subsection{Messaging Service}\label{subsec:messaging-eval}
 
-Für das Praxisrufsystem wird ein Dienst benötigt mit dem Benachrichtigungen an eine Mobile Applikation gesendet werden können.
+Für das Praxisrufsystem wird ein Dienst benötigt, mit dem Benachrichtigungen an eine Mobile Applikation gesendet werden können.
 Als Reaktion auf eine empfangene Benachrichtigung muss es möglich sein, Push-Benachrichtigungen auf dem Gerät anzuzeigen.
-Die Technologie die dazu verwendet wird, muss dabei mit der für den Mobile Client gewählten Technologie kompatibel sein.
+Die Technologie, die dazu verwendet wird, muss dabei mit der für den Mobile Client gewählten Technologie kompatibel sein.
 Für den Mobile Client wurde das Native Script Framework ausgewählt.
 Damit sind Push-Benachrichtigungen auf iOS und Android möglich.
-Push-Benachrichtigungen auf iOS sind dabei nur über die Anbindung von Firebase Messaging (FCM) möglich.\cite{nativescript-push}
+Push-Benachrichtigungen auf iOS sind allerdings nur über die Anbindung von Firebase Cloud Messaging (FCM) möglich.\cite{nativescript-push}
 
-Um Mobile Clients über Benachrichtigungen zu informieren ist es möglich mit Event-Sources\cite{event-source} Anfragen von der Serverseite an einen Client zu senden.
+Bevor Push-Benachrichtigungen auf dem Gerät angezeigt werden können, muss die entsprechende Benachrichtigung an den Mobile Client gesendet werden. 
+Mit Event-Sources\cite{event-source} ist es möglich, Anfragen von der Serverseite an einen Mobile Client zu senden.
 Dies hat allerdings den Nachteil, dass eine Konstante HTTP Verbindung zwischen Client und Server bestehen muss.
-
-Weiter besteht die Möglichkeit, über einen Messaging Broker Benachrichtigungen an den Mobile Client zu senden.
-Hier besteht allerdings dasselbe Problem.
-Damit Benachrichtigungen auf der Client Seite Empfangen werden können, muss eine Verbindung zum Messaging Broker bestehen.
-
-Sowohl die Option ``EventSources'' als auch die Option ``Message Broker'' haben zudem die Einschränkung, dass sie es nicht ermöglichen Push-Benachrichtigungen anzuzeigen.
-Um dies auf iOS mit Nativescript zu ermöglichen müsste zusätzlich ein Firebase Messaging Service angebunden werden.
-
-FCM ermöglicht es dabei selbst von einem Server Umfeld Benachrichtigungen an Endgeräte zu versenden.\cite{fcm-java}
-Firebase Messaging unterstützt damit die Anforderungen, von einem Cloud Server Benachrichtigungen an einen Mobile Client zu senden und Push-Benachrichtigungen auf dem Gerät anzuzeigen.
-In der Folge wird für das Praxisrufsystem auschliessliche Firebase Messaging als Messaging Service verwendet.
+Alternativ kann ein Message Broker verwendet werden, um Benachrichtigungen an den Mobile Client zu senden.\cite{broker}
+Beide Optionen haben die Einschränkung, dass sie es nicht ermöglichen Push-Benachrichtigungen auf dem Gerät anzuzeigen.
+Um dies auf iOS mit Nativescript zu ermöglichen, müsste zusätzlich ein Firebase Cloud Messaging Service angebunden werden.
+Firebase Cloud Messaging ermöglicht es dabei selbst von einem Server Umfeld Benachrichtigungen an Endgeräte zu versenden.\cite{fcm-java}
+Firebase Cloud Messaging unterstützt damit die Anforderungen, von einem Cloud Server Benachrichtigungen an einen Mobile Client zu senden und Push-Benachrichtigungen auf dem Gerät anzuzeigen.
+In der Folge wird für das Praxisrufsystem auschliessliche Firebase Cloud Messaging als Messaging Service verwendet.
 
 \subsection{Cloud Service}\label{subsec:cloud-service2}
 
-Cloud Services die für das Praxisrufsystem nötig sind, werden mit Java und Spring Boot umgesetzt.
-Spring Boot vereinfacht Grundlagenarbeit die zum Aufsetzen eines Backendservices nötig sind und bietet
+Backendservices die für das Praxisrufsystem nötig sind, werden mit Java und Spring Boot umgesetzt.
+Spring Boot vereinfacht Grundlagenarbeit, die zum Aufsetzen eines Backendservices nötig sind und bietet
 gleichzeitig die Werkzeuge die nötig sind um sichere, skalierbare Microservices zu implementieren.\cite{why-spring}
 Spring und Java sind zudem Technologien, mit welchen alle Projektteilnehmer bereits Erfahrung gesammelt haben.
 Diese für die Umsetzung in diesem Projekt zu verwenden, ermöglicht es die nötigen Services noch effizienter umzusetzen
-und den Fokus auf das Technische Konzept sowie die Anforderungsanalyse zu legen.
+und den Fokus auf das technische Konzept sowie die Anforderungsanalyse zu legen.
 
 In der Anforderung T04\footnote{Siehe Kapitel 3} ist vorgegeben, dass der Betrieb aller Cloud- und Web-Applikationen mit Amazon Webservices erfolgen muss.
 Mit Elastic Beanstalk von AWS ist die der Betrieb von Java Applikationen auf AWS möglich.\cite{aws-spring-java}
