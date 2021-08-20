@@ -2,11 +2,13 @@
 
 \subsubsection*{Testablauf}
 
-Am 21. Juli 2021 Benutzertests wurden zusammen mit dem Auftraggeber durchgeführt.
+Am 21. Juli 2021 wurden zusammen mit dem Auftraggeber Benutzertests durchgeführt.
 Dazu wurde der Mobile Client auf in physisches Ipad installiert.
 Zusätzlich wurde eine zweite Mobile Client Instanz auf einem Emulator gestartet.
 Der Cloud Service sowie das Admin UI wurden mit Amazon Webservices deployt.
 Ein Firebase Messaging Service wurde angebunden.
+
+Für die Benutzertests wurde folgender Ablauf durchgespielt:
 
 \begin{enumerate}
     \item Client 1 im Admin UI anlegen und Benutzer 1 zuweisen.
@@ -23,14 +25,13 @@ Ein Firebase Messaging Service wurde angebunden.
     \item Auf Emulator Benachrichtigung auslösen.
 \end{enumerate}
 
-Als Ergebnis wird erwartet, dass die Benachrichtigung auf dem physischen Ipad ankommt und angezeigt wird.
 Der Test wurde zweimal durchgeführt.
 Bei der ersten Durchführung war die Mobile Client Applikation auf dem Empfänger Gerät im Vordergrund geöffnet.
 Bei der zweiten Durchführung wurde die Mobile Client Applikation auf dem Empfänger Gerät minimiert.
 In beiden Fällen wurde erwartet, dass die Benachrichtigung in der Inbox des Empfängers angezeigt wird.
 Im zweiten Fall wurde zusätzlich erwartet, dass eine Push-Benachrichtigung angezeigt wird.
 
-Mehr oder frühere Benutzertests konnten aufgrund der pandemischen Situation leider durchgeführt werden.
+Mehr oder frühere Benutzertests konnten aufgrund der pandemischen Situation nicht durchgeführt werden.
 
 \subsubsection*{Feedback vom Benutzer}
 
@@ -42,8 +43,8 @@ Aus den Tests mit dem Benutzer sind folgende zusätzliche Anforderungen hervorge
     \item Wenn Benachrichtigungen quittiert werden, soll der Versender darüber informiert werden.
 \end{itemize}
 
-Um diesen Wünschen Gerecht zu werden, wurden die Szenarien S07 und S09 hinzugefügt.
-Diese Anforderungen konnten auch noch umgesetzt werden.
+Um diesen Wünschen Gerecht zu werden, wurden die Szenarien S07 und S09 hinzugefügt.\footnote{Siehe Anhang E}
+Diese Anforderungen konnten im Rahmen des Projektes umgesetzt werden.
 Der dritte Wunsch des Kunden, die Quittierung von Benachrichtigungen an den Sender weitergeleitet wird konnte aus zeitlichen Gründen nicht mehr umgesetzt werden.
 
 \clearpage
