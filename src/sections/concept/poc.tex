@@ -49,23 +49,22 @@ Damit der Proof Of Concept aussagekräftig ist, müssen die folgenden technische
 \textbf{T01 - IPad Client}
 
 Der für den Proof Of Concept umgesetzte Client muss auf einem IPad funktionieren und alle Anforderungen die an den
-Proof Of Concept gestellt werden erfüllen. Kommunikation mit Cloud Service muss funktionieren. Kommunikation mit Messaging Service muss funktionieren.
-
+Proof Of Concept gestellt werden erfüllen.
+Dazu muss er Anfragen an den Cloud Service senden und Benachrichtigungen vom Messaging Service empfangen können.
 
 \textbf{T04 - AWS Platform}
 
-Der Cloud Service muss auf AWS deployt werden. Die Kommunikation zwischen Mobile Client und Cloud Service muss funktionieren.
-Die Kommunikation mit Messaging Service muss funktionieren.
+Der Cloud Service muss auf AWS deployt werden.
+Dabei muss die Plattform so konfiguriert werden, dass Anfragen vom Mobile Client empfangen und Benachrichtigungen an den Messaging Service gesendet werden können.
 
 
 \subsubsection{Laufzeitsicht}
 
 Im Wesentlichen muss der Proof Of Concept beweisen, dass es möglich ist mit den gewählten Technologien Benachrichtigungen zu Versenden und zu Empfangen.
 
-Der Benutzer muss den Mobile Client auf dem IPad öffnen können.
-Aus dem Mobile Client muss der Benutzer über einen Button eine Benachrichtigung versenden können.
-Diese Benachrichtigung muss an den Cloud Service übermittelt werden.
-Der Cloud Service muss diese Benachrichtigung über den Messaging Service an einen Empfänger übermitteln.
+Der Benutzer muss den Mobile Client auf dem IPad öffnen und über einen Button eine Benachrichtigung versenden können.
+Diese Benachrichtigung wird an den Cloud Service übermittelt.
+Dieser stellt die Benachrichtigung über den Messaging Service einem Empfänger zu.
 Im Rahmen des Proof Of Concept wird eine Benachrichtigung immer an den Sender zurückgesendet.
 
 \begin{figure}[h]
@@ -78,9 +77,9 @@ Im Rahmen des Proof Of Concept wird eine Benachrichtigung immer an den Sender zu
 
 \clearpage
 
-Wurde eine Benachrichtigung über den Message Service an den Mobile Client versendet, muss diese vom Mobile Client empfangen werden.
-Als Reaktion auf den Empfang der Benachrichtigung muss der Inhalt der Benachrichtigung im Mobile Client angezeigt werden.
-Zudem muss eine Push-Benachrichtigung auf dem Host Gerät erfolgen.
+Wurde eine Benachrichtigung über den Message Service an den Mobile Client versendet, wird diese vom Mobile Client empfangen.
+Als Reaktion auf den Empfang der Benachrichtigung wird der Inhalt der Benachrichtigung im Mobile Client angezeigt.
+Die Benachrichtigung löst zudem eine Push-Benachrichtigung auf dem Host Gerät aus.
 
 \begin{figure}[h]
     \centering

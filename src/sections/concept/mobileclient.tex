@@ -2,17 +2,15 @@
 
 \subsubsection{Framework Grundlagen}
 NativeScript bietet eine Abstraktion zu den nativen Plattformen Android und iOS.
-Die jeweilige NativeScript Runtime erlaubt es in Javascript (oder einem entsprechenden Application Framework) Code zu schreiben,
-welcher direkt für die entsprechende native Umgebung kompiliert wird~\cite{ns-core-overview}.
+Die jeweilige NativeScript Runtime erlaubt es in Javascript (oder einem entsprechenden Application Framework) Code zu schreiben, welcher direkt für die entsprechende native Umgebung kompiliert wird~\cite{ns-core-overview}.
 \begin{figure}[h]
     \centering
     \label{fig:howNSWorks}
     \includegraphics[width=0.7\textwidth]{graphics/ns-common}\caption[NativeScript-Overview]{NativeScript-Overview}\textcopyright OpenJS Foundation
 \end{figure}
 
-
 Die Runtime agiert als Proxy zwischen Javascript und dem jeweiligen Ökosystem.
-Im Falle von iOS bedeutet dies u.A. das für alle Objective-C types ein JavaScript Prototype angeboten wird.
+Im Falle von iOS bedeutet dies, dass für alle Objective-C types ein JavaScript Prototype angeboten wird.
 Dies ermöglicht es direkt mit nativen Objekten zu interagieren.
 Im Umkehrschluss findet eine Typenkonversion via Marshalling Service statt\cite{ns-ios-runtime}.
 
@@ -43,15 +41,13 @@ Der Mobile-Client wird so nach einem Objekt-orientierten Paradigma aufgebaut.
 Das eigentliche~\emph{\nameref{fig:MobileClient-Mocks}} besteht aus dem Homescreen,
 der es dem Benutzer erlaubt Nachrichten zu versenden, und der Inbox welche eingegangene Nachrichten anzeigt.
 Diese Ansicht ist erst nach erfolgreicher Authentifizierung erreichbar.
-Hat sich der Benutzer erfolgreich angemeldet, erhält er eine Auswahl der ihm zur verfügungstehenden Konfigurationen.
+Hat sich der Benutzer erfolgreich angemeldet, erhält er eine Auswahl der ihm zur Verfügung stehenden Konfigurationen.
 Mit der Auswahl einer dieser Konfigurationen werden die vordefinierten Notification Buttons geladen und auf dem Homescreen erstellt.
-
 Innerhalb des App-Root Kontextes sind zwei Workflows parallel aktiv.
 Zum einen können die vordefinierten Nachrichten durch Betätigen des entsprechenden Buttons versendet werden.
-Die Empfänger werden durch die Rule-Engine des Cloudservices ermittelt.
+Die Empfänger werden durch die Rule-Engine des Cloud Service ermittelt.
 Bei einem Fehlschlag wird dies dem Benutzer via Pop-Up mitgeteilt und er kann entscheiden, ob die Nachricht nochmals neu versendet werden soll.
-
-Gleichzeitig ist immer der Listener auf Firebase aktiv.
+Gleichzeitig ist immer der Listener aktiv, der auf Benachrichtigungen des Messaging Services wartet.
 Dieser wird auf dem Client eingegangene Nachrichten in der Inbox ablegen und ein akustisches Signal abspielen.
 Wird die Meldung nicht innerhalb eines definierten Zeitraums quittiert, wird das akustische Signal wiederholt.
 \clearpage
@@ -71,11 +67,11 @@ Wird die Meldung nicht innerhalb eines definierten Zeitraums quittiert, wird das
 \end{figure}
 
 Die Buttons der Meldungen werden in einem 3x3 Grid auf dem Homescreen dynamisch angelegt.
-Nach Betätigung eines Buttons wird dieser in Rot eingefärbt, bis eine Rückmeldung über Erfolg oder Misserfolg vom Cloudservice eingegangen ist.
-
-Die Gegensprechfunktion ist ebenfalls auf dem Homescreen angedacht.
+Nach Betätigung eines Buttons wird dieser in Rot eingefärbt, bis eine Rückmeldung über Erfolg oder Misserfolg vom Cloud Service eingegangen ist.
+Die gezeigten Mockups wurden zusammen mit dem Kunden entwickelt.
+Sie zeigen dementsprechend bereits Bereiche zur Bedienung einer Gegensprechanlage.
 Hier sollten die Gesprächspartner direkt mit einem entsprechenden Button angewählt werden.
-Diese Funktionalität wie beschrieben in den Userstories U10 und U11 sind im Projektverlauf ausserhalb des Umsetzungsscopes gefallen und daher nicht weiter spezifiziert worden.
+Diese Funktionalität ist allerdings ausserhalb des Projektumfangs gefallen und wird deshalb nicht weiter beschrieben\footnote{Siehe Kapitel 3}.
 
 Die Inbox besteht aus einer Scrollview, welche eingegangene Nachrichten als Cards darstellt.
 Eine Nachricht enthält:
@@ -85,8 +81,5 @@ Eine Nachricht enthält:
     \item Detail Text
     \item Icon
 \end{itemize}
-
-Das Icon könnte noch dynamisch mit dem jeweiligen Nachrichtentyp verknüpft werden.
-Solche wurden fachlich jedoch noch nicht definiert.
 
 \clearpage
